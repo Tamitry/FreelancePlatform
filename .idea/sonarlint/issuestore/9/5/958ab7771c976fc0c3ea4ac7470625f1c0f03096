@@ -1,0 +1,16 @@
+
+Xsquid:S1143Õ"4Remove this throw statement from this finally block.(æ‚‹´øÿÿÿÿ8ÏÑæÂé-
+asquid:S1163Õ"=Refactor this code to not throw exceptions in finally blocks.(æ‚‹´øÿÿÿÿ8ÏÑæÂé-
+asquid:S1163ô"=Refactor this code to not throw exceptions in finally blocks.(æ‚‹´øÿÿÿÿ8¬ÄçÂé-
+Xsquid:S1143”"4Remove this throw statement from this finally block.(æ‚‹´øÿÿÿÿ8áˆèÂé-
+msquid:S11925"JDefine a constant instead of duplicating this literal "UserEmail" 4 times.(Ÿç½€ÿÿÿÿÿ8çÛ„ è-
+Msquid:S1481â".Remove this unused "timestamp" local variable.(œçï8“¢Ú è-
+jsquid:S11924"GDefine a constant instead of duplicating this literal "UserId" 4 times.(øÎÀÕøÿÿÿÿ8çÛ„ è-
+gsquid:S11927"IDefine a constant instead of duplicating this literal "LastName" 4 times.(Şö¨ô8çÛ„ è-
+lsquid:S11929"IDefine a constant instead of duplicating this literal "Password" 4 times.(ñëÜŠıÿÿÿÿ8çÛ„ è-
+dsquid:S11928"FDefine a constant instead of duplicating this literal "Login" 4 times.(¥‰Ëê8çÛ„ è-
+Msquid:S1481".Remove this unused "timestamp" local variable.(œçï8çÛİ è-
+psquid:S1192="SDefine a constant instead of duplicating this literal "DateOfRegistration" 4 times.(óÏí!8çÛ„ è-
+msquid:S11926"JDefine a constant instead of duplicating this literal "FirstName" 4 times.(Ş­ãÄüÿÿÿÿ8çÛ„ è-
+Xsquid:S1143ô"4Remove this throw statement from this finally block.(æ‚‹´øÿÿÿÿ8¬ÄçÂé-
+asquid:S1163”"=Refactor this code to not throw exceptions in finally blocks.(æ‚‹´øÿÿÿÿ8áˆèÂé-
