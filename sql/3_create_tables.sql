@@ -1,74 +1,137 @@
-use `freelance_platform_db`;
-
-create table if not exists Users
-(
-    `UserId`             int     NOT NULL AUTO_INCREMENT,
-    `FirstName`          varchar(255),
-    `LastName`           varchar(255),
-    `DateOfRegistration` timestamp,
-    `UserEmail`          varchar(255) not null,
-    `Login`              varchar(255) not null,
-    `UserPassword`       varchar(255) not null,
+use freelance_platform_db;
+create table if not exists Users (
+                                     UserId         int     not null auto_increment,
+                                     FirstName      varchar(250)    default '',
+                                     LastName       varchar(250)    default '',
+                                     RegDate        timestamp,
+                                     UserLogin      varchar(250)    not null unique,
+                                     UserEmail      varchar(250)    not null unique,
+                                     UserPassword   varchar(250)    not null,
     /*
-     * Role of the user:
-     * 1. Administrator;
-     * 2. Freelancer;
-     * 3. Client.
+     Roles:
+     1 - Administrator;
+     2 - Freelancer;
+     3 - Client
      */
-    `Role`               tinyint not null,
-    primary key (`UserId`)
+                                     UserRole   tinyint,
+                                     primary key (UserId),
+                                     check ( UserEmail like '_%@_%._%')
 );
 
-create table if not exists Categories
-(
-    `CategoryId`   int auto_increment,
-    `CategoryName` varchar(255),
-    primary key (`CategoryId`)
+create index idx_fullname
+    on Users (FirstName, LastName);
+
+create index idx_email
+    on Users (UserEmail);
+
+create index idx_login
+    on Users (UserLogin);
+
+create index idx_regdate
+    on Users (RegDate);
+
+create table if not exists Categories (
+                                          CategoryId      int             not null auto_increment,
+                                          CategoryName    varchar(250)    not null unique,
+                                          primary key (CategoryId)
 );
 
-create table if not exists Orders
-(
-    `OrderID`            int          NOT NULL AUTO_INCREMENT,
-    `Name`               varchar(255) not null,
-    `DateOfRegistration` timestamp,
-    `DateOfDeadline`     timestamp,
-    `ClientId`           int          not null,
-    `Description`        varchar(255),
-    check ( `DateOfDeadline` > `DateOfRegistration` ),
-    primary key (`OrderID`),
-    foreign key (`ClientId`) references Users (`UserId`)
+create index idx_catname
+    on Categories (CategoryName);
+
+create trigger User_Before_Insert before insert on Users
+    FOR EACH ROW
+BEGIN
+    set new.RegDate = NOW();
+END;
+
+create table if not exists Skills (
+                                      UserId      int,
+                                      CategoryId  int,
+                                      primary key (UserId, CategoryId),
+                                      foreign key (UserId) references Users(UserId),
+                                      foreign key (CategoryId) references Categories(CategoryId)
 );
 
+create index idx_usersskillid
+    on Skills(UserId);
 
-create table if not exists OrderCategory
-(
-    `OrderCategoryId` int not null auto_increment,
-    `NumberOfPeople`  int default 1,
-    `Price`           int default 0,
-    `OrderId`         int not null,
-    `CategoryId`      int not null,
-    primary key (`OrderCategoryId`),
-    foreign key (`OrderId`) references Orders (`OrderID`),
-    foreign key (`CategoryId`) references Categories (`CategoryId`)
+create index idx_categoryskillid
+    on Skills(CategoryId);
+
+create table if not exists ComMethods (
+                                          ComMethodId     int             not null auto_increment,
+                                          ComPic          blob,
+                                          ComMethodName   varchar(250)    not null unique,
+                                          primary key (ComMethodId)
 );
 
-create table if not exists Skills
-(
-    `SkillId`    int auto_increment,
-    `UserId`     int not null,
-    `CategoryId` int default null,
-    primary key (`SkillId`),
-    foreign key (`UserId`) references Users (`UserId`),
-    foreign key (`CategoryId`) references Categories (`CategoryId`)
+create index idx_commethodname
+    on ComMethods(ComMethodName);
+
+
+create table if not exists UserAddresses (
+                                             UserId      int,
+                                             ComMethodId int,
+                                             AddressName varchar(255),
+                                             primary key (UserId, ComMethodId),
+                                             foreign key (UserId) references Users(UserId),
+                                             foreign key (ComMethodId) references ComMethods(ComMethodId)
 );
 
-create table if not exists Works
-(
-    `WorkId`          int auto_increment,
-    `UserId`          int not null,
-    `OrderCategoryId` int not null,
-    `Rating`          int not null default 3,
-    primary key (`WorkId`),
-    foreign key (`UserId`) references Users (`UserId`),
-    foreign key (`OrderCategoryId`) references OrderCategory (`OrderCategoryId`)
+create index idx_addressname
+    on UserAddresses(AddressName);
+
+create table if not exists Orders (
+                                      OrderId         int             not null auto_increment,
+                                      OrderName       varchar(250)    not null,
+                                      OrderRegDate    timestamp,
+                                      OrderDeadLine   timestamp,
+                                      OrderDesc       text,
+                                      ClientId        int,
+                                      primary key (OrderId),
+                                      foreign key (ClientId) references Users(UserId)
 );
+
+create index idx_ordername
+    on Orders(OrderName);
+
+create index idx_orderregdate
+    on Orders(OrderRegDate);
+
+create index idx_orderdeaddate
+    on Orders(OrderDeadLine);
+
+create index idx_clientid
+    on Orders(ClientId);
+
+create table if not exists OrderProperties (
+                                               OrderPropertyId     int     not null auto_increment,
+                                               OrderId             int,
+                                               CategoryId          int,
+                                               primary key (OrderPropertyId),
+                                               foreign key (OrderId) references Orders(OrderId),
+                                               foreign key (CategoryId) references Categories(CategoryId)
+);
+
+create index idx_proporderid
+    on OrderProperties(OrderId);
+
+create index idx_catorderpropid
+    on OrderProperties(CategoryId);
+
+create table Works (
+                       OrderPropertyId     int,
+                       UserId              int,
+                       Grade               int,
+                       primary key (OrderPropertyId, UserId),
+                       foreign key (UserId) references Users(UserId),
+                       foreign key (OrderPropertyId) references OrderProperties(OrderPropertyId),
+                       check ( Grade between 0 and 10)
+);
+
+create index idx_workuserid
+    on Works(UserId);
+
+create index idx_workorderproperty
+    on Works(OrderPropertyId);

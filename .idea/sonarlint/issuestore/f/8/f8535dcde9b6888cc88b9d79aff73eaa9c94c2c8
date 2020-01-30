@@ -1,14 +1,0 @@
-
-dsquid:S2142r"FEither re-interrupt this method or rethrow the "InterruptedException".(©ÌËš8‰¸‰¿é-
-Bsquid:S2629Q"$Invoke method(s) only conditionally.(„ÇÜ„8ÁÛå¾é-
-isquid:S21429"FEither re-interrupt this method or rethrow the "InterruptedException".(Öââşÿÿÿÿ8¿Øß¾é-
-Nsquid:S00108‹")Either remove or fill this block of code.(Ú¼›ßşÿÿÿÿ8‘ñŠ¿é-
-qsquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(‘›Àû8¿Øß¾é-
-Bsquid:S2629@"$Invoke method(s) only conditionally.(×ìñ¥8ÁÛå¾é-
-Hsquid:S00108.")Either remove or fill this block of code.(É®£8¿Øß¾é-
-Xsquid:S1141,"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8¿Øß¾é-
-isquid:S2142V"FEither re-interrupt this method or rethrow the "InterruptedException".(‰ˆ‘½şÿÿÿÿ8¿Øß¾é-
-Hsquid:S00108[")Either remove or fill this block of code.(ßÄ²8¿Øß¾é-
-osquid:S3008"QRename this field "LOGGER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‰ñ±8­ˆï¾é-
-squid:CallToDeprecatedMethod‘"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(ÖÒ˜Ùùÿÿÿÿ8‘ñŠ¿é-
-h"squid:ObjectFinalizeOverridenCheck‘"-Do not override the Object.finalize() method.(ÖÒ˜Ùùÿÿÿÿ8‘ñŠ¿é-

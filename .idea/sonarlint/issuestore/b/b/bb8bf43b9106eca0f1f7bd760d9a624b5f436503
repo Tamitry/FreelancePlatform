@@ -1,5 +1,0 @@
-
-^squid:S00107"AConstructor has 8 parameters, which is greater than 7 authorized.(«¿„É8èÅÀ¦ç-
-Šsquid:S1319"nThe type of the "ord" object should be an interface such as "List" rather than the implementation "ArrayList".(®†ïÿ8èÅÀ¦ç-
-Œsquid:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ı€Í”8èÅÀ¦ç-
-Šsquid:S1319"nThe type of the "ord" object should be an interface such as "List" rather than the implementation "ArrayList".(ÖÏâÆ8èÅÀ¦ç-
