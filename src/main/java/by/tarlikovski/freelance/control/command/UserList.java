@@ -20,7 +20,7 @@ public class UserList extends Command {
                        final HttpServletResponse response)
             throws PersistentException {
         UserService service = (UserService) factory.getService(ServiceName.FIND_ALL);
-        List<User> users = service.findAll();
+        List<User> users = service.findAllFreelancers();
         request.setAttribute("users", users);
         return "Users list.";
     }

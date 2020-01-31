@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <style>
     * {
@@ -418,12 +419,16 @@
         <div class="headerContent">
             <div class="logo"><a href=""><span class="pink">Pink <span class="pink">Flamingo</span><span class="gray">.com</span></a></div>
             <ul class="nav">
-                <li><a href="#" class="active">Home</a></li>
+                <c:url value="/home.html" var="home"/>
+                <li><a href="${home}" class="active">Home</a></li>
                 <li><a href="#">About</a></li>
-                <li><a href="#">Freelancers</a></li>
+                <c:url value="/userlist.html" var="userlist"/>
+                <li><a href="${userlist}">Freelancers</a></li>
                 <li><a href="#">Works</a></li>
-                <li><a href="#">Contacts</a></li>
-                <li><a href="#">Log In</a></li>
+                <c:url value="/toregistration.html" var="registration"/>
+                <li><a href="${registration}">Registration</a></li>
+                <c:url value="/login.html" var="login"/>
+                <li><a href="${login}">Log In</a></li>
             </ul>
         </div>
     </div>
@@ -440,22 +445,21 @@
             </ul>
         </div>
         <div class="main">
-            <form action="#" class="form">
+            <form action="registration.html" class="form" method="post">
                 <h1 class="form__title">Registration</h1>
-
                 <div class="form_group">
-                    <input class="form__input" placeholder="E-mail">
+                    <input class="form__input" placeholder="E-mail" name="email" required>
                 </div>
 
                 <div class="form_group">
-                    <input class="form__input" placeholder="Login">
+                    <input class="form__input" placeholder="Login" name="login" required>
                 </div>
 
                 <div class="form_group">
-                    <input class="form__input" placeholder="Password" type="password">
+                    <input class="form__input" placeholder="Password" name="password" type="password" required>
                 </div>
                 <div class="form_group">
-                    <input class="form__input" placeholder="Repeat password" type="password">
+                    <input class="form__input" placeholder="Repeat password" name="repeat" type="password" required>
                 </div>
                 <div class="role">
                     <p>Role</p>
@@ -464,12 +468,12 @@
 
                 </div>
                 <div class="form_group">
-                    <input class="form__input" placeholder="First name">
+                    <input class="form__input" name="firstname" placeholder="First name (optional)">
                 </div>
                 <div class="form_group">
-                    <input class="form__input" placeholder="Last name">
+                    <input class="form__input" name="lastname" placeholder="Last name (optional)">
                 </div>
-                <button class="form__button">Register</button>
+                <button class="form__button" type="submit">Register</button>
                 <input type="reset" class="form__reset">
             </form>
         </div>

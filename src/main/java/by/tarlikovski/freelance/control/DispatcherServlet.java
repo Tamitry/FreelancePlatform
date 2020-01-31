@@ -4,7 +4,6 @@ import by.tarlikovski.freelance.control.command.Command;
 import by.tarlikovski.freelance.exception.PersistentException;
 import by.tarlikovski.freelance.service.ServiceFactoryImpl;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

@@ -1,8 +1,7 @@
 package by.tarlikovski.freelance.control.filters;
 
-import by.tarlikovski.freelance.control.command.Command;
+import by.tarlikovski.freelance.control.command.*;
 import by.tarlikovski.freelance.control.command.Registration;
-import by.tarlikovski.freelance.control.command.UserList;
 import by.tarlikovski.freelance.exception.ControlException;
 
 import javax.servlet.*;
@@ -20,8 +19,14 @@ public class CommandFilter implements Filter {
         switch (name) {
             case "/userlist":
                 return new UserList();
+            case "/toregistration":
+                return new ToRegistration();
             case "/registration":
                 return new Registration();
+            case "/home":
+                return new Home();
+            case "/error":
+                return new ErrorPage();
             default:
                 throw new ControlException("Command not found!");
         }

@@ -8,15 +8,18 @@ import by.tarlikovski.freelance.exception.DAOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     private static final String FIND_FULL_NAME = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole from users where CONCAT(FirstName, ' ', LastName) like '%?%'";
     private static final String FIND_BY_LOGIN = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole from users where UserLogin = ?";
-    private static final String FIND_ALL = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole from users";
+    private static final String FIND_BY_EMAIL = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole from users where UserEmail = ?";
+    private static final String FIND_ALL = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole from users where UserRole = 2";
     private static final String FIND_BY_ID = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole from users where UserId = ?";
-    private static final String CREATE = "insert into users (UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole) values (?,?,?,?,?,?,?)";
+    private static final String CREATE = "insert into users (FirstName, LastName, UserLogin, UserEmail, UserPassword, UserRole) values (?,?,?,?,?,?)";
     private static final String UPDATE = "update users set FirstName = ?, LastName = ?, RegDate = ?, UserLogin = ?, UserEmail = ?, UserPassword = ?, UserRole = ? where UserId = ?";
     private static final String DELETE = "delete from users where UserId = ?";
 
@@ -59,7 +62,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     }
 
     @Override
-    public User findByLogin(final String lg) throws DAOException {
+    public Optional<User> findByLogin(final String lg) throws DAOException {
         PreparedStatement prepState = null;
         ResultSet resSet = null;
         int i = 1;
@@ -67,18 +70,22 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             prepState = connection.prepareCall(FIND_BY_LOGIN);
             prepState.setString(i, lg);
             resSet = prepState.executeQuery();
-            List<User> users = new ArrayList<>();
-            User user = null;
-            user = new User();
-            user.setFirstName(resSet.getString("FirstName"));
-            user.setLastName(resSet.getString("LastName"));
-            user.setRegDate(resSet.getTimestamp("RegDate"));
-            user.setEmail(resSet.getString("UserEmail"));
-            user.setLogin(resSet.getString("UserLogin"));
-            user.setPassword(resSet.getString("UserPassword"));
-            user.setRole(Role.getRole(resSet.getInt("UserRole")));
-            users.add(user);
-            return user;
+            if (resSet.next()) {
+                List<User> users = new ArrayList<>();
+                User user = null;
+                user = new User();
+                user.setFirstName(resSet.getString("FirstName"));
+                user.setLastName(resSet.getString("LastName"));
+                user.setRegDate(resSet.getTimestamp("RegDate"));
+                user.setEmail(resSet.getString("UserEmail"));
+                user.setLogin(resSet.getString("UserLogin"));
+                user.setPassword(resSet.getString("UserPassword"));
+                user.setRole(Role.getRole(resSet.getInt("UserRole")));
+                users.add(user);
+                return Optional.ofNullable(user);
+            } else {
+                return Optional.empty();
+            }
         } catch (SQLException ex) {
             throw new DAOException(ex);
         } finally {
@@ -94,7 +101,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> findAll() throws DAOException {
+    public List<User> findAllFreelancers() throws DAOException {
         PreparedStatement prepState = null;
         ResultSet resSet = null;
         try {
@@ -129,16 +136,57 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
         }
     }
 
+    //May be optional?
+    @Override
+    public Optional<User> findByEmail(final String email) throws DAOException {
+        PreparedStatement prepState = null;
+        ResultSet resSet = null;
+        int i = 1;
+        try {
+            prepState = connection.prepareCall(FIND_BY_EMAIL);
+            prepState.setString(i, email);
+            resSet = prepState.executeQuery();
+            if (!resSet.next()) {
+                return Optional.empty();
+            } else {
+                List<User> users = new ArrayList<>();
+                User user = null;
+                user = new User();
+                user.setFirstName(resSet.getString("FirstName"));
+                user.setLastName(resSet.getString("LastName"));
+                user.setRegDate(resSet.getTimestamp("RegDate"));
+                user.setEmail(resSet.getString("UserEmail"));
+                user.setLogin(resSet.getString("UserLogin"));
+                user.setPassword(resSet.getString("UserPassword"));
+                user.setRole(Role.getRole(resSet.getInt("UserRole")));
+                users.add(user);
+                return Optional.ofNullable(user);
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(ex);
+        } finally {
+            try {
+                resSet.close();
+            } catch (SQLException | NullPointerException e) {
+            }
+            try {
+                prepState.close();
+            } catch (SQLException | NullPointerException e) {
+            }
+        }
+    }
+
     @Override
     public Integer create(final User entity) throws DAOException {
         PreparedStatement prepStat = null;
         ResultSet resSet = null;
         int i = 1;
         try {
-            prepStat = connection.prepareStatement(CREATE);
-            prepStat.setString(i++, entity.getFirstName());
-            prepStat.setString(i++, entity.getLastName());
-            prepStat.setTimestamp(i++, entity.getRegDate());
+            prepStat = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS);
+            String firstName = entity.getFirstName() != null ? entity.getFirstName() : "";
+            prepStat.setString(i++, firstName);
+            String lastName = entity.getLastName() != null ? entity.getLastName() : "";
+            prepStat.setString(i++, lastName);
             prepStat.setString(i++, entity.getLogin());
             prepStat.setString(i++, entity.getEmail());
             prepStat.setString(i++, entity.getPassword());
@@ -146,6 +194,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             prepStat.executeUpdate();
             resSet = prepStat.getGeneratedKeys();
             if (resSet.next()) {
+                i = 1;
                 return resSet.getInt(i);
             } else {
                 throw new DAOException("An error occurred while adding to the table Users.");
@@ -165,7 +214,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     }
 
     @Override
-    public User read(final Integer identity) throws DAOException {
+    public Optional<User> read(final Integer identity) throws DAOException {
         PreparedStatement prepState = null;
         ResultSet resSet = null;
         int i = 1;
@@ -173,18 +222,22 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             prepState = connection.prepareCall(FIND_BY_ID);
             prepState.setInt(i, identity);
             resSet = prepState.executeQuery();
-            List<User> users = new ArrayList<>();
-            User user = null;
-            user = new User();
-            user.setId(resSet.getInt("UserId"));
-            user.setFirstName(resSet.getString("FirstName"));
-            user.setLastName(resSet.getString("LastName"));
-            user.setRegDate(resSet.getTimestamp("RegDate"));
-            user.setEmail(resSet.getString("UserEmail"));
-            user.setLogin(resSet.getString("UserLogin"));
-            user.setPassword(resSet.getString("UserPassword"));
-            user.setRole(Role.getRole(resSet.getInt("UserRole")));
-            return user;
+            if (!resSet.next()) {
+                return Optional.empty();
+            } else {
+                List<User> users = new ArrayList<>();
+                User user = null;
+                user = new User();
+                user.setId(resSet.getInt("UserId"));
+                user.setFirstName(resSet.getString("FirstName"));
+                user.setLastName(resSet.getString("LastName"));
+                user.setRegDate(resSet.getTimestamp("RegDate"));
+                user.setEmail(resSet.getString("UserEmail"));
+                user.setLogin(resSet.getString("UserLogin"));
+                user.setPassword(resSet.getString("UserPassword"));
+                user.setRole(Role.getRole(resSet.getInt("UserRole")));
+                return Optional.ofNullable(user);
+            }
         } catch (SQLException ex) {
             throw new DAOException(ex);
         } finally {

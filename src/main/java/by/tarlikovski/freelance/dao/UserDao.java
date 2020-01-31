@@ -4,11 +4,14 @@ import by.tarlikovski.freelance.bean.User;
 import by.tarlikovski.freelance.exception.DAOException;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserDao extends Dao<User> {
     List<User> findByFullName(String name) throws DAOException;
 
-    User findByLogin(String lg) throws DAOException;
+    Optional<User> findByLogin(String lg) throws DAOException;
 
-    List<User> findAll() throws DAOException;
+    List<User> findAllFreelancers() throws DAOException;
+
+    Optional<User> findByEmail(String email) throws DAOException;
 }

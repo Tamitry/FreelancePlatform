@@ -4,6 +4,7 @@ import by.tarlikovski.freelance.bean.User;
 import by.tarlikovski.freelance.exception.PersistentException;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     void userRegistration(User user) throws PersistentException;
@@ -12,9 +13,11 @@ public interface UserService {
 
     void changeParameters(User user) throws PersistentException;
 
-    List<User> findAll() throws PersistentException;
+    List<User> findAllFreelancers() throws PersistentException;
 
     List<User> findByName(String name) throws PersistentException;
 
-    User findByLogin(String login) throws PersistentException;
+    Optional<User> findByLogin(String login) throws PersistentException;
+
+    Optional<User> findByEmail(String email) throws PersistentException;
 }

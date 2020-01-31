@@ -369,12 +369,13 @@
         <div class="headerContent">
             <div class="logo"><a href=""><span class="pink">Pink</span><span class="pink">Flamingo</span><span class="gray">.com</span></a></div>
             <ul class="nav">
-                <li><a href="http://localhost:8080/FreelancePlatform_war_exploded/" class="active">Home</a></li>
+                <c:url value="/home.html" var="home"/>
+                <li><a href="${home}" class="active">Home</a></li>
                 <li><a href="#">About</a></li>
                 <c:url value="/userlist.html" var="userlist"/>
                 <li><a href="${userlist}">Freelancers</a></li>
                 <li><a href="#">Works</a></li>
-                <c:url value="/registration.html" var="registration"/>
+                <c:url value="/toregistration.html" var="registration"/>
                 <li><a href="${registration}">Registration</a></li>
                 <c:url value="/login.html" var="login"/>
                 <li><a href="${login}">Log In</a></li>

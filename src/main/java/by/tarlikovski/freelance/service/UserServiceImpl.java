@@ -7,6 +7,7 @@ import by.tarlikovski.freelance.exception.DAOException;
 import by.tarlikovski.freelance.exception.PersistentException;
 
 import java.util.List;
+import java.util.Optional;
 
 public class UserServiceImpl extends ServiceImpl implements UserService {
 
@@ -15,6 +16,7 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
         try {
             UserDao userDao = (UserDao) transaction.createDao(Type.USER_DAO);
             userDao.create(user);
+            transaction.commit();
         } catch (DAOException ex) {
             throw new PersistentException(ex);
         }
@@ -41,10 +43,10 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAll() throws PersistentException {
+    public List<User> findAllFreelancers() throws PersistentException {
         try {
             UserDao userDao = (UserDao) transaction.createDao(Type.USER_DAO);
-            return userDao.findAll();
+            return userDao.findAllFreelancers();
         } catch (DAOException ex) {
             throw new PersistentException(ex);
         }
@@ -61,10 +63,20 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
     }
 
     @Override
-    public User findByLogin(final String login) throws PersistentException {
+    public Optional<User> findByLogin(final String login) throws PersistentException {
         try {
             UserDao userDao = (UserDao) transaction.createDao(Type.USER_DAO);
             return userDao.findByLogin(login);
+        } catch (DAOException ex) {
+            throw new PersistentException(ex);
+        }
+    }
+
+    @Override
+    public Optional<User> findByEmail(final String email) throws PersistentException {
+        try {
+            UserDao userDao = (UserDao) transaction.createDao(Type.USER_DAO);
+            return userDao.findByEmail(email);
         } catch (DAOException ex) {
             throw new PersistentException(ex);
         }

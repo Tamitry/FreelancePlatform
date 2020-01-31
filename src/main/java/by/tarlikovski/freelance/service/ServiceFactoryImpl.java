@@ -22,6 +22,7 @@ public class ServiceFactoryImpl implements ServiceFactory {
         try {
             switch (type) {
                 case REG_FIRST:
+                case REG_CONFIRM:
                 case FIND_ALL:
                     UserServiceImpl userService = new UserServiceImpl();
                     userService.setTransaction(transactionFactory.createTransaction());
