@@ -56,6 +56,8 @@ public class Registration extends Command {
             user.setLastName(lastName);
         }
         service.userRegistration(user);
+        user = service.findByLogin(user.getLogin()).get();
+        request.getSession().setAttribute("user", user);
         return "Success.";
     }
 }

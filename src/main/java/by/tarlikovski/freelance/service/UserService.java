@@ -20,4 +20,6 @@ public interface UserService {
     Optional<User> findByLogin(String login) throws PersistentException;
 
     Optional<User> findByEmail(String email) throws PersistentException;
+
+    Optional<User> findById(int id) throws PersistentException;
 }

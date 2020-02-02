@@ -22,10 +22,18 @@
         <c:url value="/userlist.html" var="userlist"/>
         <li><a href="${userlist}">Freelancers</a></li>
         <li><a href="#">Works</a></li>
-        <c:url value="/toregistration.html" var="registration"/>
-        <li><a href="${registration}">Registration</a></li>
-        <c:url value="/login.html" var="login"/>
-        <li><a href="${login}">Log In</a></li>
+        <c:if test="${user ne null}">
+          <c:url value="/toprofile.html" var="toprofile"/>
+          <li><a href="${toprofile}?userid=${user.id}">Profile</a></li>
+          <c:url value="/exit.html" var="exit"/>
+          <li><a href="${exit}">Exit</a></li>
+        </c:if>
+        <c:if test="${user eq null}">
+          <c:url value="/toregistration.html" var="registration"/>
+          <li><a href="${registration}">Registration</a></li>
+          <c:url value="/tologin.html" var="login"/>
+          <li><a href="${login}">Log In</a></li>
+        </c:if>
       </ul>
     </div>
   </div>

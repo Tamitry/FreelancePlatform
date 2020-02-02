@@ -41,6 +41,9 @@ public class DispatcherServlet extends HttpServlet {
         } catch (PersistentException e) {
             throw new ServletException(e);
         }
+        if (req.getSession().getAttribute("user") != null) {
+            req.setAttribute("curuser", req.getSession().getAttribute("user")); //TODO Change this part.
+        }
         String jspPage = "/WEB-INF/views" + command.getName() + ".jsp";
         getServletContext().getRequestDispatcher(jspPage).forward(req, resp);
     }

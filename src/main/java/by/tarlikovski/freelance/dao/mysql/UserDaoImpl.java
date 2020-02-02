@@ -74,6 +74,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
                 List<User> users = new ArrayList<>();
                 User user = null;
                 user = new User();
+                user.setId(resSet.getInt("UserId"));
                 user.setFirstName(resSet.getString("FirstName"));
                 user.setLastName(resSet.getString("LastName"));
                 user.setRegDate(resSet.getTimestamp("RegDate"));
@@ -152,6 +153,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
                 List<User> users = new ArrayList<>();
                 User user = null;
                 user = new User();
+                user.setId(resSet.getInt("UserId"));
                 user.setFirstName(resSet.getString("FirstName"));
                 user.setLastName(resSet.getString("LastName"));
                 user.setRegDate(resSet.getTimestamp("RegDate"));

@@ -117,3 +117,15 @@ z
 Jsrc/main/java/by/tarlikovski/freelance/control/command/ToRegistration.java,3\2\32dc70ab7119efd3ea942ea1a05c3a8630f73282
 K
 web/WEB-INF/views/error.jsp,b\3\b371907e540513cc5436eb9b4f3987e7365d4ae5
+s
+Csrc/main/java/by/tarlikovski/freelance/control/command/ToLogin.java,9\c\9c8439b3114ed38f939a599d9b14b9b98b5ab077
+q
+Asrc/main/java/by/tarlikovski/freelance/control/command/Login.java,6\0\60f1984f15ecc46346691fb025becf597f5b57c9
+K
+web/WEB-INF/views/login.jsp,c\8\c82e137a32d2c425833b576179dc3ba0ff94ac4e
+u
+Esrc/main/java/by/tarlikovski/freelance/control/command/ToProfile.java,9\3\935d63d2a84e30b454ca130257dbe62b747ced9e
+M
+web/WEB-INF/views/profile.jsp,4\0\40c9cbc0d9d7143ee2ce7b837cd9c3266bd68f74
+p
+@src/main/java/by/tarlikovski/freelance/control/command/Exit.java,c\1\c1462db3bf01231067e57b23e0c61f915d68e875

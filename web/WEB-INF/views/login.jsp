@@ -10,7 +10,6 @@
         width: 100%;
         height: 100%;
         z-index: -2;
-        outline: none;
     }
 
     body {
@@ -321,7 +320,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 70vh;
+        height: 50vh;
     }
 
     .form {
@@ -351,12 +350,6 @@
         margin: 32px;
     }
 
-    .role {
-        margin-bottom: 20px;
-        text-align: center;
-        color: #4c545e;
-    }
-
     .form__input {
         width: 100%;
         padding: 0 0 10px 0;
@@ -381,11 +374,6 @@
         font-weight: bold;
     }
 
-    .form__button:hover {
-        background-color: aquamarine;
-    }
-
-
     .form__reset {
         width: 30%;
         text-align: center;
@@ -395,6 +383,10 @@
 
     .form__reset:hover {
         color: blue;
+    }
+
+    .form__button:hover {
+        background-color: aquamarine;
     }
 
     /*Подвал*/
@@ -410,6 +402,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="login.css">
     <link rel="stylesheet" type="text/css" href="media-queries.css">
     <title>Orders</title>
 </head>
@@ -417,7 +410,7 @@
 <div class="wrapper">
     <div class="header">
         <div class="headerContent">
-            <div class="logo"><a href=""><span class="pink">Pink <span class="pink">Flamingo</span><span class="gray">.com</span></a></div>
+            <div class="logo"><a href=""><span class="pink">Pink <span class="pink">Flamingo</span><span class="gray">.com</span></span></a></div>
             <ul class="nav">
                 <c:url value="/home.html" var="home"/>
                 <li><a href="${home}" class="active">Home</a></li>
@@ -447,41 +440,23 @@
                 <li>
                     <form>
                         <input type="search" contenteditable="false" placeholder="Search">
-                        <input type="button" name="Search" value="Search">
+                        <input type="button" name="search" value="Search">
                     </form>
                 </li>
             </ul>
         </div>
         <div class="main">
-            <form action="registration.html" class="form" method="post">
-                <h1 class="form__title">Registration</h1>
+            <form action="login.html" class="form" method="post">
+                <h1 class="form__title">Log In</h1>
                 <div class="form_group">
-                    <input class="form__input" placeholder="E-mail" name="email" required>
+                    <input class="form__input" placeholder="Login" name="login">
                 </div>
 
                 <div class="form_group">
-                    <input class="form__input" placeholder="Login" name="login" required>
+                    <input type=password class="form__input" placeholder="Password" name="password">
                 </div>
 
-                <div class="form_group">
-                    <input class="form__input" placeholder="Password" name="password" type="password" required>
-                </div>
-                <div class="form_group">
-                    <input class="form__input" placeholder="Repeat password" name="repeat" type="password" required>
-                </div>
-                <div class="role">
-                    <p>Role</p>
-                    <p><input name="role" type="radio" value="client">Client</p>
-                    <p><input name="role" type="radio" value="freelancer" checked>Freelancer</p>
-
-                </div>
-                <div class="form_group">
-                    <input class="form__input" name="firstname" placeholder="First name (optional)">
-                </div>
-                <div class="form_group">
-                    <input class="form__input" name="lastname" placeholder="Last name (optional)">
-                </div>
-                <button class="form__button" type="submit">Register</button>
+                <button type="submit" class="form__button">Log In</button>
                 <input type="reset" class="form__reset">
             </form>
         </div>

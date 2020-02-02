@@ -81,4 +81,14 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
             throw new PersistentException(ex);
         }
     }
+
+    @Override
+    public Optional<User> findById(final int id) throws PersistentException {
+        try {
+            UserDao userDao = (UserDao) transaction.createDao(Type.USER_DAO);
+            return userDao.read(id);
+        } catch (DAOException ex) {
+            throw new PersistentException(ex);
+        }
+    }
 }

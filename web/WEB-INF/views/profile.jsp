@@ -24,7 +24,7 @@
                 <li><a href="#">Works</a></li>
                 <c:if test="${curuser ne null}">
                     <c:url value="/toprofile.html" var="toprofile"/>
-                    <li><a href="${toprofile}?user=${curuser.id}">Profile</a></li>
+                    <li><a href="${toprofile}?userid=${curuser.id}">Profile</a></li>
                     <c:url value="/exit.html" var="exit"/>
                     <li><a href="${exit}">Exit</a></li>
                 </c:if>
@@ -51,8 +51,16 @@
             </ul>
         </div>
         <div class="main">
-            <p><c:out value="Error"/></p>
-            <p><c:out value="${error}"/></p>
+            <p>First name: ${user.firstName}</p>
+            <p>Last name: ${user.lastName}</p>
+            <p>Date of registration: ${user.regDate}</p>
+            <p>E-mail: ${user.email}</p>
+            <c:if test="${user.role eq 'FREELANCER'}">
+                <p>User role: Freelancer</p>
+            </c:if>
+            <c:if test="${user.role eq 'CLIENT'}">
+                <p>User role: Client</p>
+            </c:if>
         </div>
     </div>
     <div class="footer">

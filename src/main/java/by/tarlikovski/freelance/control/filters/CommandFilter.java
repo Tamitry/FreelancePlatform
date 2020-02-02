@@ -27,6 +27,14 @@ public class CommandFilter implements Filter {
                 return new Home();
             case "/error":
                 return new ErrorPage();
+            case "/login":
+                return new Login();
+            case "/tologin":
+                return new ToLogin();
+            case "/toprofile":
+                return new ToProfile();
+            case "/exit":
+                return new Exit();
             default:
                 throw new ControlException("Command not found!");
         }
