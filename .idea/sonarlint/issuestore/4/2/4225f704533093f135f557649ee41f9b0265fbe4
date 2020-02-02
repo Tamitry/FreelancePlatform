@@ -1,0 +1,32 @@
+
+msquid:S1192+"JDefine a constant instead of duplicating this literal "UserEmail" 5 times.(Ÿç½€ÿÿÿÿÿ8‡¢‡¸ş-
+Hsquid:S00108b")Either remove or fill this block of code.(«ğÆ‚8’Ÿù·ş-
+lsquid:S1192."IDefine a constant instead of duplicating this literal "UserRole" 5 times.(Ü¤š¯üÿÿÿÿ8‡¢‡¸ş-
+csquid:S2259"DA "NullPointerException" could be thrown; "resSet" is nullable here.(ÆáâÂ8‡¢‡¸ş-
+Isquid:S00108‚")Either remove or fill this block of code.(«ğÆ‚8‡¢‡¸ş-
+csquid:S2259Î"DA "NullPointerException" could be thrown; "resSet" is nullable here.(ÆáâÂ8¿õ°¹ş-
+fsquid:S1192*"HDefine a constant instead of duplicating this literal "RegDate" 5 times.(´ä‚8‡¢‡¸ş-
+jsquid:S1192'"GDefine a constant instead of duplicating this literal "UserId" 3 times.(øÎÀÕøÿÿÿÿ8ÑËÑ¸ş-
+Isquid:S00108ú")Either remove or fill this block of code.(«ğÆ‚8¾ë¸ş-
+csquid:S2259©"DA "NullPointerException" could be thrown; "resSet" is nullable here.(ÆáâÂ8¿Ïãÿ-
+gsquid:S1192)"IDefine a constant instead of duplicating this literal "LastName" 5 times.(Şö¨ô8‡¢‡¸ş-
+csquid:S2259õ"DA "NullPointerException" could be thrown; "resSet" is nullable here.(ÆáâÂ8¾ë¸ş-
+Hsquid:S00108^")Either remove or fill this block of code.(«ğÆ‚8’Ÿù·ş-
+Isquid:S00108Ó")Either remove or fill this block of code.(«ğÆ‚8¿õ°¹ş-
+esquid:S2259¤"FA "NullPointerException" could be thrown; "prepStat" is nullable here.(‚ªì8¢ëºş-
+esquid:S2259’"FA "NullPointerException" could be thrown; "prepStat" is nullable here.(‚ªì8ÊÉºş-
+Isquid:S00108ª")Either remove or fill this block of code.(«ğÆ‚8¿Ïãÿ-
+Isquid:S00108Ï")Either remove or fill this block of code.(«ğÆ‚8«¢°¹ş-
+Isquid:S1481ä"*Remove this unused "users" local variable.(Ğ÷¤¤8ûô†çÿ-
+Hsquid:S00108;")Either remove or fill this block of code.(«ğÆ‚8ğ“ò·ş-
+Isquid:S00108ö")Either remove or fill this block of code.(«ğÆ‚8¾ë¸ş-
+Nsquid:S00108¥")Either remove or fill this block of code.(õÆêáÿÿÿÿÿ8ÇÊîºş-
+hsquid:S1192,"JDefine a constant instead of duplicating this literal "UserLogin" 5 times.(¿ÌÇ 8‡¢‡¸ş-
+bsquid:S2259]"DA "NullPointerException" could be thrown; "resSet" is nullable here.(ÆáâÂ8’Ÿù·ş-
+msquid:S1192("JDefine a constant instead of duplicating this literal "FirstName" 5 times.(Ş­ãÄüÿÿÿÿ8‡¢‡¸ş-
+psquid:S1192-"MDefine a constant instead of duplicating this literal "UserPassword" 5 times.(¢Ôõ¸üÿÿÿÿ8‡¢‡¸ş-
+Isquid:S00108†")Either remove or fill this block of code.(«ğÆ‚8‡¢‡¸ş-
+bsquid:S22596"DA "NullPointerException" could be thrown; "resSet" is nullable here.(ÆáâÂ8ô§ë·ş-
+Hsquid:S001087")Either remove or fill this block of code.(«ğÆ‚8ğ“ò·ş-
+Nsquid:S00108“")Either remove or fill this block of code.(õÆêáÿÿÿÿÿ8Ê™Íºş-
+Isquid:S00108®")Either remove or fill this block of code.(«ğÆ‚8¿Ïãÿ-

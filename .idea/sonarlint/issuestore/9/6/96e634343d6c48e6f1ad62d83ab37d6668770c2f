@@ -1,0 +1,11 @@
+
+dsquid:S1192#"FDefine a constant instead of duplicating this literal "error" 6 times.(øºåã8­È£ãÿ-
+Gsquid:S1905 ")Remove this unnecessary cast to "String".(Æšèþ8ê‘Æåÿ-
+Xsquid:S2441<":Make "User" serializable or don't store it in the session.(úÆè“8€™‰®€.
+Lsquid:S1905")Remove this unnecessary cast to "String".(äØá•úÿÿÿÿ8ê‘Æåÿ-
+Gsquid:S1905")Remove this unnecessary cast to "String".(Æ›ØÝ8ê‘Æåÿ-
+Lsquid:S1905")Remove this unnecessary cast to "String".(À×Ž¥ýÿÿÿÿ8ê‘Æåÿ-
+Gsquid:S1905!")Remove this unnecessary cast to "String".(ß¡¢ª8ê‘Æåÿ-
+jsquid:S1192$"GDefine a constant instead of duplicating this literal "/error" 3 times.(ëø’´ùÿÿÿÿ8µ†œèÿ-
+Usquid:S3655;"7Call "Optional#isPresent()" before accessing the value.(ŽµÖþ8Òü­€.
+Lsquid:S1905")Remove this unnecessary cast to "String".(ÇÐ¯úÿÿÿÿ8ÞÊÅåÿ-
