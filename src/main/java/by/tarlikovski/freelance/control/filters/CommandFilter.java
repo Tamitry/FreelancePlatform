@@ -35,6 +35,8 @@ public class CommandFilter implements Filter {
                 return new ToProfile();
             case "/exit":
                 return new Exit();
+            case "/toeditprofile":
+                return new ToEditProfile();
             default:
                 throw new ControlException("Command not found!");
         }

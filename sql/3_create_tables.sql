@@ -44,13 +44,13 @@ create trigger User_Before_Insert before insert on Users
 BEGIN
     set new.RegDate = NOW();
 END;
-
 create table if not exists Skills (
-                                      UserId      int,
-                                      CategoryId  int,
-                                      primary key (UserId, CategoryId),
-                                      foreign key (UserId) references Users(UserId),
-                                      foreign key (CategoryId) references Categories(CategoryId)
+    SkillId     int not null auto_increment,
+    UserId      int,
+    CategoryId  int,
+    primary key (SkillId),
+    foreign key (UserId) references Users(UserId),
+    foreign key (CategoryId) references Categories(CategoryId)
 );
 
 create index idx_usersskillid
@@ -121,13 +121,14 @@ create index idx_catorderpropid
     on OrderProperties(CategoryId);
 
 create table Works (
-                       OrderPropertyId     int,
-                       UserId              int,
-                       Grade               int,
-                       primary key (OrderPropertyId, UserId),
-                       foreign key (UserId) references Users(UserId),
-                       foreign key (OrderPropertyId) references OrderProperties(OrderPropertyId),
-                       check ( Grade between 0 and 10)
+    WorkId              int not null auto_increment,
+    OrderPropertyId     int,
+    UserId              int,
+    Grade               int,
+    primary key (WorkId),
+    foreign key (UserId) references Users(UserId),
+    foreign key (OrderPropertyId) references OrderProperties(OrderPropertyId),
+    check (Grade between 0 and 10)
 );
 
 create index idx_workuserid

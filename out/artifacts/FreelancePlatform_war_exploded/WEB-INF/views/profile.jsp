@@ -57,9 +57,18 @@
             <p>E-mail: ${user.email}</p>
             <c:if test="${user.role eq 'FREELANCER'}">
                 <p>User role: Freelancer</p>
+                <p></p>
+                <c:forEach var="elem" items="${categories}">
+                    <p>${elem.name}</p>
+                </c:forEach>
             </c:if>
             <c:if test="${user.role eq 'CLIENT'}">
                 <p>User role: Client</p>
+            </c:if>
+            <c:if test="${curuser.id eq user.id}">
+                <form method="get" action="toeditprofile.html?userid=${user.id}">
+                    <input type="button" value="Edit">
+                </form>
             </c:if>
         </div>
     </div>

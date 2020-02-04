@@ -2,6 +2,8 @@ package by.tarlikovski.freelance.dao.transaction.Impl;
 
 import by.tarlikovski.freelance.bean.Type;
 import by.tarlikovski.freelance.dao.Dao;
+import by.tarlikovski.freelance.dao.mysql.CategoryDaoImpl;
+import by.tarlikovski.freelance.dao.mysql.SkillDaoImpl;
 import by.tarlikovski.freelance.dao.mysql.UserDaoImpl;
 import by.tarlikovski.freelance.dao.transaction.Transaction;
 import by.tarlikovski.freelance.exception.DAOException;
@@ -24,6 +26,14 @@ public class TransactionImpl implements Transaction {
                 UserDaoImpl userDao = new UserDaoImpl();
                 userDao.setConnection(connection);
                 return userDao;
+            case SKILL_DAO:
+                SkillDaoImpl skillDao = new SkillDaoImpl();
+                skillDao.setConnection(connection);
+                return skillDao;
+            case CATEGORY_DAO:
+                CategoryDaoImpl categoryDao = new CategoryDaoImpl();
+                categoryDao.setConnection(connection);
+                return categoryDao;
             //case OrderDao:
             //    break;
             default:

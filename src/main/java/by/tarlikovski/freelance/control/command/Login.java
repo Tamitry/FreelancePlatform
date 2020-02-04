@@ -18,7 +18,7 @@ public class Login extends Command {
     public String exec(final HttpServletRequest request,
                        final HttpServletResponse response)
             throws PersistentException {
-        UserService userService = (UserService) factory.getService(ServiceName.LOGIN);
+        UserService userService = (UserService) factory.getService(ServiceName.USER_SERVICE);
         User user = null;
         if (userService.findByLogin(request.getParameter("login")).isPresent()) {
             user = userService.findByLogin(request.getParameter("login")).get();

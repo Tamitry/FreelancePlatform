@@ -21,13 +21,14 @@ public class ServiceFactoryImpl implements ServiceFactory {
     public Service getService(final ServiceName type) throws PersistentException {
         try {
             switch (type) {
-                case REG_FIRST:
-                case REG_CONFIRM:
-                case FIND_ALL:
-                case LOGIN:
+                case USER_SERVICE:
                     UserServiceImpl userService = new UserServiceImpl();
                     userService.setTransaction(transactionFactory.createTransaction());
                     return userService;
+                case SKILL_SERVICE:
+                    SkillServiceImpl skillService = new SkillServiceImpl();
+                    skillService.setTransaction(transactionFactory.createTransaction());
+                    return skillService;
                 default:
                     throw new PersistentException("Service is not exist.");
             }

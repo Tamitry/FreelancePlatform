@@ -22,13 +22,13 @@
                 <c:url value="/userlist.html" var="userlist"/>
                 <li><a href="${userlist}">Freelancers</a></li>
                 <li><a href="#">Works</a></li>
-                <c:if test="${curuser ne null}">
+                <c:if test="${user ne null}">
                     <c:url value="/toprofile.html" var="toprofile"/>
-                    <li><a href="${toprofile}?userid=${curuser.id}">Profile</a></li>
+                    <li><a href="${toprofile}?userid=${user.id}">Profile</a></li>
                     <c:url value="/exit.html" var="exit"/>
                     <li><a href="${exit}">Exit</a></li>
                 </c:if>
-                <c:if test="${curuser eq null}">
+                <c:if test="${user eq null}">
                     <c:url value="/toregistration.html" var="registration"/>
                     <li><a href="${registration}">Registration</a></li>
                     <c:url value="/tologin.html" var="login"/>
@@ -51,25 +51,14 @@
             </ul>
         </div>
         <div class="main">
-            <p>First name: ${user.firstName}</p>
-            <p>Last name: ${user.lastName}</p>
-            <p>Date of registration: ${user.regDate}</p>
-            <p>E-mail: ${user.email}</p>
-            <c:if test="${user.role eq 'FREELANCER'}">
-                <p>User role: Freelancer</p>
-                <p></p>
-                <c:forEach var="elem" items="${categories}">
-                    <p>${elem.name}</p>
+            <p>First name: <input type="text" placeholder="${user.firstName}" name="firstname"></p>
+            <p>Last name: <input type="text" placeholder="${user.lastName}" name="lastname"></p>
+            <p></p>
+            <form action="editprofile.jsp" method="post">
+                <c:forEach var="elem" items="categories">
+                    <input type="checkbox" value="${elem.categoryName}" name="${elem.id}">
                 </c:forEach>
-            </c:if>
-            <c:if test="${user.role eq 'CLIENT'}">
-                <p>User role: Client</p>
-            </c:if>
-            <c:if test="${curuser.id eq user.id}">
-                <form method="get" action="toeditprofile.html?userid=${user.id}">
-                    <input type="button" value="Edit">
-                </form>
-            </c:if>
+            </form>
         </div>
     </div>
     <div class="footer">
