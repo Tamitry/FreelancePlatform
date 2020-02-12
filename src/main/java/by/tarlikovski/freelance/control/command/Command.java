@@ -2,7 +2,7 @@ package by.tarlikovski.freelance.control.command;
 
 import by.tarlikovski.freelance.bean.Role;
 import by.tarlikovski.freelance.bean.User;
-import by.tarlikovski.freelance.exception.PersistentException;
+import by.tarlikovski.freelance.service.ServiceException;
 import by.tarlikovski.freelance.service.ServiceFactory;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +13,7 @@ import java.util.Set;
 abstract public class Command {
     private Set<Role> roles = new HashSet<>();
     private User user;
-    private String name;
+    private String address;
     protected ServiceFactory factory;
 
     public Set<Role> getRoles() {
@@ -28,12 +28,12 @@ abstract public class Command {
         this.user = authorizedUser;
     }
 
-    public String getName() {
-        return name;
+    public String getAddress() {
+        return address;
     }
 
-    public void setName(final String name) {
-        this.name = name;
+    public void setAddress(final String address) {
+        this.address = address;
     }
 
     public void setFactory(final ServiceFactory factory) {
@@ -42,5 +42,5 @@ abstract public class Command {
 
     abstract public String exec(final HttpServletRequest request,
                                 final HttpServletResponse response)
-            throws PersistentException;
+            throws ServiceException;
 }

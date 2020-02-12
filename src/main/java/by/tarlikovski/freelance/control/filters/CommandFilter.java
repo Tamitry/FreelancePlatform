@@ -2,7 +2,7 @@ package by.tarlikovski.freelance.control.filters;
 
 import by.tarlikovski.freelance.control.command.*;
 import by.tarlikovski.freelance.control.command.Registration;
-import by.tarlikovski.freelance.exception.ControlException;
+import by.tarlikovski.freelance.control.ControlException;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +37,8 @@ public class CommandFilter implements Filter {
                 return new Exit();
             case "/toeditprofile":
                 return new ToEditProfile();
+            case "/orderlist":
+                return new OrderList();
             default:
                 throw new ControlException("Command not found!");
         }

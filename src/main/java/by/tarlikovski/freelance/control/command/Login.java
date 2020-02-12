@@ -2,7 +2,7 @@ package by.tarlikovski.freelance.control.command;
 
 import by.tarlikovski.freelance.bean.ServiceName;
 import by.tarlikovski.freelance.bean.User;
-import by.tarlikovski.freelance.exception.PersistentException;
+import by.tarlikovski.freelance.service.ServiceException;
 import by.tarlikovski.freelance.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,28 +11,30 @@ import javax.servlet.http.HttpServletResponse;
 public class Login extends Command {
 
     public Login() {
-        setName("/index");
+        setAddress("/index");
     }
 
     @Override
     public String exec(final HttpServletRequest request,
                        final HttpServletResponse response)
-            throws PersistentException {
+            throws ServiceException {
         UserService userService = (UserService) factory.getService(ServiceName.USER_SERVICE);
         User user = null;
-        if (userService.findByLogin(request.getParameter("login")).isPresent()) {
+        if (userService.findByLogin(request.getParameter("login")).isPresent()
+                && !request.getParameter("login").equals("")) {
             user = userService.findByLogin(request.getParameter("login")).get();
         } else {
             request.setAttribute("error", "User does not exist.");
-            setName("/error");
+            setAddress("/error");
             return "Error";
         }
-        if (user.getPassword().equals(request.getParameter("password"))) {
+        if (user.getPassword().equals(request.getParameter("password"))
+                && !request.getParameter("password").equals("")) {
             request.getSession().setAttribute("user", user);
             return "Success";
         } else {
             request.setAttribute("error", "Wrong password.");
-            setName("/error");
+            setAddress("/error");
             return "Error";
         }
     }

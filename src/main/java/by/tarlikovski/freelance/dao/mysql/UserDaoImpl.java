@@ -3,7 +3,7 @@ package by.tarlikovski.freelance.dao.mysql;
 import by.tarlikovski.freelance.bean.Role;
 import by.tarlikovski.freelance.bean.User;
 import by.tarlikovski.freelance.dao.UserDao;
-import by.tarlikovski.freelance.exception.DAOException;
+import by.tarlikovski.freelance.dao.DAOException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,10 +14,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserDaoImpl extends BaseDaoImpl implements UserDao {
-    private static final String FIND_FULL_NAME = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole from users where CONCAT(FirstName, ' ', LastName) like '%?%'";
+    private static final String FIND_FULL_NAME = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole from users where CONCAT(FirstName, ' ', LastName) like ?";
     private static final String FIND_BY_LOGIN = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole from users where UserLogin = ?";
     private static final String FIND_BY_EMAIL = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole from users where UserEmail = ?";
-    private static final String FIND_ALL = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole from users where UserRole = 2";
+    private static final String FIND_ALL_FREELANCER = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole from users where UserRole = 2";
     private static final String FIND_BY_ID = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole from users where UserId = ?";
     private static final String CREATE = "insert into users (FirstName, LastName, UserLogin, UserEmail, UserPassword, UserRole) values (?,?,?,?,?,?)";
     private static final String UPDATE = "update users set FirstName = ?, LastName = ?, RegDate = ?, UserLogin = ?, UserEmail = ?, UserPassword = ?, UserRole = ? where UserId = ?";
@@ -30,7 +30,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
         int i = 1;
         try {
             prepState = connection.prepareCall(FIND_FULL_NAME);
-            prepState.setString(i, name);
+            prepState.setString(i, "%" + name + "%");
             resSet = prepState.executeQuery();
             List<User> users = new ArrayList<>();
             User user = null;
@@ -106,7 +106,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
         PreparedStatement prepState = null;
         ResultSet resSet = null;
         try {
-            prepState = connection.prepareCall(FIND_ALL);
+            prepState = connection.prepareCall(FIND_ALL_FREELANCER);
             resSet = prepState.executeQuery();
             List<User> users = new ArrayList<>();
             User user = null;
@@ -179,10 +179,11 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     }
 
     @Override
-    public Integer create(final User entity) throws DAOException {
+    public int create(final User entity) throws DAOException {
         PreparedStatement prepStat = null;
         ResultSet resSet = null;
         int i = 1;
+        int v;
         try {
             prepStat = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS);
             String firstName = entity.getFirstName() != null ? entity.getFirstName() : "";
@@ -193,11 +194,12 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             prepStat.setString(i++, entity.getEmail());
             prepStat.setString(i++, entity.getPassword());
             prepStat.setInt(i, (entity.getRole().getRoleNum()));
-            prepStat.executeUpdate();
+            v = prepStat.executeUpdate();
             resSet = prepStat.getGeneratedKeys();
             if (resSet.next()) {
                 i = 1;
-                return resSet.getInt(i);
+                entity.setId(resSet.getInt(i));
+                return v;
             } else {
                 throw new DAOException("An error occurred while adding to the table Users.");
             }
@@ -227,9 +229,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             if (!resSet.next()) {
                 return Optional.empty();
             } else {
-                List<User> users = new ArrayList<>();
-                User user = null;
-                user = new User();
+                User user = new User();
                 user.setId(resSet.getInt("UserId"));
                 user.setFirstName(resSet.getString("FirstName"));
                 user.setLastName(resSet.getString("LastName"));
@@ -255,7 +255,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     }
 
     @Override
-    public void update(final User entity) throws DAOException {
+    public int update(final User entity) throws DAOException {
         PreparedStatement prepStat = null;
         int i = 1;
         try {
@@ -268,7 +268,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             prepStat.setString(i++, entity.getPassword());
             prepStat.setInt(i++, (entity.getRole().getRoleNum()));
             prepStat.setInt(i, entity.getId());
-            prepStat.executeUpdate();
+            return prepStat.executeUpdate();
         } catch (SQLException ex) {
             throw new DAOException(ex);
         } finally {
@@ -280,13 +280,13 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     }
 
     @Override
-    public void delete(final Integer identity) throws DAOException {
+    public int delete(final Integer identity) throws DAOException {
         PreparedStatement prepStat = null;
         int i = 1;
         try {
             prepStat = connection.prepareStatement(DELETE);
             prepStat.setInt(i, identity);
-            prepStat.executeUpdate();
+            return prepStat.executeUpdate();
         } catch (SQLException ex) {
             throw new DAOException(ex);
         } finally {

@@ -21,7 +21,8 @@
                 <li><a href="#">About</a></li>
                 <c:url value="/userlist.html" var="userlist"/>
                 <li><a href="${userlist}">Freelancers</a></li>
-                <li><a href="#">Works</a></li>
+                <c:url value="/orderlist.html" var="orders"/>
+                <li><a href="${orders}">Works</a></li>
                 <c:if test="${curuser ne null}">
                     <c:url value="/toprofile.html" var="toprofile"/>
                     <li><a href="${toprofile}?userid=${curuser.id}">Profile</a></li>
@@ -66,9 +67,9 @@
                 <p>User role: Client</p>
             </c:if>
             <c:if test="${curuser.id eq user.id}">
-                <form method="get" action="toeditprofile.html?userid=${user.id}">
-                    <input type="button" value="Edit">
-                </form>
+                <c:url value="/toeditprofile.html" var="editprof"/>
+                <c:set var="userid" value="${curuser.id}"/>
+                <button onclick="window.location='${editprof}?userid=${userid}'">Submit
             </c:if>
         </div>
     </div>

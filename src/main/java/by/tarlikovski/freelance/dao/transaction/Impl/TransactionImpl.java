@@ -2,11 +2,11 @@ package by.tarlikovski.freelance.dao.transaction.Impl;
 
 import by.tarlikovski.freelance.bean.Type;
 import by.tarlikovski.freelance.dao.Dao;
-import by.tarlikovski.freelance.dao.mysql.CategoryDaoImpl;
-import by.tarlikovski.freelance.dao.mysql.SkillDaoImpl;
-import by.tarlikovski.freelance.dao.mysql.UserDaoImpl;
+import by.tarlikovski.freelance.dao.OrderPropertyDao;
+import by.tarlikovski.freelance.dao.WorkDao;
+import by.tarlikovski.freelance.dao.mysql.*;
 import by.tarlikovski.freelance.dao.transaction.Transaction;
-import by.tarlikovski.freelance.exception.DAOException;
+import by.tarlikovski.freelance.dao.DAOException;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -34,8 +34,18 @@ public class TransactionImpl implements Transaction {
                 CategoryDaoImpl categoryDao = new CategoryDaoImpl();
                 categoryDao.setConnection(connection);
                 return categoryDao;
-            //case OrderDao:
-            //    break;
+            case ORDER_PROPERTY_DAO:
+                OrderPropertyDaoImpl ordPropDao = new OrderPropertyDaoImpl();
+                ordPropDao.setConnection(connection);
+                return ordPropDao;
+            case WORK_DAO:
+                WorkDaoImpl workDao = new WorkDaoImpl();
+                workDao.setConnection(connection);
+                return workDao;
+            case ORDER_DAO:
+                OrderDaoImpl orderDao = new OrderDaoImpl();
+                orderDao.setConnection(connection);
+                return orderDao;
             default:
                 throw new DAOException("Unknown DAO class.");
         }

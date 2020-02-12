@@ -1,6 +1,7 @@
 package by.tarlikovski.freelance.bean;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 
 public class User extends Entity {
     private Role role;
@@ -87,5 +88,33 @@ public class User extends Entity {
 
     public void setPassword(final String pass) {
         this.password = pass;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        };
+        User user = (User) o;
+        return getRole() == user.getRole() &&
+                getFirstName().equals(user.getFirstName()) &&
+                getLastName().equals(user.getLastName()) &&
+                Objects.equals(getRegDate(), user.getRegDate()) &&
+                getEmail().equals(user.getEmail()) &&
+                getLogin().equals(user.getLogin()) &&
+                getPassword().equals(user.getPassword());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getRole(), getFirstName(),
+                getLastName(), getRegDate(), getEmail(),
+                getLogin(), getPassword());
     }
 }

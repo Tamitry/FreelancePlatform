@@ -1,25 +1,24 @@
 package by.tarlikovski.freelance.service;
 
 import by.tarlikovski.freelance.bean.User;
-import by.tarlikovski.freelance.exception.PersistentException;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    void userRegistration(User user) throws PersistentException;
+    int userRegistration(User user) throws ServiceException;
 
-    void deleteUser(int i) throws PersistentException;
+    int deleteUser(int i) throws ServiceException;
 
-    void changeParameters(User user) throws PersistentException;
+    int changeParameters(User user) throws ServiceException;
 
-    List<User> findAllFreelancers() throws PersistentException;
+    List<User> findAllFreelancers() throws ServiceException;
 
-    List<User> findByName(String name) throws PersistentException;
+    List<User> findByName(String name) throws ServiceException;
 
-    Optional<User> findByLogin(String login) throws PersistentException;
+    Optional<User> findByLogin(String login) throws ServiceException;
 
-    Optional<User> findByEmail(String email) throws PersistentException;
+    Optional<User> findByEmail(String email) throws ServiceException;
 
-    Optional<User> findById(int id) throws PersistentException;
+    Optional<User> findById(int id) throws ServiceException;
 }

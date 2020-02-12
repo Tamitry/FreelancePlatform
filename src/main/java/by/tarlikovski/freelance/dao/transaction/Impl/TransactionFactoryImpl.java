@@ -3,7 +3,7 @@ package by.tarlikovski.freelance.dao.transaction.Impl;
 import by.tarlikovski.freelance.dao.connectionpool.ConnectionPool;
 import by.tarlikovski.freelance.dao.transaction.Transaction;
 import by.tarlikovski.freelance.dao.transaction.TransactionFactory;
-import by.tarlikovski.freelance.exception.DAOException;
+import by.tarlikovski.freelance.dao.DAOException;
 
 import java.sql.Connection;
 import java.sql.SQLException;

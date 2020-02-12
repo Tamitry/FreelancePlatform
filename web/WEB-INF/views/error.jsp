@@ -21,7 +21,8 @@
                 <li><a href="#">About</a></li>
                 <c:url value="/userlist.html" var="userlist"/>
                 <li><a href="${userlist}">Freelancers</a></li>
-                <li><a href="#">Works</a></li>
+                <c:url value="/orderlist.html" var="orders"/>
+                <li><a href="${orders}">Works</a></li>
                 <c:if test="${curuser ne null}">
                     <c:url value="/toprofile.html" var="toprofile"/>
                     <li><a href="${toprofile}?user=${curuser.id}">Profile</a></li>

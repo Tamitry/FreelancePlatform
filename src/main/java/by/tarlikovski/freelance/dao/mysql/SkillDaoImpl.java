@@ -3,7 +3,7 @@ package by.tarlikovski.freelance.dao.mysql;
 import by.tarlikovski.freelance.bean.Skill;
 import by.tarlikovski.freelance.bean.User;
 import by.tarlikovski.freelance.dao.SkillDao;
-import by.tarlikovski.freelance.exception.DAOException;
+import by.tarlikovski.freelance.dao.DAOException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -54,19 +54,21 @@ public class SkillDaoImpl extends BaseDaoImpl implements SkillDao {
     }
 
     @Override
-    public Integer create(final Skill entity) throws DAOException {
+    public int create(final Skill entity) throws DAOException {
         PreparedStatement prepStat = null;
         ResultSet resSet = null;
         int i = 1;
+        int v;
         try {
             prepStat = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS);
             prepStat.setInt(i++, entity.getUserId());
             prepStat.setInt(i, entity.getCategoryId());
-            prepStat.executeUpdate();
+            v = prepStat.executeUpdate();
             resSet = prepStat.getGeneratedKeys();
             if (resSet.next()) {
                 i = 1;
-                return resSet.getInt(i);
+                entity.setId(resSet.getInt(i));
+                return v;
             } else {
                 throw new DAOException("An error occurred while adding to the table Skills.");
             }
@@ -117,18 +119,18 @@ public class SkillDaoImpl extends BaseDaoImpl implements SkillDao {
     }
 
     @Override
-    public void update(final Skill entity) throws DAOException {
+    public int update(final Skill entity) throws DAOException {
         throw new DAOException(new UnsupportedOperationException("This table can not be updated."));
     }
 
     @Override
-    public void delete(final Integer identity) throws DAOException {
+    public int delete(final Integer identity) throws DAOException {
         PreparedStatement prepStat = null;
         int i = 1;
         try {
             prepStat = connection.prepareStatement(DELETE);
             prepStat.setInt(i, identity);
-            prepStat.executeUpdate();
+            return prepStat.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
         } finally {

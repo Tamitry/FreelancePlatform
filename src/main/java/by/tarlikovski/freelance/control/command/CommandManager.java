@@ -1,6 +1,6 @@
 package by.tarlikovski.freelance.control.command;
 
-import by.tarlikovski.freelance.exception.ControlException;
+import by.tarlikovski.freelance.control.ControlException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

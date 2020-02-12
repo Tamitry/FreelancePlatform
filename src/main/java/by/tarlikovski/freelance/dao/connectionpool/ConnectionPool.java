@@ -1,6 +1,6 @@
 package by.tarlikovski.freelance.dao.connectionpool;
 
-import by.tarlikovski.freelance.exception.DAOException;
+import by.tarlikovski.freelance.dao.DAOException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

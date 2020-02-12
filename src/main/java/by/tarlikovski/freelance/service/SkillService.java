@@ -2,14 +2,13 @@ package by.tarlikovski.freelance.service;
 
 import by.tarlikovski.freelance.bean.Category;
 import by.tarlikovski.freelance.bean.User;
-import by.tarlikovski.freelance.exception.PersistentException;
 
 import java.util.List;
 
 public interface SkillService extends Service {
-    List<Category> findUserSkills(final User user) throws PersistentException;
+    List<Category> findUserSkills(final User user) throws ServiceException;
 
-    void createSkill(User user, Category category) throws PersistentException;
+    int createSkill(User user, Category category) throws ServiceException;
 
-    void deleteSkill(User user, Category category) throws PersistentException;
+    int deleteSkill(User user, Category category) throws ServiceException;
 }

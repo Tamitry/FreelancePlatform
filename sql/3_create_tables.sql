@@ -1,12 +1,12 @@
-use freelance_platform_db;
+
 create table if not exists Users (
-                                     UserId         int     not null auto_increment,
-                                     FirstName      varchar(250)    default '',
-                                     LastName       varchar(250)    default '',
-                                     RegDate        timestamp,
-                                     UserLogin      varchar(250)    not null unique,
-                                     UserEmail      varchar(250)    not null unique,
-                                     UserPassword   varchar(250)    not null,
+                                     UserId      int     not null auto_increment,
+                                     FirstName   varchar(250)    default '',
+                                     LastName    varchar(250)    default '',
+                                     RegDate     timestamp,
+                                     UserLogin   varchar(250)    unique,
+                                     UserEmail   varchar(250)    unique,
+                                     UserPassword varchar(250)   unique,
     /*
      Roles:
      1 - Administrator;
@@ -44,13 +44,14 @@ create trigger User_Before_Insert before insert on Users
 BEGIN
     set new.RegDate = NOW();
 END;
+
 create table if not exists Skills (
-    SkillId     int not null auto_increment,
-    UserId      int,
-    CategoryId  int,
-    primary key (SkillId),
-    foreign key (UserId) references Users(UserId),
-    foreign key (CategoryId) references Categories(CategoryId)
+                                      SkillId     int not null auto_increment,
+                                      UserId      int,
+                                      CategoryId  int,
+                                      primary key (SkillId),
+                                      foreign key (UserId) references Users(UserId),
+                                      foreign key (CategoryId) references Categories(CategoryId)
 );
 
 create index idx_usersskillid
@@ -58,29 +59,6 @@ create index idx_usersskillid
 
 create index idx_categoryskillid
     on Skills(CategoryId);
-
-create table if not exists ComMethods (
-                                          ComMethodId     int             not null auto_increment,
-                                          ComPic          blob,
-                                          ComMethodName   varchar(250)    not null unique,
-                                          primary key (ComMethodId)
-);
-
-create index idx_commethodname
-    on ComMethods(ComMethodName);
-
-
-create table if not exists UserAddresses (
-                                             UserId      int,
-                                             ComMethodId int,
-                                             AddressName varchar(255),
-                                             primary key (UserId, ComMethodId),
-                                             foreign key (UserId) references Users(UserId),
-                                             foreign key (ComMethodId) references ComMethods(ComMethodId)
-);
-
-create index idx_addressname
-    on UserAddresses(AddressName);
 
 create table if not exists Orders (
                                       OrderId         int             not null auto_increment,
@@ -92,6 +70,11 @@ create table if not exists Orders (
                                       primary key (OrderId),
                                       foreign key (ClientId) references Users(UserId)
 );
+create trigger Orders_Before_Insert before insert on Orders
+    for each row
+begin
+    set new.OrderRegDate = NOW();
+end;
 
 create index idx_ordername
     on Orders(OrderName);
@@ -119,20 +102,28 @@ create index idx_proporderid
 
 create index idx_catorderpropid
     on OrderProperties(CategoryId);
-
 create table Works (
-    WorkId              int not null auto_increment,
-    OrderPropertyId     int,
-    UserId              int,
-    Grade               int,
-    primary key (WorkId),
-    foreign key (UserId) references Users(UserId),
-    foreign key (OrderPropertyId) references OrderProperties(OrderPropertyId),
-    check (Grade between 0 and 10)
+                       WorkId      int not null auto_increment,
+                       OrderId     int,
+                       UserId              int,
+                       Grade               int,
+                       primary key (WorkId),
+                       foreign key (UserId) references Users(UserId),
+                       foreign key (OrderId) references Orders(OrderId),
+                       check ( Grade between 0 and 10)
 );
 
 create index idx_workuserid
     on Works(UserId);
 
 create index idx_workorderproperty
-    on Works(OrderPropertyId);
+    on Works(OrderId);
+
+create unique index unq_orderproperties
+    on orderproperties (OrderId, CategoryId);
+
+create unique index unq_works
+    on works (OrderId, UserId);
+
+create unique index unq_skills
+    on skills (UserId, CategoryId);

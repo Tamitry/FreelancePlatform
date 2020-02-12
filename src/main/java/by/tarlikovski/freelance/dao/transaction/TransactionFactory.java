@@ -1,7 +1,6 @@
 package by.tarlikovski.freelance.dao.transaction;
 
-import by.tarlikovski.freelance.exception.DAOException;
-import by.tarlikovski.freelance.exception.PersistentException;
+import by.tarlikovski.freelance.dao.DAOException;
 
 public interface TransactionFactory {
     Transaction createTransaction() throws DAOException;

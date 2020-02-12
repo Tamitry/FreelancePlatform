@@ -2,7 +2,7 @@ package by.tarlikovski.freelance.dao.mysql;
 
 import by.tarlikovski.freelance.bean.Category;
 import by.tarlikovski.freelance.dao.CategoryDao;
-import by.tarlikovski.freelance.exception.DAOException;
+import by.tarlikovski.freelance.dao.DAOException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -46,7 +46,7 @@ public class CategoryDaoImpl extends BaseDaoImpl implements CategoryDao {
     }
 
     @Override
-    public Integer create(final Category entity) throws DAOException {
+    public int create(final Category entity) throws DAOException {
         throw new DAOException(new UnsupportedOperationException("Сategory creation should be done in the database console."));
     }
 
@@ -82,12 +82,12 @@ public class CategoryDaoImpl extends BaseDaoImpl implements CategoryDao {
     }
 
     @Override
-    public void update(final Category entity) throws DAOException {
+    public int update(final Category entity) throws DAOException {
         throw new DAOException(new UnsupportedOperationException("Сategory update should be done in the database console."));
     }
 
     @Override
-    public void delete(final Integer identity) throws DAOException {
+    public int delete(final Integer identity) throws DAOException {
         throw new DAOException(new UnsupportedOperationException("Сategory deletion should be done in the database console."));
     }
 }

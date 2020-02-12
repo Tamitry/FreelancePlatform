@@ -51,12 +51,11 @@
             </ul>
         </div>
         <div class="main">
+            <form>
             <p>First name: <input type="text" placeholder="${user.firstName}" name="firstname"></p>
             <p>Last name: <input type="text" placeholder="${user.lastName}" name="lastname"></p>
-            <p></p>
-            <form action="editprofile.jsp" method="post">
-                <c:forEach var="elem" items="categories">
-                    <input type="checkbox" value="${elem.categoryName}" name="${elem.id}">
+                <c:forEach var="elem" items="${categories}">
+                    <p><input type="checkbox" value="${elem.id}" name="category">${elem.name}</p>
                 </c:forEach>
             </form>
         </div>

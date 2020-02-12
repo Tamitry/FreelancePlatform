@@ -1,6 +1,6 @@
 package by.tarlikovski.freelance.control.command;
 
-import by.tarlikovski.freelance.exception.PersistentException;
+import by.tarlikovski.freelance.service.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 public class ToLogin extends Command {
 
     public ToLogin() {
-        setName("/login");
+        setAddress("/login");
     }
     @Override
     public String exec(final HttpServletRequest request,
                        final HttpServletResponse response)
-            throws PersistentException {
+            throws ServiceException {
         return "To login";
     }
 }

@@ -1,7 +1,7 @@
 package by.tarlikovski.freelance.control.command;
 
-import by.tarlikovski.freelance.exception.ControlException;
-import by.tarlikovski.freelance.exception.PersistentException;
+import by.tarlikovski.freelance.control.ControlException;
+import by.tarlikovski.freelance.service.ServiceException;
 import by.tarlikovski.freelance.service.ServiceFactory;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +22,7 @@ public class CommandManagerImpl implements CommandManager {
         command.setFactory(factory);
         try {
             return command.exec(request, response);
-        } catch (PersistentException ex) {
+        } catch (ServiceException ex) {
             throw new ControlException(ex);
         }
     }
@@ -31,7 +31,7 @@ public class CommandManagerImpl implements CommandManager {
     public void close() throws ControlException {
         try {
             factory.close();
-        } catch (PersistentException ex) {
+        } catch (ServiceException ex) {
             throw new ControlException(ex);
         }
     }
