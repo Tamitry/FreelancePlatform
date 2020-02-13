@@ -187,7 +187,13 @@ y
 Isrc/main/java/by/tarlikovski/freelance/service/impl/SkillServiceImpl.java,0\5\0511625ed401e39547e58a1ceb9dd5a792be7fe8
 N
 web/WEB-INF/views/addorder.jsp,8\9\8965f04b74eaa72fe4803d7c5470c77cc4e59ad7
-t
-Dsrc/test/java/by/tarlikovski/freelance/services/UserServiceTest.java,7\4\74023845a4ef091087b1f3b546a10447eb6ab0b4
 L
 sql/5_create_test_tables.sql,a\3\a3d5bfb9491efe5b298037f56516c51f057e28d2
+t
+Dsrc/test/java/by/tarlikovski/freelance/service/OrderServiceTest.java,6\c\6cddde9c967f1f097934eefbbb2f303f3fcb431e
+s
+Csrc/test/java/by/tarlikovski/freelance/service/UserServiceTest.java,8\d\8d2bf70ca1f9ee5bf107692248f9a1703207de72
+|
+Lsrc/test/java/by/tarlikovski/freelance/service/OrderPropertyServiceTest.java,3\3\33a1b00c7a24f818b36946d77e98015d6a9e639b
+t
+Dsrc/test/java/by/tarlikovski/freelance/service/SkillServiceTest.java,7\8\78d103e1e3338e35f80cc80fe2eeb5fb8b83d9c3

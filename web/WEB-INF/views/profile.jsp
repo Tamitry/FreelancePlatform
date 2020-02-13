@@ -66,10 +66,12 @@
             <c:if test="${user.role eq 'CLIENT'}">
                 <p>User role: Client</p>
             </c:if>
-            <c:if test="${curuser.id eq user.id}">
+            <c:if test="${curuser.id eq user.id and curuser.id ne null}">
                 <c:url value="/toeditprofile.html" var="editprof"/>
+                <c:url value="/deleteuser.html" var="deleteprof"/>
                 <c:set var="userid" value="${curuser.id}"/>
-                    <button onclick="window.location='${editprof}?userid=${userid}'">Submit
+                <button onclick="window.location='${editprof}?userid=${userid}'">Edit</button>
+                <button onclick="window.location='${deleteprof}?userid=${userid}'">Delete</button>
             </c:if>
         </div>
     </div>

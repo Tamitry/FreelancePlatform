@@ -45,6 +45,10 @@ public class ServiceFactoryImpl implements ServiceFactory {
                     CategoryServiceImpl categoryService = new CategoryServiceImpl();
                     categoryService.setTransaction(transactionFactory.createTransaction());
                     return categoryService;
+                case VALIDATOR:
+                    UserValidatorImpl validator = new UserValidatorImpl();
+                    validator.setTransaction(transactionFactory.createTransaction());
+                    return validator;
                 default:
                     throw new ServiceException("Service is not exist.");
             }

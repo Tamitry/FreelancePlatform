@@ -103,14 +103,20 @@ create index idx_proporderid
 create index idx_catorderpropid
     on OrderProperties(CategoryId);
 create table Works (
-                       WorkId      int not null auto_increment,
-                       OrderId     int,
+                       WorkId              int not null auto_increment,
+                       OrderId             int,
                        UserId              int,
                        Grade               int,
+    /*
+     1 - not confirmed
+     2 - confirmed
+     3 - performed
+     */
+                       Status              tinyint default 1,
                        primary key (WorkId),
                        foreign key (UserId) references Users(UserId),
-                       foreign key (OrderId) references Orders(OrderId),
-                       check ( Grade between 0 and 10)
+                       foreign key (OrderId) references orders(OrderId),
+                       check ( Grade between 1 and 10)
 );
 
 create index idx_workuserid

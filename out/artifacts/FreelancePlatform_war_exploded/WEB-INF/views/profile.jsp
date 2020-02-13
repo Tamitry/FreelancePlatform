@@ -69,7 +69,7 @@
             <c:if test="${curuser.id eq user.id}">
                 <c:url value="/toeditprofile.html" var="editprof"/>
                 <c:set var="userid" value="${curuser.id}"/>
-                <button onclick="window.location='${editprof}?userid=${userid}'">Submit
+                    <button onclick="window.location='${editprof}?userid=${userid}'">Submit
             </c:if>
         </div>
     </div>

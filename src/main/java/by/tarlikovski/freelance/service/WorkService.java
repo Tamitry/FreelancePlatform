@@ -7,11 +7,13 @@ import by.tarlikovski.freelance.bean.Work;
 import java.util.List;
 
 public interface WorkService extends Service {
-    List<Order> findByUser(User user) throws ServiceException;
+    List<Work> findByUser(User user) throws ServiceException;
 
-    List<User> findByOrder(Order order) throws ServiceException;
+    List<Work> findByOrder(Order order) throws ServiceException;
+
+    int update(Work work) throws ServiceException;
 
     int create(Work work) throws ServiceException;
 
-    int delete(Work work) throws ServiceException;
+    int delete(int id) throws ServiceException;
 }

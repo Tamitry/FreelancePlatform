@@ -1,8 +1,9 @@
 package by.tarlikovski.freelance.bean;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-abstract public class Entity {
+abstract public class Entity implements Serializable {
     private int id;
 
     public Entity() {

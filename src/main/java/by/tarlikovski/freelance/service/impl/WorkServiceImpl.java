@@ -16,40 +16,56 @@ import java.util.List;
 
 public class WorkServiceImpl extends ServiceImpl implements WorkService {
     @Override
-    public List<Order> findByUser(final User user)
+    public List<Work> findByUser(final User user)
             throws ServiceException {
         try {
             WorkDao workDao = (WorkDao) transaction.createDao(Type.WORK_DAO);
             OrderDao orderDao = (OrderDao) transaction.createDao(Type.ORDER_DAO);
+            UserDao userDao = (UserDao) transaction.createDao(Type.USER_DAO);
             List<Work> list = workDao.findByUser(user);
-            List<Order> orders = new ArrayList<>();
-            transaction.commit();
+            List<Work> works = new ArrayList<>();
             for (Work work : list) {
-                if (orderDao.read(work.getOrder().getId()).isPresent()) {
-                    orders.add(orderDao.read(work.getOrder().getId()).get());
-                }
+                work.setUser(user);
+                Order order = orderDao.read(work.getOrder().getId()).get();
+                order.setClient(userDao.read(order.getClient().getId()).get());
+                work.setOrder(order);
+                works.add(work);
             }
-            return orders;
+            transaction.commit();
+            return works;
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
     }
 
     @Override
-    public List<User> findByOrder(final Order order)
+    public List<Work> findByOrder(final Order order)
             throws ServiceException {
         try {
             WorkDao workDao = (WorkDao) transaction.createDao(Type.WORK_DAO);
             UserDao userDao = (UserDao) transaction.createDao(Type.USER_DAO);
             List<Work> list = workDao.findByOrder(order);
-            List<User> users = new ArrayList<>();
-            transaction.commit();
+            List<Work> works = new ArrayList<>();
             for (Work work : list) {
-                if (userDao.read(work.getOrder().getId()).isPresent()) {
-                    users.add(userDao.read(work.getOrder().getId()).get());
-                }
+                work.setOrder(order);
+                work.setUser(userDao
+                        .read(work.getUser().getId()).get());
+                works.add(work);
             }
-            return users;
+            transaction.commit();
+            return works;
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public int update(final Work work) throws ServiceException {
+        try {
+            WorkDao workDao = (WorkDao) transaction.createDao(Type.WORK_DAO);
+            int v = workDao.update(work);
+            transaction.commit();
+            return v;
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
@@ -70,12 +86,12 @@ public class WorkServiceImpl extends ServiceImpl implements WorkService {
     }
 
     @Override
-    public int delete(final Work work)
+    public int delete(final int id)
             throws ServiceException {
         try {
             int i;
             WorkDao workDao = (WorkDao) transaction.createDao(Type.WORK_DAO);
-            i = workDao.delete(work.getId());
+            i = workDao.delete(id);
             transaction.commit();
             return i;
         } catch (DAOException e) {

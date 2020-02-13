@@ -1,6 +1,7 @@
 package by.tarlikovski.freelance.dao.mysql;
 
 import by.tarlikovski.freelance.bean.Order;
+import by.tarlikovski.freelance.bean.Status;
 import by.tarlikovski.freelance.bean.User;
 import by.tarlikovski.freelance.bean.Work;
 import by.tarlikovski.freelance.dao.DAOException;
@@ -15,11 +16,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class WorkDaoImpl extends BaseDaoImpl implements WorkDao {
-    private static final String FIND_BY_USER = "select WorkId, OrderId, UserId, Grade from works where UserId = ?";
-    private static final String FIND_BY_ORDER = "select WorkId, OrderId, UserId, Grade from works where OrderId = ?";
-    private static final String READ = "select WorkId, OrderId, UserId, Grade from works where WorkId = ?";
+    private static final String FIND_BY_USER = "select WorkId, OrderId, UserId, Grade, Status from works where UserId = ?";
+    private static final String FIND_BY_ORDER = "select WorkId, OrderId, UserId, Grade, Status from works where OrderId = ?";
+    private static final String READ = "select WorkId, OrderId, UserId, Grade, Status from works where WorkId = ?";
     private static final String CREATE = "insert into works (OrderId, UserId, Grade) values (?,?,?)";
-    private static final String UPDATE = "update works set OrderId = ?, UserId = ?, Grade = ? where WorkId = ?";
+    private static final String UPDATE = "update works set OrderId = ?, UserId = ?, Grade = ?, Status = ? where WorkId = ?";
     private static final String DELETE = "delete from works where WorkId = ?";
     @Override
     public List<Work> findByUser(final User user)
@@ -43,6 +44,7 @@ public class WorkDaoImpl extends BaseDaoImpl implements WorkDao {
                 usr.setId(resSet.getInt("UserId"));
                 work.setUser(usr);
                 work.setGrade(resSet.getByte("Grade"));
+                work.setStatus(Status.getStatus(resSet.getInt("Status")));
                 works.add(work);
             }
             return works;
@@ -82,6 +84,7 @@ public class WorkDaoImpl extends BaseDaoImpl implements WorkDao {
                 user.setId(resSet.getInt("UserId"));
                 work.setUser(user);
                 work.setGrade(resSet.getByte("Grade"));
+                work.setStatus(Status.getStatus(resSet.getInt("Status")));
                 works.add(work);
             }
             return works;
@@ -180,6 +183,7 @@ public class WorkDaoImpl extends BaseDaoImpl implements WorkDao {
             prepStat = connection.prepareStatement(UPDATE);
             prepStat.setInt(i++, entity.getUser().getId());
             prepStat.setByte(i++, entity.getGrade());
+            prepStat.setInt(i++, entity.getStatus().getStatusNum());
             prepStat.setInt(i, entity.getId());
             return prepStat.executeUpdate();
         } catch (SQLException ex) {

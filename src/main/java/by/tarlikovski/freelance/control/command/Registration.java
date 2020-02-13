@@ -5,6 +5,7 @@ import by.tarlikovski.freelance.bean.ServiceName;
 import by.tarlikovski.freelance.bean.User;
 import by.tarlikovski.freelance.service.ServiceException;
 import by.tarlikovski.freelance.service.UserService;
+import by.tarlikovski.freelance.service.UserValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ public class Registration extends Command {
                        final HttpServletResponse response)
             throws ServiceException {
         UserService service = (UserService) factory.getService(ServiceName.USER_SERVICE);
+        UserValidator validator = (UserValidator) factory.getService(ServiceName.VALIDATOR);
         User user = new User();
         if (request.getParameter("role").equals("client")) {
             user.setRole(Role.CLIENT);
@@ -26,38 +28,25 @@ public class Registration extends Command {
             user.setRole(Role.FREELANCER);
         }
 
-        String login = (String) request.getParameter("log_in");
-        String email = (String) request.getParameter("email");
-        String pass = (String) request.getParameter("password");
+        user.setLogin((String) request.getParameter("log_in"));
+        user.setEmail((String) request.getParameter("email"));
+        user.setPassword((String) request.getParameter("password"));
         String repeat = (String) request.getParameter("repeat");
-        String firstName = (String) request.getParameter("firstname");
-        String lastName = (String) request.getParameter("lastname");
-        if (!pass.equals(repeat) && !pass.equals("")) {
+        user.setFirstName((String) request.getParameter("firstname"));
+        user.setLastName((String) request.getParameter("lastname"));
+        if (!user.getPassword().equals(repeat)) {
             request.setAttribute("error", "Passwords aren't equal.");
             setAddress("/error");
             return "error";
         }
-        user.setPassword(pass);
-        if (service.findByLogin(login).isPresent() && !login.equals("")) {
-            request.setAttribute("error", "User's is not unique.");
-            setAddress("/error");//TODO Replace
-            return "error";
-        }
-        user.setLogin(login);
-        if (service.findByEmail(email).isPresent() && !email.equals("")) {
-            request.setAttribute("error", "User's e-mail is not unique.");
+        try {
+            validator.validate(user);
+        } catch (ServiceException e) {
+            request.setAttribute("error", e.getMessage());
             setAddress("/error");
             return "error";
         }
-        user.setEmail(email);
-        if (!firstName.equals("")) {
-            user.setFirstName(firstName);
-        }
-        if (!lastName.equals("")){
-            user.setLastName(lastName);
-        }
         service.userRegistration(user);
-        user = service.findByLogin(user.getLogin()).get();
         request.getSession().setAttribute("user", user);
         return "Success.";
     }

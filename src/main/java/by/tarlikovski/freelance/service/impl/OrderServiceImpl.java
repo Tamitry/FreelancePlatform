@@ -68,10 +68,10 @@ public class OrderServiceImpl extends ServiceImpl implements OrderService {
         try {
             OrderDao orderDao = (OrderDao) transaction.createDao(Type.ORDER_DAO);
             UserDao userDao = (UserDao) transaction.createDao(Type.USER_DAO);
-            Optional<Order> order = orderDao.read(id);
-            order.get().setClient(userDao.read(order.get().getClient().getId()).get());
+            Order order = orderDao.read(id).get();
+            order.setClient(userDao.read(order.getClient().getId()).get());
             transaction.commit();
-            return order;
+            return Optional.ofNullable(order);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }    }
