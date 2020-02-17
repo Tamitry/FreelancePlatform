@@ -1,12 +1,3 @@
 
-Lsquid:S1905")Remove this unnecessary cast to "String".(À×¥ıÿÿÿÿ8ê‘Æåÿ-
-isquid:S1192$"FDefine a constant instead of duplicating this literal "error" 6 times.(×¨Ğäıÿÿÿÿ8ùÏ¦â€.
-Gsquid:S1905")Remove this unnecessary cast to "String".(Æ›Øİ8ê‘Æåÿ-
-Xsquid:S2441=":Make "User" serializable or don't store it in the session.(úÆè“8€™‰®€.
-Gsquid:S1905"")Remove this unnecessary cast to "String".(ß¡¢ª8ê‘Æåÿ-
-esquid:S1192%"GDefine a constant instead of duplicating this literal "/error" 3 times.(÷ô­İ8Õõ¦â€.
-Gsquid:S1905")Remove this unnecessary cast to "String".(ìÖ•8ŞÊÅåÿ-
-Lsquid:S1905 ")Remove this unnecessary cast to "String".(äØá•úÿÿÿÿ8ê‘Æåÿ-
-Psquid:S1135+"2Complete the task associated to this TODO comment.(ÙšÈ„8¿¼¡â€.
-Usquid:S3655<"7Call "Optional#isPresent()" before accessing the value.(µÖş8ÜÕ¹â€.
-Gsquid:S1905!")Remove this unnecessary cast to "String".(Æšèş8ê‘Æåÿ-
+Lsquid:S1905%")Remove this unnecessary cast to "String".(äØá•úÿÿÿÿ8ê‘Æåÿ-
+isquid:S1192)"FDefine a constant instead of duplicating this literal "error" 4 times.(×¨Ğäıÿÿÿÿ8œºáñƒ.

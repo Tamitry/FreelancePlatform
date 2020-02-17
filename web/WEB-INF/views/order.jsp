@@ -1,13 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%--
-  Created by IntelliJ IDEA.
-  User: User
-  Date: 25.11.2019
-  Time: 19:26
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <style>
     * {
         margin: 0;
@@ -333,6 +326,13 @@
         font-weight: 900;
     }
 
+    .ordname input {
+        border-radius: 10px;
+        text-align: center;
+        width: 50%;
+        height: 30px;
+    }
+
     .main img {
         margin-right: 15px;
         border: 10px solid #697689;
@@ -346,6 +346,17 @@
     .main img:hover {
         border: 10px solid #a45f93;
     }
+
+    .desc input {
+        width: 80%;
+        height: 8cm;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .checkboxes {
+        border-radius: 10px;
+    }
     /*Подвал*/
     .footer {
 
@@ -355,6 +366,7 @@
         text-align: center;
     }
 </style>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -367,22 +379,22 @@
 <div class="wrapper">
     <div class="header">
         <div class="headerContent">
-            <div class="logo"><a href=""><span class="pink">Pink</span><span class="pink">Flamingo</span><span class="gray">.com</span></a></div>
+            <div class="logo"><a href=""><span class="pink">Pink <span class="pink">Flamingo</span><span class="gray">.com</span></span></a></div>
             <ul class="nav">
                 <c:url value="/home.html" var="home"/>
                 <li><a href="${home}" class="active">Home</a></li>
                 <li><a href="#">About</a></li>
                 <c:url value="/userlist.html" var="userlist"/>
                 <li><a href="${userlist}">Freelancers</a></li>
-                <c:url value="/orderlist.html" var="orderlist"/>
-                <li><a href="${orderlist}">Works</a></li>
-                <c:if test="${curuser ne null}">
+                <c:url value="/orderlist.html" var="orders"/>
+                <li><a href="${orders}">Works</a></li>
+                <c:if test="${user ne null}">
                     <c:url value="/toprofile.html" var="toprofile"/>
-                    <li><a href="${toprofile}?userid=${curuser.id}">Profile</a></li>
+                    <li><a href="${toprofile}?userid=${user.id}">Profile</a></li>
                     <c:url value="/exit.html" var="exit"/>
                     <li><a href="${exit}">Exit</a></li>
                 </c:if>
-                <c:if test="${curuser eq null}">
+                <c:if test="${user eq null}">
                     <c:url value="/toregistration.html" var="registration"/>
                     <li><a href="${registration}">Registration</a></li>
                     <c:url value="/tologin.html" var="login"/>
@@ -408,31 +420,87 @@
             </ul>
         </div>
         <div class="main">
-            <h1>List of freelancers</h1>
-            <!--Таблица-->
-            <div class="mobile">
+            <form>
+                <p><label>Order name</label></p>
+                <div class="ordname">
+                    <h3>${order.orderName}</h3>
+                    <p><label>Registration date</label></p>
+                    <p>${order.orderRegDate}</p>
+                    <p><label>Dead line</label></p>
+                    <p>${order.orderDeadLine}</p>
+                </div>
+                <div class="desc">
+                    <p><label>Description</label></p>
+                    <p>${order.description}</p>
+                </div>
+                <p>${order.client.firstName} ${order.client.lastName}</p>
+                <h3>Categories</h3>
+                <c:forEach var="elem" items="${properties}">
+                    <p>${elem.name}</p>
+                </c:forEach>
+                <h3>Unconfirmed freelancers</h3>
                 <table class="bordered">
                     <thead>
                     <tr>
-                        <th>Order name</th>
-                        <th>Dead line</th>
-                        <th>Description</th>
-                        <th>Data of registration</th>
+                        <th>First name</th>
+                        <th>Confirm</th>
+                        <th>Cancel</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="elem" items="${orders}">
+                    <c:forEach var="elem" items="${unconfworks}">
                         <tr>
-                            <td><a href="toorder.html?orderid=${elem.id}"><c:out value="${elem.orderName}"/></a></td>
-                            <td><a href="toorder.html?orderid=${elem.id}"><c:out value="${elem.orderDeadLine}"/></a></td>
-                            <td><a href="toorder.html?orderid=${elem.id}"><c:out value="${elem.description}"/></a></td>
-                            <c:url value="/toprofile.html" var="toprofile"/>
-                            <td><a href="${toprofile}?userid=${elem.client.id}"><c:out value="${elem.client.firstName} ${elem.client.lastName}"/></a></td>
+                            <td><a href="toprofile.html?userid=${elem.user.id}"><c:out value="${elem.user.firstName} ${elem.user.lastName}"/></a></td>
+                            <c:if test="${order.client.id eq curuser.id}">
+                                <td><a href="confirmwork.html?workid=${elem.id}"><c:out value="Confirm"/></a></td>
+                                <td><a href="cancelwork.html?workid=${elem.id}"><c:out value="Cancel"/></a></td>
+                            </c:if>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
-            </div>
+                <h3>Сonfirmed freelancers</h3>
+                <table class="bordered">
+                    <thead>
+                    <tr>
+                        <th>First name</th>
+                        <th>Cancel</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="elem" items="${confworks}">
+                        <tr>
+                            <td><a href="toprofile.html?userid=${elem.id}"><c:out value="${elem.user.firstName} ${elem.user.lastName}"/></a></td>
+                            <c:if test="${order.client.id eq curuser.id}">
+                                <td><a href="cancelwork.html?workid=${elem.id}"><c:out value="Cancel"/></a></td>
+                            </c:if>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+                <c:if test="${order.client.id eq curuser.id}">
+                    <p>
+                        <c:url value="/editorder.html" var="edit"/>
+                        <c:url value="/deleteorder.html" var="delete"/>
+                        <button onclick= window.location='${edit}?orderid=${order.id}'>Edit</button>
+                        <button onclick="if (confirm('Delete order?')) window.location='${delete}?orderid=${order.id}'">Delete</button>
+                    </p>
+                </c:if>
+                <c:if test="${curuser.role eq 'FREELANCER'}">
+                    <c:if test="${subscribe eq true}">
+                        <p>
+                            <c:url value="/unsubscribe.html" var="unsub"/>
+                            <button onclick=window.location='${unsub}?orderid=${order.id}&userid=${curuser.id}'>Unsubscribe</button>
+                        </p>
+                    </c:if>
+                    <c:if test="${subscribe eq false}">
+                    <p>
+                        <c:url value="/subscribe.html" var="sub"/>
+                        <button onclick=window.location='${sub}?orderid=${order.id}&userid=${curuser.id}'>Subscribe</button>
+                    </p>
+                    </c:if>
+                </c:if>
+            </form>
         </div>
     </div>
     <div class="footer">
@@ -442,4 +510,3 @@
 <script src="css3-mediaqueries.js"></script>
 </body>
 </html>
-

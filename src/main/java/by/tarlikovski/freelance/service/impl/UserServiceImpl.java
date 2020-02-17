@@ -99,7 +99,7 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findById(final int id) throws ServiceException {
+    public Optional<User> read(final int id) throws ServiceException {
         try {
             UserDao userDao = (UserDao) transaction.createDao(Type.USER_DAO);
             Optional<User> user = userDao.read(id);

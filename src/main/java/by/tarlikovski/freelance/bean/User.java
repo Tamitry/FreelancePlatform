@@ -92,7 +92,7 @@ public class User extends Entity {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
@@ -101,7 +101,7 @@ public class User extends Entity {
         }
         if (!super.equals(o)) {
             return false;
-        };
+        }
         User user = (User) o;
         return getRole() == user.getRole() &&
                 getFirstName().equals(user.getFirstName()) &&

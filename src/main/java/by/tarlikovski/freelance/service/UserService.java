@@ -20,5 +20,5 @@ public interface UserService {
 
     Optional<User> findByEmail(String email) throws ServiceException;
 
-    Optional<User> findById(int id) throws ServiceException;
+    Optional<User> read(int id) throws ServiceException;
 }

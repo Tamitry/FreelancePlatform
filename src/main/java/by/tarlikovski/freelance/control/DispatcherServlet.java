@@ -42,9 +42,10 @@ public class DispatcherServlet extends HttpServlet {
                          final HttpServletResponse resp)
             throws IOException, ServletException {
         Command command = (Command) req.getAttribute("command");
+        String res;
         try {
             CommandManager cm = CommandManagerFactory.getManager();
-            String res = cm.execute(command, req, resp);
+            res = cm.execute(command, req, resp);
         } catch (ControlException e) {
             throw new ServletException(e);
         }
@@ -54,6 +55,10 @@ public class DispatcherServlet extends HttpServlet {
             req.setAttribute("curuser", user); //TODO Change this part.
         }
         String jspPage = "/WEB-INF/views" + command.getAddress() + ".jsp";
-        getServletContext().getRequestDispatcher(jspPage).forward(req, resp);
+   //     if (!res.equals("Redirect")) {
+            getServletContext().getRequestDispatcher(jspPage).forward(req, resp);
+     //   } else {
+       //     resp.sendRedirect(jspPage);
+        //}
     }
 }

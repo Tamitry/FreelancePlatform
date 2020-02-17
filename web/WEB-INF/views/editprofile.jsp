@@ -40,7 +40,10 @@
     <div class="content">
         <div class="leftCol">
             <ul class="leftNav">
-                <li><a href="#">Add project</a></li>
+                <c:if test="${curuser.role eq 'CLIENT'}">
+                    <c:url value="/toaddprofile.html" var="addorder"/>
+                    <li><a href="${addorder}">Add project</a></li>
+                </c:if>
                 <li>
                     <form>
                         <div class="form__label">Search</div>
@@ -51,12 +54,17 @@
             </ul>
         </div>
         <div class="main">
-            <form>
-            <p>First name: <input type="text" placeholder="${user.firstName}" name="firstname"></p>
-            <p>Last name: <input type="text" placeholder="${user.lastName}" name="lastname"></p>
-                <c:forEach var="elem" items="${categories}">
-                    <p><input type="checkbox" value="${elem.id}" name="category">${elem.name}</p>
+            <form action="saveprofile.html" method="post" class="form">
+                <p>First name: <input type="text" placeholder="First name" value="${user.firstName}" name="firstname"></p>
+                <p>Last name: <input type="text" placeholder="Last name" value="${user.lastName}" name="lastname"></p>
+                <c:forEach var="elem" items="${skills}">
+                    <p><input type="checkbox" name="${elem.id}" checked>${elem.name}</p>
                 </c:forEach>
+                <c:forEach var="elem" items="${lastcategories}">
+                    <p><input type="checkbox" name="${elem.id}">${elem.name}</p>
+                </c:forEach>
+                <button type="submit">Save</button>
+                <button type="reset">Reset</button>
             </form>
         </div>
     </div>

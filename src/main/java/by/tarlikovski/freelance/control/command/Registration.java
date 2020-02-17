@@ -3,17 +3,21 @@ package by.tarlikovski.freelance.control.command;
 import by.tarlikovski.freelance.bean.Role;
 import by.tarlikovski.freelance.bean.ServiceName;
 import by.tarlikovski.freelance.bean.User;
+import by.tarlikovski.freelance.service.PasswordEncoder;
 import by.tarlikovski.freelance.service.ServiceException;
 import by.tarlikovski.freelance.service.UserService;
 import by.tarlikovski.freelance.service.UserValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Set;
 
 public class Registration extends Command {
 
     public Registration() {
         setAddress("/index");
+        Set<Role> roles = getRoles();
+        roles.add(Role.CLIENT);
     }
     @Override
     public String exec(final HttpServletRequest request,
@@ -28,7 +32,7 @@ public class Registration extends Command {
             user.setRole(Role.FREELANCER);
         }
 
-        user.setLogin((String) request.getParameter("log_in"));
+        user.setLogin((String) request.getParameter("login"));
         user.setEmail((String) request.getParameter("email"));
         user.setPassword((String) request.getParameter("password"));
         String repeat = (String) request.getParameter("repeat");
@@ -46,6 +50,8 @@ public class Registration extends Command {
             setAddress("/error");
             return "error";
         }
+        PasswordEncoder encoder = (PasswordEncoder) factory.getService(ServiceName.ENCODER);
+        user.setPassword(encoder.encode(user.getPassword()));
         service.userRegistration(user);
         request.getSession().setAttribute("user", user);
         return "Success.";

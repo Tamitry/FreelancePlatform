@@ -41,7 +41,10 @@
   <div class="content">
     <div class="leftCol">
       <ul class="leftNav">
-        <li><a href="#">Add project</a></li>
+        <c:if test="${curuser.Role eq 'CLIENT'}">
+          <c:url value="/toaddprofile.html" var="addorder"/>
+          <li><a href="${addorder}">Add project</a></li>
+        </c:if>
         <li>
           <form>
             <div class="form__label">Search</div>

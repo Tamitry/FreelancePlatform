@@ -2,6 +2,7 @@ package by.tarlikovski.freelance.control.command;
 
 import by.tarlikovski.freelance.bean.ServiceName;
 import by.tarlikovski.freelance.bean.User;
+import by.tarlikovski.freelance.service.PasswordEncoder;
 import by.tarlikovski.freelance.service.ServiceException;
 import by.tarlikovski.freelance.service.UserService;
 
@@ -19,6 +20,7 @@ public class Login extends Command {
                        final HttpServletResponse response)
             throws ServiceException {
         UserService userService = (UserService) factory.getService(ServiceName.USER_SERVICE);
+        PasswordEncoder passwordEncoder = (PasswordEncoder) factory.getService(ServiceName.ENCODER);
         User user = null;
         if (userService.findByLogin(request.getParameter("login")).isPresent()
                 && !request.getParameter("login").equals("")) {
@@ -28,7 +30,10 @@ public class Login extends Command {
             setAddress("/error");
             return "Error";
         }
-        if (user.getPassword().equals(request.getParameter("password"))
+        String password = request.getParameter("password");
+        //String[] sp = password.split(":");
+        //password = passwordEncoder.encode(sp[0], sp[1]);
+        if (user.getPassword().equals(password)
                 && !request.getParameter("password").equals("")) {
             request.getSession().setAttribute("user", user);
             return "Success";

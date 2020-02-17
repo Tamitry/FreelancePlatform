@@ -7,5 +7,6 @@ public enum ServiceName {
     WORK_SERVICE,
     ORDER_SERVICE,
     CATEGORY_SERVICE,
-    VALIDATOR
+    VALIDATOR,
+    ENCODER
 }

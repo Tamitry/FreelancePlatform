@@ -14,7 +14,7 @@ public class WorkServiceTest {
         UserService userService = (UserService) factory.getService(ServiceName.USER_SERVICE);
         OrderService orderService = (OrderService) factory.getService(ServiceName.ORDER_SERVICE);
         WorkService workService = (WorkService) factory.getService(ServiceName.WORK_SERVICE);
-        User user = userService.findById(18).get();
+        User user = userService.read(18).get();
         Order order = orderService.read(26).get();
         Work work = new Work();
         work.setUser(user);
@@ -32,7 +32,7 @@ public class WorkServiceTest {
         UserService userService = (UserService) factory.getService(ServiceName.USER_SERVICE);
         OrderService orderService = (OrderService) factory.getService(ServiceName.ORDER_SERVICE);
         WorkService workService = (WorkService) factory.getService(ServiceName.WORK_SERVICE);
-        User user = userService.findById(18).get();
+        User user = userService.read(18).get();
         Order order = orderService.read(26).get();
         Work actual = workService.findByUser(user).get(0);
         Work expected = new Work();
@@ -51,7 +51,7 @@ public class WorkServiceTest {
         UserService userService = (UserService) factory.getService(ServiceName.USER_SERVICE);
         OrderService orderService = (OrderService) factory.getService(ServiceName.ORDER_SERVICE);
         WorkService workService = (WorkService) factory.getService(ServiceName.WORK_SERVICE);
-        User user = userService.findById(18).get();
+        User user = userService.read(18).get();
         Order order = orderService.read(26).get();
         Work actual = workService.findByOrder(order).get(0);
         Work expected = new Work();

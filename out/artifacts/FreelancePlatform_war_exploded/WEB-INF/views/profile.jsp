@@ -41,7 +41,10 @@
     <div class="content">
         <div class="leftCol">
             <ul class="leftNav">
-                <li><a href="#">Add project</a></li>
+                <c:if test="${curuser.role eq 'CLIENT'}">
+                    <c:url value="/toaddprofile.html" var="addorder"/>
+                    <li><a href="${addorder}">Add project</a></li>
+                </c:if>
                 <li>
                     <form>
                         <div class="form__label">Search</div>
@@ -58,18 +61,27 @@
             <p>E-mail: ${user.email}</p>
             <c:if test="${user.role eq 'FREELANCER'}">
                 <p>User role: Freelancer</p>
-                <p></p>
+                <h2>Skills</h2>
                 <c:forEach var="elem" items="${categories}">
                     <p>${elem.name}</p>
+                </c:forEach>
+                <h2>Works</h2>
+                <c:forEach var="elem" items="${works}">
+                    <p><a href="/toorder.html?orderid=${elem.order.id}">${elem.order.orderName}</a></p>
                 </c:forEach>
             </c:if>
             <c:if test="${user.role eq 'CLIENT'}">
                 <p>User role: Client</p>
+                <c:forEach var="elem" items="${orders}">
+                    <p><a href="/toorder.html?orderid=${elem.id}">${elem.orderName}</a></p>
+                </c:forEach>
             </c:if>
-            <c:if test="${curuser.id eq user.id}">
+            <c:if test="${(curuser.id eq user.id and curuser.id ne null) or curuser.role eq 'ADMIN'}">
                 <c:url value="/toeditprofile.html" var="editprof"/>
+                <c:url value="/deleteuser.html" var="deleteprof"/>
                 <c:set var="userid" value="${curuser.id}"/>
-                    <button onclick="window.location='${editprof}?userid=${userid}'">Submit
+                <button onclick="window.location='${editprof}?userid=${userid}'">Edit</button>
+                <button onclick="if (confirm('Delete user?')) window.location='${deleteprof}'">Delete</button>
             </c:if>
         </div>
     </div>

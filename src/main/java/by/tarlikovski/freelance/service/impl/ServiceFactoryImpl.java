@@ -49,6 +49,9 @@ public class ServiceFactoryImpl implements ServiceFactory {
                     UserValidatorImpl validator = new UserValidatorImpl();
                     validator.setTransaction(transactionFactory.createTransaction());
                     return validator;
+                case ENCODER:
+                    PasswordEncoder encoder = new PasswordEncoderImpl();
+                    return encoder;
                 default:
                     throw new ServiceException("Service is not exist.");
             }

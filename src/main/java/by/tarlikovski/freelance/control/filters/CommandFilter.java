@@ -39,6 +39,22 @@ public class CommandFilter implements Filter {
                 return new ToEditProfile();
             case "/orderlist":
                 return new OrderList();
+            case "/saveprofile":
+                return new EditProfile();
+            case "/toaddprofile":
+                return new ToAddOrder();
+            case "/deleteuser":
+                return new DeleteUser();
+            case "/confirmwork":
+                return new ConfirmWork();
+            case "/cancelwork":
+                return new CancelWork();
+            case "/unsubscribe":
+                return new Unsubscribe();
+            case "/subscribe":
+                return new Subscribe();
+            case "/toorder":
+                return new ToOrder();
             default:
                 throw new ControlException("Command not found!");
         }

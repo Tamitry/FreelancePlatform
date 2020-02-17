@@ -2,6 +2,7 @@ package by.tarlikovski.freelance.control.command;
 
 import by.tarlikovski.freelance.bean.Role;
 import by.tarlikovski.freelance.bean.User;
+import by.tarlikovski.freelance.control.ControlException;
 import by.tarlikovski.freelance.service.ServiceException;
 import by.tarlikovski.freelance.service.ServiceFactory;
 
@@ -15,6 +16,10 @@ abstract public class Command {
     private User user;
     private String address;
     protected ServiceFactory factory;
+
+    public void setRoles(final Set<Role> roles) {
+        this.roles = roles;
+    }
 
     public Set<Role> getRoles() {
         return roles;

@@ -12,7 +12,7 @@ import static org.testng.Assert.*;
 
 public class OrderPropertyServiceTest {
 
-    @Test
+    @Test (description = "Cre")
     public void createTest_Equal() throws Exception {
         ServiceFactoryImpl.init();
         ServiceFactoryImpl factory = new ServiceFactoryImpl();

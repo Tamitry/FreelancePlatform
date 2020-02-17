@@ -1,3 +1,4 @@
+use freelance_platform_db;
 
 create table if not exists Users (
                                      UserId      int     not null auto_increment,
@@ -6,7 +7,7 @@ create table if not exists Users (
                                      RegDate     timestamp,
                                      UserLogin   varchar(250)    unique,
                                      UserEmail   varchar(250)    unique,
-                                     UserPassword varchar(250)   unique,
+                                     UserPassword varchar(250),
     /*
      Roles:
      1 - Administrator;
@@ -50,8 +51,8 @@ create table if not exists Skills (
                                       UserId      int,
                                       CategoryId  int,
                                       primary key (SkillId),
-                                      foreign key (UserId) references Users(UserId),
-                                      foreign key (CategoryId) references Categories(CategoryId)
+                                      foreign key (UserId) references Users(UserId) on delete cascade on update cascade ,
+                                      foreign key (CategoryId) references Categories(CategoryId)  on delete cascade on update cascade
 );
 
 create index idx_usersskillid
@@ -68,7 +69,7 @@ create table if not exists Orders (
                                       OrderDesc       text,
                                       ClientId        int,
                                       primary key (OrderId),
-                                      foreign key (ClientId) references Users(UserId)
+                                      foreign key (ClientId) references Users(UserId) on delete cascade on update cascade
 );
 create trigger Orders_Before_Insert before insert on Orders
     for each row
@@ -93,8 +94,8 @@ create table if not exists OrderProperties (
                                                OrderId             int,
                                                CategoryId          int,
                                                primary key (OrderPropertyId),
-                                               foreign key (OrderId) references Orders(OrderId),
-                                               foreign key (CategoryId) references Categories(CategoryId)
+                                               foreign key (OrderId) references Orders(OrderId) on delete cascade on update cascade,
+                                               foreign key (CategoryId) references Categories(CategoryId) on delete cascade on update cascade
 );
 
 create index idx_proporderid
@@ -114,8 +115,8 @@ create table Works (
      */
                        Status              tinyint default 1,
                        primary key (WorkId),
-                       foreign key (UserId) references Users(UserId),
-                       foreign key (OrderId) references orders(OrderId),
+                       foreign key (UserId) references Users(UserId) on delete cascade on update cascade,
+                       foreign key (OrderId) references orders(OrderId) on delete cascade on update cascade,
                        check ( Grade between 1 and 10)
 );
 

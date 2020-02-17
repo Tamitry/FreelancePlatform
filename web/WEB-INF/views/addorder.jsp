@@ -394,19 +394,22 @@
                     <c:url value="/exit.html" var="exit"/>
                     <li><a href="${exit}">Exit</a></li>
                 </c:if>
-                <!--<c:if test="${user eq null}">
-          <c:url value="/toregistration.html" var="registration"/>
-          <li><a href="${registration}">Registration</a></li>
-          <c:url value="/tologin.html" var="login"/>
-          <li   ><a href="${login}">Log In</a></li>
-          </c:if>-->
+                <c:if test="${user eq null}">
+                    <c:url value="/toregistration.html" var="registration"/>
+                    <li><a href="${registration}">Registration</a></li>
+                    <c:url value="/tologin.html" var="login"/>
+                    <li><a href="${login}">Log In</a></li>
+                </c:if>
             </ul>
         </div>
     </div>
     <div class="content">
         <div class="leftCol">
             <ul class="leftNav">
-                <li><a href="#">Add project</a></li>
+                <c:if test="${curuser.role eq 'CLIENT'}">
+                    <c:url value="/toaddprofile.html" var="addorder"/>
+                    <li><a href="${addorder}">Add project</a></li>
+                </c:if>
                 <li>
                     <form>
                         <div class="form__label">Search</div>
@@ -430,8 +433,8 @@
                 </div>
                 <h1>Categories</h1>
                 <div class="checkboxes">
-                    <c:forEach var="elem" items="categories">
-                        <input type="checkbox" value="${elem.id}" name="id" id="${elem.id}">
+                    <c:forEach var="elem" items="${categories}">
+                        <input type="checkbox" value="${elem.id}" name="id" id="${elem.id}">${elem.name}
                     </c:forEach>
                 </div>
                 <p>

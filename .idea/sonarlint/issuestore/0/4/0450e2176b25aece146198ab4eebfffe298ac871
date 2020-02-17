@@ -1,3 +1,2 @@
 
-msquid:UselessImportCheck"CRemove this unused import 'by.tarlikovski.freelance.bean.Category'.(ÁµÁn8”Üû€ƒ.
-Usquid:S3655"7Call "Optional#isPresent()" before accessing the value.(’ò¥ç8•êçá€.
+Usquid:S36554"7Call "Optional#isPresent()" before accessing the value.(’ò¥ç8×‰áûƒ.

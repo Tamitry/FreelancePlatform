@@ -13,6 +13,7 @@ import by.tarlikovski.freelance.service.WorkService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class WorkServiceImpl extends ServiceImpl implements WorkService {
     @Override
@@ -94,6 +95,20 @@ public class WorkServiceImpl extends ServiceImpl implements WorkService {
             i = workDao.delete(id);
             transaction.commit();
             return i;
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public Optional<Work> read(final int id)
+            throws ServiceException {
+        try {
+            int i;
+            WorkDao workDao = (WorkDao) transaction.createDao(Type.WORK_DAO);
+            Optional<Work> work = workDao.read(id);
+            transaction.commit();
+            return work;
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

@@ -3,8 +3,6 @@ package by.tarlikovski.freelance.service;
 import by.tarlikovski.freelance.bean.Order;
 import by.tarlikovski.freelance.bean.ServiceName;
 import by.tarlikovski.freelance.bean.User;
-import by.tarlikovski.freelance.service.OrderService;
-import by.tarlikovski.freelance.service.UserService;
 import by.tarlikovski.freelance.service.impl.ServiceFactoryImpl;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -12,7 +10,7 @@ import org.testng.annotations.Test;
 import java.sql.Timestamp;
 
 public class OrderServiceTest {
-    private static int id;
+    private int id;
 
     @Test
     public void createTest_Equal() throws Exception {
@@ -30,7 +28,8 @@ public class OrderServiceTest {
         id = order.getId();
         Assert.assertEquals(i, 1);
     }
-    @Test (dependsOnMethods = "createTest_Equal")
+
+    @Test(dependsOnMethods = "createTest_Equal")
     public void findByNameTest_True() throws Exception {
         ServiceFactoryImpl.init();
         ServiceFactoryImpl factory = new ServiceFactoryImpl();
@@ -46,12 +45,13 @@ public class OrderServiceTest {
         Order actual = orderService.findByName(order.getOrderName()).get(0);
         Assert.assertTrue(order.getClient().equals(actual.getClient()) &&
                 order.getOrderName().equals(actual.getOrderName()) &&
-     //           order.getDescription().equals(actual.getDescription()) &&
-                order.getOrderDeadLine().equals(order.getOrderDeadLine()) &&
+                order.getDescription().equals(actual.getDescription()) &&
+                //          order.getOrderDeadLine().equals(order.getOrderDeadLine()) &&
+                order.getClient().equals(actual.getClient()) &&
                 order.getId() == actual.getId());
     }
 
-    @Test (dependsOnMethods = "findByNameTest_True")
+    @Test(dependsOnMethods = "findByNameTest_True")
     public void findByUserTest_True() throws Exception {
         ServiceFactoryImpl.init();
         ServiceFactoryImpl factory = new ServiceFactoryImpl();
@@ -72,7 +72,7 @@ public class OrderServiceTest {
                 order.getId() == actual.getId());
     }
 
-    @Test (dependsOnMethods = "findByUserTest_True")
+    @Test(dependsOnMethods = "findByUserTest_True")
     public void findAllTest_True() throws Exception {
         ServiceFactoryImpl.init();
         ServiceFactoryImpl factory = new ServiceFactoryImpl();
@@ -93,7 +93,7 @@ public class OrderServiceTest {
                 order.getId() == actual.getId());
     }
 
-    @Test (dependsOnMethods = "findAllTest_True")
+    @Test(dependsOnMethods = "findAllTest_True")
     public void readTest_True() throws Exception {
         ServiceFactoryImpl.init();
         ServiceFactoryImpl factory = new ServiceFactoryImpl();
@@ -114,7 +114,7 @@ public class OrderServiceTest {
                 order.getId() == actual.getId());
     }
 
-    @Test (dependsOnMethods = "readTest_True")
+    @Test(dependsOnMethods = "readTest_True")
     public void updateTest_Equal() throws Exception {
         ServiceFactoryImpl.init();
         ServiceFactoryImpl factory = new ServiceFactoryImpl();
@@ -131,7 +131,7 @@ public class OrderServiceTest {
         Assert.assertEquals(v, 1);
     }
 
-    @Test (dependsOnMethods = "updateTest_Equal")
+    @Test(dependsOnMethods = "updateTest_Equal")
     public void deleteTest_Equal() throws Exception {
         ServiceFactoryImpl.init();
         ServiceFactoryImpl factory = new ServiceFactoryImpl();
