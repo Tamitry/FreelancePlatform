@@ -427,20 +427,23 @@
             </ul>
         </div>
         <div class="main">
-            <form action="addorder.html" method="post">
+            <form action="editorder.html" method="post">
                 <p><label>Order name</label></p>
                 <div class="ordname">
-                    <p><input type="text" placeholder="Order name" name="ordername"/></p>
+                    <p><input type="text" placeholder="Order name" name="ordername" value="${order.orderName}"/></p>
                     <p><label>Dead line</label></p>
-                    <p><input type="date" placeholder="Date" name="deadline"/></p>
+                    <p><input type="date" placeholder="Date" name="deadline" value="${order.orderDeadLine}"/></p>
                 </div>
                 <div class="desc">
                     <p><label>Description</label></p>
-                    <p><input type=text placeholder="Description" name="desc"></p>
+                    <p><input type=text placeholder="Description" name="desc" value="${order.description}"></p>
                 </div>
                 <h1>Categories</h1>
                 <div class="checkboxes">
-                    <c:forEach var="elem" items="${categories}">
+                    <c:forEach var="elem" items="${properties}">
+                        <p><input type="checkbox" name="${elem.id}" id="${elem.id}" checked>${elem.name}</p>
+                    </c:forEach>
+                    <c:forEach var="elem" items="${lastcategories}">
                         <p><input type="checkbox" name="${elem.id}" id="${elem.id}">${elem.name}</p>
                     </c:forEach>
                 </div>

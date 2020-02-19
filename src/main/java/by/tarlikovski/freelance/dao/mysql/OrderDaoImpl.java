@@ -17,7 +17,7 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
     private static final String FIND_ALL = "select OrderId, OrderName, OrderRegDate, OrderDeadLine, OrderDesc, ClientId from orders";
     private static final String FIND_BY_USER = "select OrderId, OrderName, OrderRegDate, OrderDeadLine, OrderDesc, ClientId from orders where ClientId = ?";
     private static final String FIND_BY_NAME = "select OrderId, OrderName, OrderRegDate, OrderDeadLine, OrderDesc, ClientId from orders where OrderName like ?";
-    private static final String CREATE = "insert into orders (OrderName, OrderRegDate, OrderDeadLine, OrderDesc, ClientId) value (?,?,?,?,?)";
+    private static final String CREATE = "insert into orders (OrderName, OrderDeadLine, OrderDesc, ClientId) value (?,?,?,?)";
     private static final String READ = "select OrderId, OrderName, OrderRegDate, OrderDeadLine, OrderDesc, ClientId from orders where OrderId = ?";
     private static final String UPDATE = "update orders set OrderName = ?, OrderRegDate = ?, OrderDeadLine = ?, OrderDesc = ? where OrderId = ?";
     private static final String DELETE = "delete from orders where OrderId = ?";
@@ -34,7 +34,6 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
                 order = new Order();
                 order.setId(resSet.getInt("OrderId"));
                 order.setOrderName(resSet.getString("OrderName"));
-                order.setOrderRegDate(resSet.getTimestamp("OrderRegDate"));
                 order.setOrderDeadLine(resSet.getTimestamp("OrderDeadLine"));
                 order.setDescription(resSet.getString("OrderDesc"));
                 User user = new User();
@@ -142,7 +141,6 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
         try {
             prepStat = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS);
             prepStat.setString(i++, entity.getOrderName());
-            prepStat.setTimestamp(i++, entity.getOrderRegDate());
             prepStat.setTimestamp(i++, entity.getOrderDeadLine());
             prepStat.setString(i++, entity.getDescription());
             prepStat.setInt(i, (entity.getClient().getId()));

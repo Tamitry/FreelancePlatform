@@ -1,3 +1,4 @@
 
-qsquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(šêßÖ8òÀèş-
-psquid:ModifiersOrderCheck/"EReorder the modifiers to comply with the Java Language Specification.(­¬ı8¬îÉ‡ÿ-
+qsquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(šêßÖ8òÀèş-
+psquid:ModifiersOrderCheck0"EReorder the modifiers to comply with the Java Language Specification.(­¬ı8¬îÉ‡ÿ-
+~squid:UselessImportCheck"NRemove this unused import 'by.tarlikovski.freelance.control.ControlException'.(Ğ—¯´ıÿÿÿÿ8õÿ“….

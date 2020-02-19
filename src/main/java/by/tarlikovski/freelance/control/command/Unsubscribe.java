@@ -33,6 +33,8 @@ public class Unsubscribe extends Command {
                 workService.delete(work.getId());
             }
         }
+        String path = request.getHeader("Referer");
+        request.setAttribute("url", path);
         return "Redirect";
     }
 }

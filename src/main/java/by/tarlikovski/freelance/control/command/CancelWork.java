@@ -1,9 +1,6 @@
 package by.tarlikovski.freelance.control.command;
 
-import by.tarlikovski.freelance.bean.Category;
 import by.tarlikovski.freelance.bean.ServiceName;
-import by.tarlikovski.freelance.bean.Status;
-import by.tarlikovski.freelance.bean.Work;
 import by.tarlikovski.freelance.service.ServiceException;
 import by.tarlikovski.freelance.service.WorkService;
 
@@ -15,6 +12,7 @@ public class CancelWork extends Command {
     public CancelWork() {
         setAddress("/order");
     }
+
     @Override
     public String exec(final HttpServletRequest request,
                        final HttpServletResponse response)
@@ -22,6 +20,8 @@ public class CancelWork extends Command {
         WorkService workService = (WorkService) factory.getService(ServiceName.WORK_SERVICE);
         int id = Integer.parseInt(request.getParameter("workid"));
         workService.delete(id);
+        String path = request.getHeader("Referer");
+        request.setAttribute("url", path);
         return "Redirect";
     }
 }

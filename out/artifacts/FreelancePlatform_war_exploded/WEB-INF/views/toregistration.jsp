@@ -449,9 +449,13 @@
                     <li><a href="${addorder}">Add project</a></li>
                 </c:if>
                 <li>
-                    <form>
-                        <input type="search" contenteditable="false" placeholder="Search">
-                        <input type="button" name="Search" value="Search">
+                    <form action="usersearch.html" method="get">
+                        <input type="search" contenteditable="false" name="search">
+                        <input type="submit" value="Search">
+                    </form>
+                    <form action="ordersearch.html" method="get">
+                        <input type="search" contenteditable="false" name="search">
+                        <input type="submit" value="Search">
                     </form>
                 </li>
             </ul>

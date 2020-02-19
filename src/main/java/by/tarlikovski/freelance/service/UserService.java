@@ -10,7 +10,7 @@ public interface UserService {
 
     int deleteUser(int i) throws ServiceException;
 
-    int changeParameters(User user) throws ServiceException;
+    int update(User user) throws ServiceException;
 
     List<User> findAllFreelancers() throws ServiceException;
 

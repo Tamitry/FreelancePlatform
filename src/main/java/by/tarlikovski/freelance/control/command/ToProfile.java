@@ -27,7 +27,7 @@ public class ToProfile extends Command {
         List<Work> works = workService.findByUser(user);
         request.setAttribute("user", user);
         request.setAttribute("categories", categories);
-        request.setAttribute("orders", orders);
+        request.setAttribute("orders1", orders);
         request.setAttribute("works", works);
         return "To profile";
     }

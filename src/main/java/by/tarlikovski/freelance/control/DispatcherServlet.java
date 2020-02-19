@@ -54,11 +54,13 @@ public class DispatcherServlet extends HttpServlet {
             user.setPassword(null);
             req.setAttribute("curuser", user); //TODO Change this part.
         }
-        String jspPage = "/WEB-INF/views" + command.getAddress() + ".jsp";
-   //     if (!res.equals("Redirect")) {
+        String jspPage;
+        if (!res.equals("Redirect")) {
+            jspPage = "/WEB-INF/views" + command.getAddress() + ".jsp";
             getServletContext().getRequestDispatcher(jspPage).forward(req, resp);
-     //   } else {
-       //     resp.sendRedirect(jspPage);
-        //}
+            } else {
+                jspPage = (String) req.getAttribute("url");
+                resp.sendRedirect(jspPage);
+            }
     }
 }

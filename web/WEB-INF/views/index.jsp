@@ -35,6 +35,7 @@
           <c:url value="/tologin.html" var="login"/>
           <li><a href="${login}">Log In</a></li>
         </c:if>
+
       </ul>
     </div>
   </div>
@@ -46,10 +47,13 @@
           <li><a href="${addorder}">Add project</a></li>
         </c:if>
         <li>
-          <form>
-            <div class="form__label">Search</div>
-            <input type="search" contenteditable="false">
-            <input type="button" name="Search" value="Search">
+          <form action="usersearch.html" method="get">
+            <input type="search" contenteditable="false" name="search">
+            <input type="submit" value="Search">
+          </form>
+          <form action="ordersearch.html" method="get">
+            <input type="search" contenteditable="false" name="search">
+            <input type="submit" value="Search">
           </form>
         </li>
       </ul>

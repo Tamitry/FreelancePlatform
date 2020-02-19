@@ -55,6 +55,14 @@ public class CommandFilter implements Filter {
                 return new Subscribe();
             case "/toorder":
                 return new ToOrder();
+            case "/addorder":
+                return new AddOrder();
+            case "/usersearch":
+                return new UserSearch();
+            case "/ordersearch":
+                return new OrderSearch();
+            case "/toeditorder":
+                return new ToEditOrder();
             default:
                 throw new ControlException("Command not found!");
         }

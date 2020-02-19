@@ -23,6 +23,8 @@ public class ConfirmWork extends Command {
             Work work = workService.read(id).get();
             work.setStatus(Status.CONFIRMED);
             workService.update(work);
+            String path = request.getHeader("Referer");
+            request.setAttribute("url", path);
             return "Redirect";
     }
 }

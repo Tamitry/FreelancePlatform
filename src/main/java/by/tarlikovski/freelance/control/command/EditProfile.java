@@ -32,6 +32,7 @@ public class EditProfile extends Command {
         User user = (User) request.getSession().getAttribute("user");
         user.setFirstName(request.getParameter("firstname"));
         user.setLastName(request.getParameter("lastname"));
+        userService.update(user);
         for (Category category : categories) {
             String req = request.getParameter("" + category.getId());
             skillService.deleteSkill(user, category);
@@ -39,6 +40,8 @@ public class EditProfile extends Command {
                 skillService.createSkill(user, category);
             }
         }
-        return "Redirect"; //redirect
+        String path = request.getContextPath() + "/toprofile.html?userid=" + user.getId();
+        request.setAttribute("url", path);
+        return "Redirect";
     }
 }

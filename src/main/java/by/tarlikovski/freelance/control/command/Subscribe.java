@@ -31,6 +31,8 @@ public class Subscribe extends Command {
         work.setStatus(Status.NOT_CONFIRMED);
         work.setGrade((byte) 5);
         workService.create(work);
+        String path = request.getHeader("Referer");
+        request.setAttribute("url", path);
         return "Redirect";
     }
 }

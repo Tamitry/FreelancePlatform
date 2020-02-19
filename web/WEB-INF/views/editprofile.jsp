@@ -45,10 +45,13 @@
                     <li><a href="${addorder}">Add project</a></li>
                 </c:if>
                 <li>
-                    <form>
-                        <div class="form__label">Search</div>
-                        <input type="search" contenteditable="false">
-                        <input type="button" name="Search" value="Search">
+                    <form action="usersearch.html" method="get">
+                        <input type="search" contenteditable="false" name="search">
+                        <input type="submit" value="Search">
+                    </form>
+                    <form action="ordersearch.html" method="get">
+                        <input type="search" contenteditable="false" name="search">
+                        <input type="submit" value="Search">
                     </form>
                 </li>
             </ul>
@@ -57,12 +60,14 @@
             <form action="saveprofile.html" method="post" class="form">
                 <p>First name: <input type="text" placeholder="First name" value="${user.firstName}" name="firstname"></p>
                 <p>Last name: <input type="text" placeholder="Last name" value="${user.lastName}" name="lastname"></p>
-                <c:forEach var="elem" items="${skills}">
-                    <p><input type="checkbox" name="${elem.id}" checked>${elem.name}</p>
-                </c:forEach>
-                <c:forEach var="elem" items="${lastcategories}">
-                    <p><input type="checkbox" name="${elem.id}">${elem.name}</p>
-                </c:forEach>
+                <c:if test="${user.role eq 'FREELANCER'}">
+                    <c:forEach var="elem" items="${skills}">
+                        <p><input type="checkbox" name="${elem.id}" checked>${elem.name}</p>
+                    </c:forEach>
+                    <c:forEach var="elem" items="${lastcategories}">
+                        <p><input type="checkbox" name="${elem.id}">${elem.name}</p>
+                    </c:forEach>
+                </c:if>
                 <button type="submit">Save</button>
                 <button type="reset">Reset</button>
             </form>

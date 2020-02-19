@@ -38,7 +38,7 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
     }
 
     @Override
-    public int changeParameters(final User user) throws ServiceException {
+    public int update(final User user) throws ServiceException {
         try {
             int i;
             UserDao userDao = (UserDao) transaction.createDao(Type.USER_DAO);

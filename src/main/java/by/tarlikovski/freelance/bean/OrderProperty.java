@@ -2,7 +2,7 @@ package by.tarlikovski.freelance.bean;
 
 public class OrderProperty extends Entity {
     private int orderId;
-    private int CategoryId;
+    private int categoryId;
 
     public int getOrderId() {
         return orderId;
@@ -13,10 +13,10 @@ public class OrderProperty extends Entity {
     }
 
     public int getCategoryId() {
-        return CategoryId;
+        return categoryId;
     }
 
     public void setCategoryId(final int catId) {
-        CategoryId = catId;
+        categoryId = catId;
     }
 }

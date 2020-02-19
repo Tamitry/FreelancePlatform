@@ -399,18 +399,21 @@
                     <li><a href="${addorder}">Add project</a></li>
                 </c:if>
                 <li>
-                    <form>
-                        <div class="form__label">Search</div>
-                        <input type="search" contenteditable="false">
-                        <input type="button" name="Search" value="Search">
+                    <form action="usersearch.html" method="get">
+                        <input type="search" contenteditable="false" name="search">
+                        <input type="submit" value="Search">
+                    </form>
+                    <form action="ordersearch.html" method="get">
+                        <input type="search" contenteditable="false" name="search">
+                        <input type="submit" value="Search">
                     </form>
                 </li>
             </ul>
         </div>
         <div class="main">
-            <h1>List of freelancers</h1>
+            <h1>Orders</h1>
             <!--Таблица-->
-            <div class="mobile">
+            <div class  ="mobile">
                 <table class="bordered">
                     <thead>
                     <tr>

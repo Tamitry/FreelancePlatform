@@ -46,10 +46,13 @@
                     <li><a href="${addorder}">Add project</a></li>
                 </c:if>
                 <li>
-                    <form>
-                        <div class="form__label">Search</div>
-                        <input type="search" contenteditable="false">
-                        <input type="button" name="Search" value="Search">
+                    <form action="usersearch.html" method="get">
+                        <input type="search" contenteditable="false" name="search">
+                        <input type="submit" value="Search">
+                    </form>
+                    <form action="ordersearch.html" method="get">
+                        <input type="search" contenteditable="false" name="search">
+                        <input type="submit" value="Search">
                     </form>
                 </li>
             </ul>
@@ -63,7 +66,7 @@
                 <p>User role: Freelancer</p>
                 <h2>Skills</h2>
                 <c:forEach var="elem" items="${categories}">
-                    <p>${elem.name}</p>
+                    <p  >${elem.name}</p>
                 </c:forEach>
                 <h2>Works</h2>
                 <c:forEach var="elem" items="${works}">
@@ -72,7 +75,8 @@
             </c:if>
             <c:if test="${user.role eq 'CLIENT'}">
                 <p>User role: Client</p>
-                <c:forEach var="elem" items="${orders}">
+                <p>Orders</p>
+                <c:forEach var="elem" items="${orders1}">
                     <p><a href="/toorder.html?orderid=${elem.id}">${elem.orderName}</a></p>
                 </c:forEach>
             </c:if>

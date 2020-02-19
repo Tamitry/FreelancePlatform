@@ -25,6 +25,6 @@ public class DeleteUser extends Command {
         UserService userService = (UserService) factory.getService(ServiceName.USER_SERVICE);
         userService.deleteUser(((User) request.getSession().getAttribute("user")).getId());
         request.getSession().invalidate();
-        return "User deleted."; //redirect
+        return "User deleted.";
     }
 }

@@ -74,4 +74,16 @@ public class Order extends Entity {
     public int hashCode() {
         return Objects.hash(getOrderName(), getOrderRegDate(), getOrderDeadLine(), getDescription(), getClient());
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Order{");
+        sb.append("orderName='").append(orderName).append('\'');
+        sb.append(", orderRegDate=").append(orderRegDate);
+        sb.append(", orderDeadLine=").append(orderDeadLine);
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", client=").append(client);
+        sb.append('}');
+        return sb.toString();
+    }
 }

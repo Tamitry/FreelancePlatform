@@ -21,7 +21,6 @@ public class ToOrder extends Command {
             throws ServiceException {
         OrderService orderService = (OrderService) factory.getService(ServiceName.ORDER_SERVICE);
         WorkService workService = (WorkService) factory.getService(ServiceName.WORK_SERVICE);
-        UserService userService = (UserService) factory.getService(ServiceName.USER_SERVICE);
         int orderid = Integer.parseInt(request.getParameter("orderid"));
         Order order = orderService.read(orderid).get();
         request.setAttribute("order", order);
@@ -36,7 +35,7 @@ public class ToOrder extends Command {
             if (work.getStatus().getStatusNum() == Status.CONFIRMED.getStatusNum()) {
                 confWorks.add(work);
             }
-            if (work.getUser().getId() == ((User) request.getSession().getAttribute("curuser")).getId()) {
+            if (work.getUser().getId() == ((User) request.getSession().getAttribute("user")).getId()) {
                 subscribe = true;
             }
         }

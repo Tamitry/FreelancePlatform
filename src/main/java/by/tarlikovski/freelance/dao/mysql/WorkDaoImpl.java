@@ -159,6 +159,7 @@ public class WorkDaoImpl extends BaseDaoImpl implements WorkDao {
                 user.setId(resSet.getInt("UserId"));
                 work.setUser(user);
                 work.setGrade(resSet.getByte("Grade"));
+                work.setStatus(Status.getStatus(resSet.getInt("Status")));
                 return Optional.ofNullable(work);
             }
         } catch (SQLException ex) {
@@ -181,6 +182,7 @@ public class WorkDaoImpl extends BaseDaoImpl implements WorkDao {
         int i = 1;
         try {
             prepStat = connection.prepareStatement(UPDATE);
+            prepStat.setInt(i++, entity.getOrder().getId());
             prepStat.setInt(i++, entity.getUser().getId());
             prepStat.setByte(i++, entity.getGrade());
             prepStat.setInt(i++, entity.getStatus().getStatusNum());

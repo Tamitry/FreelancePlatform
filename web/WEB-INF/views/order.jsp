@@ -411,10 +411,13 @@
                     <li><a href="${addorder}">Add project</a></li>
                 </c:if>
                 <li>
-                    <form>
-                        <div class="form__label">Search</div>
-                        <input type="search" contenteditable="false">
-                        <input type="button" name="Search" value="Search">
+                    <form action="usersearch.html" method="get">
+                        <input type="search" contenteditable="false" name="search">
+                        <input type="submit" value="Search">
+                    </form>
+                    <form action="ordersearch.html" method="get">
+                        <input type="search" contenteditable="false" name="search">
+                        <input type="submit" value="Search">
                     </form>
                 </li>
             </ul>
@@ -480,7 +483,7 @@
                 </table>
                 <c:if test="${order.client.id eq curuser.id}">
                     <p>
-                        <c:url value="/editorder.html" var="edit"/>
+                        <c:url value="/toeditorder.html" var="edit"/>
                         <c:url value="/deleteorder.html" var="delete"/>
                         <button onclick= window.location='${edit}?orderid=${order.id}'>Edit</button>
                         <button onclick="if (confirm('Delete order?')) window.location='${delete}?orderid=${order.id}'">Delete</button>
@@ -490,13 +493,12 @@
                     <c:if test="${subscribe eq true}">
                         <p>
                             <c:url value="/unsubscribe.html" var="unsub"/>
-                            <button onclick=window.location='${unsub}?orderid=${order.id}&userid=${curuser.id}'>Unsubscribe</button>
-                        </p>
+                            <a href='${unsub}?orderid=${order.id}&userid=${curuser.id}'>Unsubscribe</a></p>
                     </c:if>
                     <c:if test="${subscribe eq false}">
                     <p>
                         <c:url value="/subscribe.html" var="sub"/>
-                        <button onclick=window.location='${sub}?orderid=${order.id}&userid=${curuser.id}'>Subscribe</button>
+                        <a href='${sub}?orderid=${order.id}&userid=${curuser.id}'>Subscribe</a>
                     </p>
                     </c:if>
                 </c:if>
