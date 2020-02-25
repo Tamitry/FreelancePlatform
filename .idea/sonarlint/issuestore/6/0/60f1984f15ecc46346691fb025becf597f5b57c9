@@ -1,6 +1,6 @@
 
-Rsquid:S1481"4Remove this unused "passwordEncoder" local variable.(×ì–¿8ãÒ‹œ….
-dsquid:S1192"FDefine a constant instead of duplicating this literal "login" 3 times.(—ÊéÎ8ÁØ¢€ƒ.
 asquid:S1854"CRemove this useless assignment to local variable "passwordEncoder".(×ì–¿8ãÒ‹œ….
-isquid:CommentedOutCodeLine""<This block of commented-out lines of code should be removed.(”ÊÜø8ãÒ‹œ….
 Usquid:S3655"7Call "Optional#isPresent()" before accessing the value.(òÈ¿À8©æà¯€.
+Rsquid:S1481"4Remove this unused "passwordEncoder" local variable.(×ì–¿8ãÒ‹œ….
+isquid:CommentedOutCodeLine""<This block of commented-out lines of code should be removed.(”ÊÜø8ãÒ‹œ….
+dsquid:S1192"FDefine a constant instead of duplicating this literal "login" 3 times.(—ÊéÎ8ÁØ¢€ƒ.

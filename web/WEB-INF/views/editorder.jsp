@@ -1,5 +1,11 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="lang" uri="lang" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="language" value="${lang:locale(locale, cookie.locale.value)}"/>
+<fmt:setLocale value="${language}"/>
+<fmt:requestEncoding value="UTF-8"/>
+<fmt:setBundle basename="Localization"/>
 
 <style>
     * {
@@ -146,67 +152,6 @@
         position: relative;
 
     }
-    /*Шапка*/
-    .header {
-        padding-top: 20px;
-        margin-bottom: 20px;
-    }
-
-    .headerContent {
-        box-shadow: 0 3px 2px rgba(0,0,0,0.3);
-        -webkit-box-shadow: 0 3px 2px rgba(0,0,0,0.3);
-        -moz-box-shadow: 0 3px 2px rgba(0,0,0,0.3);
-        background-color: #f2f2f2;
-        background-repeat: no-repeat;
-        background-image: -ms-linear-gradient(top, #f2f2f2, #e4e4e4);
-        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f2f2f2), to(#e4e4e4));
-        background-image: -webkit-linear-gradient(top, #f2f2f2, #e4e4e4);
-        background-image: -o-linear-gradient(top, #f2f2f2, #e4e4e4);
-        background-image: linear-gradient(top, #f2f2f2, #e4e4e4);
-        background-image: -moz-linear-gradient(top, #f2f2f2, #e4e4e4);
-        filter: progid:dximagetransform.microsoft.gradient(startColorstr='#f2f2f2', endColorstr='#e4e4e4', GradientType=0);
-        height: 33px;
-        border-radius: 3px;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        padding-top: 10px;
-    }
-
-    .logo {
-        display: inline-block;
-        float: left;
-        font-weight: bold;
-    }
-
-    .logo a {
-        text-decoration: none;
-        font-size: 24px;
-        text-shadow: 0 1px 0 white;
-        color: #373e47;
-        padding-left: 10px;
-    }
-
-    .logo a:hover {
-        color: #a45f93;
-    }
-
-    *:first-child+html .logo a {
-        line-height: normal;
-    }
-
-    .pink {
-        color: #a45f93;
-    }
-
-    .logo a:hover .pink {
-        color: #373e47;
-    }
-
-    .gray {
-        color: #8b95a4;
-        font-size: 18px;
-    }
-
     /*Навигация*/
     ul.nav {
         margin: 0;
@@ -347,27 +292,8 @@
         border: 10px solid #a45f93;
     }
 
-    .desc input {
-        width: 80%;
-        height: 8cm;
-        border-radius: 10px;
-        text-align: center;
-    }
-
     .checkboxes {
         border-radius: 10px;
-    }
-    /*Подвал*/
-    .footer {
-
-    }
-
-    .footer p {
-        text-align: center;
-    }
-
-    .desc {
-        text-align: start;
     }
 </style>
 <!DOCTYPE html>
@@ -375,70 +301,27 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width; initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" type="text/css" href="media-queries.css">
-    <title>Orders</title>
+    <title><fmt:message key="editorder"/></title>
 </head>
 <body>
 <div class="wrapper">
-    <div class="header">
-        <div class="headerContent">
-            <div class="logo"><a href=""><span class="pink">Pink <span class="pink">Flamingo</span><span class="gray">.com</span></span></a></div>
-            <ul class="nav">
-                <c:url value="/home.html" var="home"/>
-                <li><a href="${home}" class="active">Home</a></li>
-                <li><a href="#">About</a></li>
-                <c:url value="/userlist.html" var="userlist"/>
-                <li><a href="${userlist}">Freelancers</a></li>
-                <c:url value="/orderlist.html" var="orders"/>
-                <li><a href="${orders}">Works</a></li>
-                <c:if test="${user ne null}">
-                    <c:url value="/toprofile.html" var="toprofile"/>
-                    <li><a href="${toprofile}?userid=${user.id}">Profile</a></li>
-                    <c:url value="/exit.html" var="exit"/>
-                    <li><a href="${exit}">Exit</a></li>
-                </c:if>
-                <c:if test="${user eq null}">
-                    <c:url value="/toregistration.html" var="registration"/>
-                    <li><a href="${registration}">Registration</a></li>
-                    <c:url value="/tologin.html" var="login"/>
-                    <li><a href="${login}">Log In</a></li>
-                </c:if>
-            </ul>
-        </div>
+    <jsp:include page="header.jsp"/>
     </div>
-    <div class="content">
-        <div class="leftCol">
-            <ul class="leftNav">
-                <c:if test="${curuser.role eq 'CLIENT'}">
-                    <c:url value="/toaddprofile.html" var="addorder"/>
-                    <li><a href="${addorder}">Add project</a></li>
-                </c:if>
-                <li>
-                    <form action="usersearch.html" method="get">
-                        <input type="search" contenteditable="false" name="search">
-                        <input type="submit" value="Search">
-                    </form>
-                    <form action="ordersearch.html" method="get">
-                        <input type="search" contenteditable="false" name="search">
-                        <input type="submit" value="Search">
-                    </form>
-                </li>
-            </ul>
-        </div>
+    <jsp:include page="leftnavbar.jsp"/>
         <div class="main">
-            <form action="editorder.html" method="post">
-                <p><label>Order name</label></p>
+            <form action="saveorder.html" method="post">
                 <div class="ordname">
-                    <p><input type="text" placeholder="Order name" name="ordername" value="${order.orderName}"/></p>
-                    <p><label>Dead line</label></p>
-                    <p><input type="date" placeholder="Date" name="deadline" value="${order.orderDeadLine}"/></p>
+                    <p><label><fmt:message key="ordername"/></label></p>
+                    <p><input type="text" placeholder=<fmt:message key="ordername"/> name="ordername" value="${order.orderName}"/></p>
+                    <p><label><fmt:message key="deadlinedate"/></label></p>
+                    <p><input type="date" placeholder="Date" name="deadline" value="${date}"/></p>
                 </div>
                 <div class="desc">
-                    <p><label>Description</label></p>
-                    <p><input type=text placeholder="Description" name="desc" value="${order.description}"></p>
+                    <p><label><fmt:message key="orderdescription"/></label></p>
+                    <p><input type=text placeholder=<fmt:message key="orderdescription"/> name="desc" value="${order.description}"></p>
                 </div>
-                <h1>Categories</h1>
+                <input type="hidden" value="${order.id}" name="orderid">
+                <h1><fmt:message key="categories"/></h1>
                 <div class="checkboxes">
                     <c:forEach var="elem" items="${properties}">
                         <p><input type="checkbox" name="${elem.id}" id="${elem.id}" checked>${elem.name}</p>
@@ -449,13 +332,10 @@
                 </div>
                 <p>
                     <input type="submit" value="submit">
-                    <input type="reset" value="reset">
+                    <input type="reset" value="reset" name="<fmt:message key="reset"/>">
                 </p>
             </form>
         </div>
-    </div>
-    <div class="footer">
-        <p>&copy; Footer content <a href="#">Link footer</a></p>
     </div>
 </div>
 <script src="css3-mediaqueries.js"></script>

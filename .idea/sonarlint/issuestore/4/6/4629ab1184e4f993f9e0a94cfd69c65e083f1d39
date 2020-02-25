@@ -1,0 +1,5 @@
+
+]squid:S1854"?Remove this useless assignment to local variable "userService".(Í¸®¢8‘„ýöƒ.
+Osquid:S1481"1Remove this unused "orderService" local variable.(îÍ±Û8‘„ýöƒ.
+^squid:S1854"@Remove this useless assignment to local variable "orderService".(îÍ±Û8‘„ýöƒ.
+Nsquid:S1481"0Remove this unused "userService" local variable.(Í¸®¢8‘„ýöƒ.

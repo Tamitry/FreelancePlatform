@@ -16,7 +16,7 @@ import java.util.List;
 public class ToEditOrder extends Command {
 
     public ToEditOrder() {
-        setAddress("/toeditorder");
+        setAddress("/editorder");
     }
 
     @Override
@@ -42,9 +42,13 @@ public class ToEditOrder extends Command {
                 lastCategories.add(category);
             }
         }
+        String date = order.getOrderDeadLine().toString();
+        date = date.split(" ")[0];
         request.setAttribute("properties", orderCategories);
         request.setAttribute("lastcategories", lastCategories);
         request.setAttribute("order", order);
+        request.setAttribute("date", date);
+        request.getSession().setAttribute("orderid", order.getId());
         return "To edit profile.";
     }
 }

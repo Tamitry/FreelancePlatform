@@ -9,4 +9,5 @@ public interface OrderDao extends Dao<Order> {
     List<Order> findAll() throws DAOException;
     List<Order> findByUser(User user) throws DAOException;
     List<Order> findByName(String name) throws DAOException;
+    List<Order> findNewest(int days) throws DAOException;
 }

@@ -13,6 +13,8 @@ public interface OrderService extends Service {
 
     List<Order> findAll() throws ServiceException;
 
+    List<Order> findNewest(int days) throws ServiceException;
+
     Optional<Order> read(final int id) throws ServiceException;
 
     int create(final Order order) throws ServiceException;

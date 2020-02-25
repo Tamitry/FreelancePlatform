@@ -1,5 +1,6 @@
 package by.tarlikovski.freelance.dao.mysql;
 
+import by.tarlikovski.freelance.bean.Category;
 import by.tarlikovski.freelance.bean.Skill;
 import by.tarlikovski.freelance.bean.User;
 import by.tarlikovski.freelance.dao.SkillDao;
@@ -15,6 +16,7 @@ import java.util.Optional;
 
 public class SkillDaoImpl extends BaseDaoImpl implements SkillDao {
     private static final String FIND_BY_USER = "select SkillId, UserId, CategoryId from Skills where UserId = ?";
+    private static final String FIND_BY_CATEGORY = "select SkillId, UserId, CategoryId from Skills where CategoryId = ?";
     private static final String CREATE = "insert into skills (UserId, CategoryId) value (?,?)";
     private static final String READ = "select SkillId, UserId, CategoryId from Skills where SkillId = ?";
     private static final String DELETE = "delete from Skills where SkillId = ?";
@@ -50,7 +52,40 @@ public class SkillDaoImpl extends BaseDaoImpl implements SkillDao {
             } catch (SQLException | NullPointerException e) {
             }
         }
+    }
 
+    @Override
+    public List<Skill> findUsersBySkill(final Category category)
+            throws DAOException {
+        PreparedStatement prepStat = null;
+        ResultSet resSet = null;
+        int i = 1;
+        try {
+            prepStat = connection.prepareStatement(FIND_BY_CATEGORY);
+            prepStat.setInt(i, category.getId());
+            resSet = prepStat.executeQuery();
+            List<Skill> skills = new ArrayList<>();
+            Skill skill = null;
+            while (resSet.next()) {
+                skill = new Skill();
+                skill.setId(resSet.getInt("SkillId"));
+                skill.setUserId(resSet.getInt("UserId"));
+                skill.setCategoryId(resSet.getInt("CategoryId"));
+                skills.add(skill);
+            }
+            return skills;
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            try {
+                resSet.close();
+            } catch (SQLException | NullPointerException e) {
+            }
+            try {
+                prepStat.close();
+            } catch (SQLException | NullPointerException e) {
+            }
+        }
     }
 
     @Override

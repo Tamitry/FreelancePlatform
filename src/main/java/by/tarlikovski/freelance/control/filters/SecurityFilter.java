@@ -23,7 +23,7 @@ public class SecurityFilter implements Filter {
         HttpSession session = request.getSession();
         Set<Role> allowedRoles = command.getRoles();
         User user = null;
-        user = (User) request.getAttribute("curuser");
+        user = (User) request.getSession().getAttribute("user");
         boolean canExecute = allowedRoles.isEmpty();
         if (user != null) {
             canExecute = canExecute || allowedRoles.contains(user.getRole());

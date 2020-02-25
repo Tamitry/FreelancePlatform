@@ -2,6 +2,7 @@ package by.tarlikovski.freelance.dao.mysql;
 
 import by.tarlikovski.freelance.bean.Role;
 import by.tarlikovski.freelance.bean.User;
+import by.tarlikovski.freelance.bean.UserStatus;
 import by.tarlikovski.freelance.dao.UserDao;
 import by.tarlikovski.freelance.dao.DAOException;
 
@@ -14,13 +15,13 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserDaoImpl extends BaseDaoImpl implements UserDao {
-    private static final String FIND_FULL_NAME = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole from users where CONCAT(FirstName, ' ', LastName) like ?";
-    private static final String FIND_BY_LOGIN = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole from users where UserLogin = ?";
-    private static final String FIND_BY_EMAIL = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole from users where UserEmail = ?";
-    private static final String FIND_ALL_FREELANCER = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole from users where UserRole = 2";
-    private static final String FIND_BY_ID = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole from users where UserId = ?";
+    private static final String FIND_FULL_NAME = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole, Status from users where CONCAT(FirstName, ' ', LastName) like ? and not Status = 2";
+    private static final String FIND_BY_LOGIN = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole, Status from users where UserLogin = ? and not Status = 2";
+    private static final String FIND_BY_EMAIL = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole, Status from users where UserEmail = ? and not Status = 2";
+    private static final String FIND_ALL_FREELANCER = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole, Status from users where UserRole = 2 and not Status = 2";
+    private static final String FIND_BY_ID = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole, Status from users where UserId = ?";
     private static final String CREATE = "insert into users (FirstName, LastName, UserLogin, UserEmail, UserPassword, UserRole) values (?,?,?,?,?,?)";
-    private static final String UPDATE = "update users set FirstName = ?, LastName = ?, RegDate = ?, UserLogin = ?, UserEmail = ?, UserPassword = ?, UserRole = ? where UserId = ?";
+    private static final String UPDATE = "update users set FirstName = ?, LastName = ?, RegDate = ?, UserLogin = ?, UserEmail = ?, UserPassword = ?, UserRole = ?, Status = ? where UserId = ?";
     private static final String DELETE = "delete from users where UserId = ?";
 
     @Override
@@ -44,6 +45,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
                 user.setLogin(resSet.getString("UserLogin"));
                 user.setPassword(resSet.getString("UserPassword"));
                 user.setRole(Role.getRole(resSet.getInt("UserRole")));
+                user.setUserStatus(UserStatus.getStatus(resSet.getInt("Status")));
                 users.add(user);
             }
             return users;
@@ -82,6 +84,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
                 user.setLogin(resSet.getString("UserLogin"));
                 user.setPassword(resSet.getString("UserPassword"));
                 user.setRole(Role.getRole(resSet.getInt("UserRole")));
+                user.setUserStatus(UserStatus.getStatus(resSet.getInt("Status")));
                 users.add(user);
                 return Optional.ofNullable(user);
             } else {
@@ -120,6 +123,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
                 user.setLogin(resSet.getString("UserLogin"));
                 user.setPassword(resSet.getString("UserPassword"));
                 user.setRole(Role.getRole(resSet.getInt("UserRole")));
+                user.setUserStatus(UserStatus.getStatus(resSet.getInt("Status")));
                 users.add(user);
             }
             return users;
@@ -161,6 +165,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
                 user.setLogin(resSet.getString("UserLogin"));
                 user.setPassword(resSet.getString("UserPassword"));
                 user.setRole(Role.getRole(resSet.getInt("UserRole")));
+                user.setUserStatus(UserStatus.getStatus(resSet.getInt("Status")));
                 users.add(user);
                 return Optional.ofNullable(user);
             }
@@ -238,6 +243,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
                 user.setLogin(resSet.getString("UserLogin"));
                 user.setPassword(resSet.getString("UserPassword"));
                 user.setRole(Role.getRole(resSet.getInt("UserRole")));
+                user.setUserStatus(UserStatus.getStatus(resSet.getInt("Status")));
                 return Optional.ofNullable(user);
             }
         } catch (SQLException ex) {
@@ -267,6 +273,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             prepStat.setString(i++, entity.getEmail());
             prepStat.setString(i++, entity.getPassword());
             prepStat.setInt(i++, (entity.getRole().getRoleNum()));
+            prepStat.setInt(i++, entity.getUserStatus().getStatusNum());
             prepStat.setInt(i, entity.getId());
             return prepStat.executeUpdate();
         } catch (SQLException ex) {

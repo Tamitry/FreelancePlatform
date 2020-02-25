@@ -36,7 +36,8 @@ public class Login extends Command {
         if (user.getPassword().equals(password)
                 && !request.getParameter("password").equals("")) {
             request.getSession().setAttribute("user", user);
-            return "Success";
+            request.setAttribute("url", request.getContextPath());
+            return "Redirect";
         } else {
             request.setAttribute("error", "Wrong password.");
             setAddress("/error");

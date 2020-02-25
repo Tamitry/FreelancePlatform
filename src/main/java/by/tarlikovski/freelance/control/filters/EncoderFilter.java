@@ -10,6 +10,7 @@ public class EncoderFilter implements Filter {
                          final FilterChain filterChain)
             throws IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         filterChain.doFilter(request, response);
     }
 

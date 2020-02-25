@@ -18,7 +18,7 @@ public class CommandFilter implements Filter {
     private Command findCommand(final String name) throws ControlException {
         switch (name) {
             case "/userlist":
-                return new UserList();
+                    return new UserList();
             case "/toregistration":
                 return new ToRegistration();
             case "/registration":
@@ -63,6 +63,18 @@ public class CommandFilter implements Filter {
                 return new OrderSearch();
             case "/toeditorder":
                 return new ToEditOrder();
+            case "/saveorder":
+                return new EditOrder();
+            case "/filterorder":
+                return new FilterOrders();
+            case "/filteruser":
+                return new FilterUser();
+            case "/banuser":
+                return new BanUser();
+            case "/localechange":
+                return new LocaleChange();
+            case "/deleteorder":
+                return new DeleteOrder();
             default:
                 throw new ControlException("Command not found!");
         }

@@ -25,11 +25,16 @@ public class EditProfile extends Command {
     public String exec(final HttpServletRequest request,
                        final HttpServletResponse response)
             throws ServiceException {
-        UserService userService = (UserService) factory.getService(ServiceName.USER_SERVICE);
-        CategoryService categoryService = (CategoryService) factory.getService(ServiceName.CATEGORY_SERVICE);
-        SkillService skillService = (SkillService) factory.getService(ServiceName.SKILL_SERVICE);
-        List<Category> categories = categoryService.findAll();
+        UserService userService = (UserService) factory
+                .getService(ServiceName.USER_SERVICE);
+        CategoryService categoryService = (CategoryService) factory
+                .getService(ServiceName.CATEGORY_SERVICE);
+        SkillService skillService = (SkillService) factory
+                .getService(ServiceName.SKILL_SERVICE);
+        List<Category> categories = categoryService
+                .findAll();
         User user = (User) request.getSession().getAttribute("user");
+        user = userService.read(user.getId()).get();
         user.setFirstName(request.getParameter("firstname"));
         user.setLastName(request.getParameter("lastname"));
         userService.update(user);

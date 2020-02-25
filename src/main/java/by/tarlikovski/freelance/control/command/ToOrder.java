@@ -1,10 +1,7 @@
 package by.tarlikovski.freelance.control.command;
 
 import by.tarlikovski.freelance.bean.*;
-import by.tarlikovski.freelance.service.OrderService;
-import by.tarlikovski.freelance.service.ServiceException;
-import by.tarlikovski.freelance.service.UserService;
-import by.tarlikovski.freelance.service.WorkService;
+import by.tarlikovski.freelance.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,12 +18,15 @@ public class ToOrder extends Command {
             throws ServiceException {
         OrderService orderService = (OrderService) factory.getService(ServiceName.ORDER_SERVICE);
         WorkService workService = (WorkService) factory.getService(ServiceName.WORK_SERVICE);
+        OrderPropertyService propertyService = (OrderPropertyService) factory
+                .getService(ServiceName.ORDER_PROPERTY_SERVICE);
         int orderid = Integer.parseInt(request.getParameter("orderid"));
         Order order = orderService.read(orderid).get();
         request.setAttribute("order", order);
         List<Work> works = workService.findByOrder(order);
         List<Work> unconfWorks = new ArrayList<>();
         List<Work> confWorks = new ArrayList<>();
+        List<Category> categories = propertyService.findByOrder(order);
         boolean subscribe = false;
         for (Work work : works) {
             if (work.getStatus().getStatusNum() == Status.NOT_CONFIRMED.getStatusNum()) {
@@ -35,13 +35,15 @@ public class ToOrder extends Command {
             if (work.getStatus().getStatusNum() == Status.CONFIRMED.getStatusNum()) {
                 confWorks.add(work);
             }
-            if (work.getUser().getId() == ((User) request.getSession().getAttribute("user")).getId()) {
+            if (request.getSession().getAttribute("user") != null
+            && work.getUser().getId() == ((User) request.getSession().getAttribute("user")).getId()) {
                 subscribe = true;
             }
         }
         request.setAttribute("confworks", confWorks);
         request.setAttribute("subscribe", subscribe);
         request.setAttribute("unconfworks", unconfWorks);
+        request.setAttribute("properties", categories);
         return "To order";
     }
 }

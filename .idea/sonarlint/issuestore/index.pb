@@ -85,14 +85,10 @@ V
 &src/main/resources/database.properties,a\c\ac67e146dfc808d2c20a560fc45d091524658f02
 V
 &web/WEB-INF/views/css3-mediaqueries.js,9\f\9fd7f81116b951b21fb2d796ad8afdbcc8f2ac3a
-K
-web/WEB-INF/views/login.css,6\0\607657e6f09943bb3c72f4edd5592b9bf7a75588
 S
 #web/WEB-INF/views/media-queries.css,b\e\beaff2ba6ebb54ed2ac32d76690617ad40eb6aeb
 E
 web/media-queries.css,c\d\cdc6bcd457f25eff9d613313b6a9b41381867113
-L
-web/WEB-INF/views/login.html,d\8\d8f9b4a9c92540ac55176e2d5fb4f6d251912df5
 K
 web/WEB-INF/views/index.jsp,e\f\ef50f9e6890943991e9688f20bd95d29f8bff321
 p
@@ -241,3 +237,19 @@ O
 web/WEB-INF/views/editorder.jsp,c\2\c24529c273ba70c56c337b329a117724c37899f7
 w
 Gsrc/main/java/by/tarlikovski/freelance/control/command/ToEditOrder.java,8\7\87814fc118c74e8e7a1e490740d1954e6a68ce98
+u
+Esrc/main/java/by/tarlikovski/freelance/control/command/EditOrder.java,7\f\7f8a4fb8455e105d1666013544105a5b29cf68db
+P
+ web/WEB-INF/views/leftnavbar.jsp,1\c\1cf3de94c765b8e4b91575abf0a75fd837ea113b
+s
+Csrc/main/java/by/tarlikovski/freelance/control/command/BanUser.java,b\3\b363a7a4198a4bc636f262a29a9b299736285a75
+x
+Hsrc/main/java/by/tarlikovski/freelance/control/command/LocaleChange.java,1\0\104a698911646f724535445d19e5be00872b5d72
+L
+web/WEB-INF/views/header.jsp,c\0\c0a63e960906e62c64129b139f26779efab38219
+I
+web/WEB-INF/tags/lang.tld,0\3\03513f130e6eeee9d8526638785db314bd582498
+x
+Hsrc/main/java/by/tarlikovski/freelance/control/filters/CookieFilter.java,9\b\9b701be2edea5856b3bf04793415cb573a1b1093
+n
+>src/main/java/by/tarlikovski/freelance/control/tag/Locale.java,7\a\7a2096bd8b9f51e61007fb4dcc8ec9e1a68e3f28

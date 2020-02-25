@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
 
-public class User extends Entity {
+public class User extends Entity implements Serializable {
     private Role role;
     private String firstName;
     private String lastName;
@@ -12,6 +12,7 @@ public class User extends Entity {
     private String email;
     private String login;
     private String password;
+    private UserStatus userStatus;
 
     public User() {
     }
@@ -33,6 +34,7 @@ public class User extends Entity {
         regDate = rd;
         email = em;
         login = lg;
+        password = pass;
     }
 
     public Role getRole() {
@@ -89,6 +91,14 @@ public class User extends Entity {
 
     public void setPassword(final String pass) {
         this.password = pass;
+    }
+
+    public UserStatus getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(final UserStatus status) {
+        this.userStatus = status;
     }
 
     @Override

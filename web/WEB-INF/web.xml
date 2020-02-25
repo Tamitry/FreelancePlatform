@@ -12,6 +12,15 @@
         <url-pattern>*.html</url-pattern>
     </filter-mapping>
     <filter>
+        <filter-name>CookieFilter</filter-name>
+        <filter-class>by.tarlikovski.freelance.control.filters.CookieFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CookieFilter</filter-name>
+        <url-pattern>*.html</url-pattern>
+    </filter-mapping>
+
+    <filter>
         <filter-name>CommandFilter</filter-name>
         <filter-class>by.tarlikovski.freelance.control.filters.CommandFilter</filter-class>
     </filter>
@@ -30,4 +39,11 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+
+    <jsp-config>
+        <taglib>
+            <taglib-uri>lang</taglib-uri>
+            <taglib-location>/WEB-INF/tags/lang.tld</taglib-location>
+        </taglib>
+    </jsp-config>
 </web-app>

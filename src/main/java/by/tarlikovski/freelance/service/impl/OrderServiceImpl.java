@@ -63,6 +63,23 @@ public class OrderServiceImpl extends ServiceImpl implements OrderService {
     }
 
     @Override
+    public List<Order> findNewest(final int days)
+            throws ServiceException {
+        try {
+            UserDao userDao = (UserDao) transaction.createDao(Type.USER_DAO);
+            OrderDao orderDao = (OrderDao) transaction.createDao(Type.ORDER_DAO);
+            List<Order> orders = orderDao.findNewest(days);
+            for (Order order : orders) {
+                order.setClient(userDao.read(order.getClient().getId()).get());
+            }
+            transaction.commit();
+            return orders;
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public Optional<Order> read(final int id)
             throws ServiceException {
         try {

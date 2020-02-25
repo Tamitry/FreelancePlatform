@@ -21,6 +21,7 @@ public class Exit extends Command {
                        final HttpServletResponse response)
             throws ServiceException {
         request.getSession().invalidate();
-        return "Exit";
+        request.setAttribute("url", request.getContextPath());
+        return "Redirect";
     }
 }

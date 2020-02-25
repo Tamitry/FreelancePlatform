@@ -14,9 +14,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
-    private static final String FIND_ALL = "select OrderId, OrderName, OrderRegDate, OrderDeadLine, OrderDesc, ClientId from orders";
+    private static final String FIND_ALL = "select OrderId, OrderName, OrderRegDate, OrderDeadLine, OrderDesc, ClientId from orders where datediff(now(), OrderDeadLine) < 0";
     private static final String FIND_BY_USER = "select OrderId, OrderName, OrderRegDate, OrderDeadLine, OrderDesc, ClientId from orders where ClientId = ?";
     private static final String FIND_BY_NAME = "select OrderId, OrderName, OrderRegDate, OrderDeadLine, OrderDesc, ClientId from orders where OrderName like ?";
+    private static final String FIND_NEWEST = "select OrderId, OrderName, OrderRegDate, OrderDeadLine, OrderDesc, ClientId from orders where datediff(NOW(), OrderRegDate) < ? and datediff(now(), OrderDeadLine) < 0 order by OrderRegDate desc";
     private static final String CREATE = "insert into orders (OrderName, OrderDeadLine, OrderDesc, ClientId) value (?,?,?,?)";
     private static final String READ = "select OrderId, OrderName, OrderRegDate, OrderDeadLine, OrderDesc, ClientId from orders where OrderId = ?";
     private static final String UPDATE = "update orders set OrderName = ?, OrderRegDate = ?, OrderDeadLine = ?, OrderDesc = ? where OrderId = ?";
@@ -101,6 +102,45 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
         try {
             prepState = connection.prepareCall(FIND_BY_NAME);
             prepState.setString(i, "%" + name + "%");
+            resSet = prepState.executeQuery();
+            List<Order> orders = new ArrayList<>();
+            Order order = null;
+            while (resSet.next()) {
+                order = new Order();
+                order.setId(resSet.getInt("OrderId"));
+                order.setOrderName(resSet.getString("OrderName"));
+                order.setOrderRegDate(resSet.getTimestamp("OrderRegDate"));
+                order.setOrderDeadLine(resSet.getTimestamp("OrderDeadLine"));
+                order.setDescription(resSet.getString("OrderDesc"));
+                User user = new User();
+                user.setId(resSet.getInt("ClientId"));
+                order.setClient(user);
+                orders.add(order);
+            }
+            return orders;
+        } catch (SQLException ex) {
+            throw new DAOException(ex);
+        } finally {
+            try {
+                resSet.close();
+            } catch (SQLException | NullPointerException e) {
+            }
+            try {
+                prepState.close();
+            } catch (SQLException | NullPointerException e) {
+            }
+        }
+    }
+
+    @Override
+    public List<Order> findNewest(final int days)
+            throws DAOException {
+        PreparedStatement prepState = null;
+        ResultSet resSet = null;
+        int i = 1;
+        try {
+            prepState = connection.prepareCall(FIND_NEWEST);
+            prepState.setInt(i,  days);
             resSet = prepState.executeQuery();
             List<Order> orders = new ArrayList<>();
             Order order = null;
