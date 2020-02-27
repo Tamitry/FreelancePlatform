@@ -193,11 +193,11 @@
             <form action="login.html" class="form" method="post">
                 <h1 class="form__title"><fmt:message key="log_in"/></h1>
                 <div class="form_group">
-                    <input class="form__input" placeholder=<fmt:message key="login"/> name="login">
+                    <input class="form__input" placeholder=<fmt:message key="login"/> name="login" required>
                 </div>
 
                 <div class="form_group">
-                    <input type=password class="form__input" placeholder=<fmt:message key="password"/> name="password">
+                    <input type=password class="form__input" placeholder=<fmt:message key="password"/> name="password" required>
                 </div>
 
                 <button type="submit" class="form__button"><fmt:message key="log_in"/></button>

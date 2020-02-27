@@ -1,7 +1,7 @@
 package by.tarlikovski.freelance.service;
 
 public interface PasswordEncoder extends Service {
-    String encode(String pass) throws ServiceException;
+    boolean check(final String password, final String stored) throws ServiceException;
 
-    String encode(String pass, String salt) throws ServiceException;
+    String getSaltedHash(final String password) throws ServiceException;
 }

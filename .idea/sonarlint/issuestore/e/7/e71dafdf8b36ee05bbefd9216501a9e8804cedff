@@ -1,5 +1,9 @@
 
-Zsquid:S3655"7Call "Optional#isPresent()" before accessing the value.(­ÃµŒúÿÿÿÿ8Ã¡Äóƒ.
-Isquid:S1481k"&Remove this unused "i" local variable.(¾Øàéüÿÿÿÿ8ƒÍñ“….
-Usquid:S36554"7Call "Optional#isPresent()" before accessing the value.(Ô‡—ã8¯Á¶òƒ.
-Usquid:S3655"7Call "Optional#isPresent()" before accessing the value.(‹”Ë8í¢Çóƒ.
+Xsquid:S3655"7Call "Optional#isPresent()" before accessing the value.(º¶Àéıÿÿÿÿ8û°¬ˆˆ.
+Rsquid:S3655"7Call "Optional#isPresent()" before accessing the value.(Ë¦ÿ8û°¬ˆˆ.
+Xsquid:S3655"7Call "Optional#isPresent()" before accessing the value.(âÃäğúÿÿÿÿ8šÍ¬ˆˆ.
+Ssquid:S3655"7Call "Optional#isPresent()" before accessing the value.(Ô‡—ã8¯Á¶òƒ.
+Ssquid:S3655"7Call "Optional#isPresent()" before accessing the value.(‹”Ë8í¢Çóƒ.
+xsquid:UselessImportCheck"JRemove this unused import 'by.tarlikovski.freelance.service.OrderService'.(­çÛşÿÿÿÿ8ÿ½Ş‡ˆ.
+wsquid:UselessImportCheck"IRemove this unused import 'by.tarlikovski.freelance.service.UserService'.(¤Ùöºûÿÿÿÿ8Ÿãİ‡ˆ.
+Xsquid:S3655"7Call "Optional#isPresent()" before accessing the value.(­ÃµŒúÿÿÿÿ8Ã¡Äóƒ.

@@ -195,10 +195,6 @@ t
 Dsrc/test/java/by/tarlikovski/freelance/service/SkillServiceTest.java,7\8\78d103e1e3338e35f80cc80fe2eeb5fb8b83d9c3
 g
 7src/main/java/by/tarlikovski/freelance/bean/Status.java,c\8\c8b1a004cbe8b10c2d67a80848cc9734c16ab395
-q
-Asrc/main/java/by/tarlikovski/freelance/service/UserValidator.java,a\f\afd0bf1241e755de8f2167f3d9ae740705905bcb
-z
-Jsrc/main/java/by/tarlikovski/freelance/service/impl/UserValidatorImpl.java,2\9\29ca42c0a84b0dd19822240125ba790f42167b63
 s
 Csrc/test/java/by/tarlikovski/freelance/service/WorkServiceTest.java,1\c\1cc632e8bac13c66dec71db84bde2c032d176ab4
 K
@@ -253,3 +249,9 @@ x
 Hsrc/main/java/by/tarlikovski/freelance/control/filters/CookieFilter.java,9\b\9b701be2edea5856b3bf04793415cb573a1b1093
 n
 >src/main/java/by/tarlikovski/freelance/control/tag/Locale.java,7\a\7a2096bd8b9f51e61007fb4dcc8ec9e1a68e3f28
+v
+Fsrc/main/java/by/tarlikovski/freelance/control/command/FilterUser.java,1\0\102fec03a1b6f9c2e06cefb1e4ac898b1f65051d
+x
+Hsrc/main/java/by/tarlikovski/freelance/control/command/FilterOrders.java,f\c\fc733a14b206e495678e4bc0e2b03a8db7d8ab5f
+}
+Msrc/main/java/by/tarlikovski/freelance/service/impl/UserRegValidatorImpl.java,1\d\1d688b4576fff05b757c6ebb4829bd75d49b5792

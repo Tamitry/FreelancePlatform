@@ -1,7 +1,7 @@
 
-|squid:UselessImportCheck"LRemove this unused import 'com.sun.org.apache.xpath.internal.operations.Or'.(µõ³‚øÿÿÿÿ8®îˆÎƒ.
-Usquid:S3655+"7Call "Optional#isPresent()" before accessing the value.(¾áãŠ8±ˆõ¬ƒ.
-Usquid:S1481S"2Remove this unused "orderProperty" local variable.(“¶ûûÿÿÿÿ8ö‡ı‚.
-Usquid:S36551"7Call "Optional#isPresent()" before accessing the value.(¹Øù±8Ë˜Îƒ.
-Xsquid:S1191"5Use classes from the Java API instead of Sun classes.(µõ³‚øÿÿÿÿ8®îˆÎƒ.
-Zsquid:S3655"7Call "Optional#isPresent()" before accessing the value.(º–ßİùÿÿÿÿ8±ˆõ¬ƒ.
+zsquid:UselessImportCheck"LRemove this unused import 'com.sun.org.apache.xpath.internal.operations.Or'.(µõ³‚øÿÿÿÿ8®îˆÎƒ.
+Ssquid:S1481"2Remove this unused "orderProperty" local variable.(“¶ûûÿÿÿÿ8ö‡ı‚.
+Xsquid:S3655"7Call "Optional#isPresent()" before accessing the value.(º–ßİùÿÿÿÿ8±ˆõ¬ƒ.
+Ssquid:S3655"7Call "Optional#isPresent()" before accessing the value.(¹Øù±8Ë˜Îƒ.
+Ssquid:S3655"7Call "Optional#isPresent()" before accessing the value.(¾áãŠ8±ˆõ¬ƒ.
+Vsquid:S1191"5Use classes from the Java API instead of Sun classes.(µõ³‚øÿÿÿÿ8®îˆÎƒ.

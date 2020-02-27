@@ -364,7 +364,7 @@
             </c:if>
             <c:if test="${user.role eq 'CLIENT'}">
                 <p><fmt:message key="role"/>: <fmt:message key="client"/></p>
-                <p><fmt:message key="orders"/></p>
+                <h2><fmt:message key="orders"/></h2>
                 <c:forEach var="elem" items="${orders1}">
                     <p><a href="toorder.html?orderid=${elem.id}">${elem.orderName}</a></p>
                 </c:forEach>

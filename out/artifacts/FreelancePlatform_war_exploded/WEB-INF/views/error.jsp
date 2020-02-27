@@ -252,7 +252,7 @@
         <jsp:include page="leftnavbar.jsp"/>
         <div class="main">
             <p><fmt:message key="error"/></p>
-            <p><c:out value="${error}"/></p>
+            <p><fmt:message key="${error}"/></p>
         </div>
     </div>
 </div>

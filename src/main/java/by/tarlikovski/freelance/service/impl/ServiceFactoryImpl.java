@@ -46,7 +46,7 @@ public class ServiceFactoryImpl implements ServiceFactory {
                     categoryService.setTransaction(transactionFactory.createTransaction());
                     return categoryService;
                 case VALIDATOR:
-                    UserValidatorImpl validator = new UserValidatorImpl();
+                    UserRegValidatorImpl validator = new UserRegValidatorImpl();
                     validator.setTransaction(transactionFactory.createTransaction());
                     return validator;
                 case ENCODER:

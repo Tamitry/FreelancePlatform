@@ -9,7 +9,7 @@ public class Order extends Entity {
     private Timestamp orderDeadLine;
     private String description;
     private User client;
-
+//TODO Показываюься заказы забанненых пользователей
     public String getOrderName() {
         return orderName;
     }

@@ -28,6 +28,14 @@
         <filter-name>CommandFilter</filter-name>
         <url-pattern>*.html</url-pattern>
     </filter-mapping>
+    <filter>
+        <filter-name>SecurityFilter</filter-name>
+        <filter-class>by.tarlikovski.freelance.control.filters.SecurityFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SecurityFilter</filter-name>
+        <url-pattern>*.html</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>DispatcherServlet</servlet-name>
         <servlet-class>by.tarlikovski.freelance.control.DispatcherServlet</servlet-class>

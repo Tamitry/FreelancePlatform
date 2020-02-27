@@ -1,8 +1,9 @@
 
 Usquid:S3655"7Call "Optional#isPresent()" before accessing the value.(‹”Ë8âä¡Éƒ.
-Usquid:S3655H"7Call "Optional#isPresent()" before accessing the value.(‹”Ë8ü¨îƒ.
-Usquid:S3655G"7Call "Optional#isPresent()" before accessing the value.(Êª›¹8…à¨îƒ.
-Usquid:S36558"7Call "Optional#isPresent()" before accessing the value.(‹”Ë8âä¡Éƒ.
+Usquid:S36558"7Call "Optional#isPresent()" before accessing the value.(‹”Ë8³„Œè‡.
 Xsquid:S1191"5Use classes from the Java API instead of Sun classes.(µõ³‚øÿÿÿÿ8‘–‰¶ƒ.
 ysquid:UselessImportCheck"IRemove this unused import 'by.tarlikovski.freelance.service.UserService'.(¤Ùöºûÿÿÿÿ8Çè…¶ƒ.
+Usquid:S3655Y"7Call "Optional#isPresent()" before accessing the value.(‹”Ë8ü¨îƒ.
+Usquid:S3655X"7Call "Optional#isPresent()" before accessing the value.(Êª›¹8…à¨îƒ.
+Usquid:S3655I"7Call "Optional#isPresent()" before accessing the value.(‹”Ë8âä¡Éƒ.
 |squid:UselessImportCheck"LRemove this unused import 'com.sun.org.apache.xpath.internal.operations.Or'.(µõ³‚øÿÿÿÿ8‘–‰¶ƒ.

@@ -1,20 +1,20 @@
 
-^squid:S2259À"FA "NullPointerException" could be thrown; "prepStat" is nullable here.(‚ªì
-Gsquid:S00108®")Either remove or fill this block of code.(õÆêáÿÿÿÿÿ
-Hsquid:S00108R")Either remove or fill this block of code.(«ğÆ‚8øÏ—‚.
-Asquid:S001084")Either remove or fill this block of code.(«ğÆ‚
-Asquid:S001080")Either remove or fill this block of code.(«ğÆ‚
-isquid:S1192'"KDefine a constant instead of duplicating this literal "CategoryId" 3 times.(«öú8øÏ—‚.
-[squid:S2259s"DA "NullPointerException" could be thrown; "resSet" is nullable here.(ÆáâÂ
-bsquid:S2259Q"DA "NullPointerException" could be thrown; "resSet" is nullable here.(ÆáâÂ8øÏ—‚.
-Asquid:S00108x")Either remove or fill this block of code.(«ğÆ‚
-\squid:S2259”"DA "NullPointerException" could be thrown; "resSet" is nullable here.(ÆáâÂ
-ssquid:S1192%"PDefine a constant instead of duplicating this literal "OrderPropertyId" 3 times.(³÷´ùüÿÿÿÿ8øÏ—‚.
-fsquid:S1192&"HDefine a constant instead of duplicating this literal "OrderId" 3 times.(Ä·øí8øÏ—‚.
-Bsquid:S00108•")Either remove or fill this block of code.(«ğÆ‚
-Asquid:S00108t")Either remove or fill this block of code.(«ğÆ‚
-^squid:S2259­"FA "NullPointerException" could be thrown; "prepStat" is nullable here.(‚ªì
-Hsquid:S00108V")Either remove or fill this block of code.(«ğÆ‚8øÏ—‚.
-Bsquid:S00108™")Either remove or fill this block of code.(«ğÆ‚
-Gsquid:S00108Á")Either remove or fill this block of code.(õÆêáÿÿÿÿÿ
-[squid:S2259/"DA "NullPointerException" could be thrown; "resSet" is nullable here.(ÆáâÂ
+Hsquid:S00108t")Either remove or fill this block of code.(«ğÆ‚8™¯µ‰ˆ.
+Hsquid:S00108V")Either remove or fill this block of code.(«ğÆ‚8™¯µ‰ˆ.
+Hsquid:S00108x")Either remove or fill this block of code.(«ğÆ‚8™¯µ‰ˆ.
+esquid:S2259­"FA "NullPointerException" could be thrown; "prepStat" is nullable here.(‚ªì8™¯µ‰ˆ.
+Hsquid:S001080")Either remove or fill this block of code.(«ğÆ‚8™¯µ‰ˆ.
+Isquid:S00108™")Either remove or fill this block of code.(«ğÆ‚8™¯µ‰ˆ.
+csquid:S2259”"DA "NullPointerException" could be thrown; "resSet" is nullable here.(ÆáâÂ8™¯µ‰ˆ.
+Nsquid:S00108®")Either remove or fill this block of code.(õÆêáÿÿÿÿÿ8™¯µ‰ˆ.
+Nsquid:S00108Á")Either remove or fill this block of code.(õÆêáÿÿÿÿÿ8™¯µ‰ˆ.
+ssquid:S1192%"PDefine a constant instead of duplicating this literal "OrderPropertyId" 3 times.(³÷´ùüÿÿÿÿ8™¯µ‰ˆ.
+esquid:S2259À"FA "NullPointerException" could be thrown; "prepStat" is nullable here.(‚ªì8™¯µ‰ˆ.
+bsquid:S2259s"DA "NullPointerException" could be thrown; "resSet" is nullable here.(ÆáâÂ8™¯µ‰ˆ.
+isquid:S1192'"KDefine a constant instead of duplicating this literal "CategoryId" 3 times.(«öú8™¯µ‰ˆ.
+Hsquid:S001084")Either remove or fill this block of code.(«ğÆ‚8™¯µ‰ˆ.
+bsquid:S2259Q"DA "NullPointerException" could be thrown; "resSet" is nullable here.(ÆáâÂ8™¯µ‰ˆ.
+Isquid:S00108•")Either remove or fill this block of code.(«ğÆ‚8™¯µ‰ˆ.
+fsquid:S1192&"HDefine a constant instead of duplicating this literal "OrderId" 3 times.(Ä·øí8™¯µ‰ˆ.
+bsquid:S2259/"DA "NullPointerException" could be thrown; "resSet" is nullable here.(ÆáâÂ8™¯µ‰ˆ.
+Hsquid:S00108R")Either remove or fill this block of code.(«ğÆ‚8™¯µ‰ˆ.

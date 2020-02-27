@@ -23,6 +23,7 @@ public class OrderPropertyServiceImpl extends ServiceImpl implements OrderProper
                     categories.add(categoryDao.read(orderProperty.getCategoryId()).get());
                 }
             }
+            transaction.commit();
             return categories;
         } catch (DAOException e) {
             throw new ServiceException(e);
@@ -48,6 +49,7 @@ public class OrderPropertyServiceImpl extends ServiceImpl implements OrderProper
                 i = order.getClient().getId();
                 order.setClient(userDao.read(i).get());
             }
+            transaction.commit();
             return orders;
         } catch (DAOException e) {
             throw new ServiceException(e);
@@ -86,6 +88,7 @@ public class OrderPropertyServiceImpl extends ServiceImpl implements OrderProper
                     i += orderPropertyDao.delete(orderProp.getId());
                 }
             }
+            transaction.commit();
             return i;
         } catch (DAOException e) {
             throw new ServiceException(e);

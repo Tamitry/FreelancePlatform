@@ -228,6 +228,9 @@
                         <th><fmt:message key="lastname"/></th>
                         <th>E-mail</th>
                         <th><fmt:message key="registrationdate"/></th>
+                        <c:if test="${curuser.role eq 'ADMIN'}">
+                            <th><fmt:message key="delete"/></th>
+                        </c:if>
                     </tr>
                     </thead>
                     <tbody>
@@ -237,7 +240,10 @@
                                 <td><a href="toprofile.html?userid=${elem.id}"><c:out value="${elem.lastName}"/></a></td>
                                 <td><a href="toprofile.html?userid=${elem.id}"><c:out value="${elem.email}"/></a></td>
                                 <td><a href="toprofile.html?userid=${elem.id}"><c:out value="${elem.regDate}"/></a></td>
-                            <tr>
+                                <c:if test="${curuser.role eq 'ADMIN'}">
+                                    <td><a href="banuser.html?userid=${elem.id}"><fmt:message key="delete"/></a></td>
+                                </c:if>
+                            </tr>
                         </c:forEach>
                     </tbody>
                 </table>

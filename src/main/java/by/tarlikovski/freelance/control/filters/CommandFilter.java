@@ -1,8 +1,10 @@
 package by.tarlikovski.freelance.control.filters;
 
 import by.tarlikovski.freelance.control.command.*;
-import by.tarlikovski.freelance.control.command.Registration;
+import by.tarlikovski.freelance.control.command.guest.*;
 import by.tarlikovski.freelance.control.ControlException;
+import by.tarlikovski.freelance.control.command.guest.Registration;
+import by.tarlikovski.freelance.control.command.registered.*;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -76,7 +78,7 @@ public class CommandFilter implements Filter {
             case "/deleteorder":
                 return new DeleteOrder();
             default:
-                throw new ControlException("Command not found!");
+                throw new ControlException("command_not_found");
         }
     }
 
@@ -102,7 +104,8 @@ public class CommandFilter implements Filter {
             req.setAttribute("command", findCommand(actionName));
             filterChain.doFilter(req, resp);
         } catch (ControlException ex) {
-            throw new ServletException(ex);
+            req.setAttribute("error", ex.getMessage());
+            req.setAttribute("command", new ErrorPage());
         }
     }
 

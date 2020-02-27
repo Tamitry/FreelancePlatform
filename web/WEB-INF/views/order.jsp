@@ -193,6 +193,53 @@
     .main img:hover {
         border: 10px solid #a45f93;
     }
+
+
+    .modalDialog:target {
+        display: block;
+        pointer-events: auto;
+    }
+
+    .modalDialog > div {
+        width: 400px;
+        position: relative;
+        margin: 10% auto;
+        padding: 5px 20px 13px 20px;
+        border-radius: 10px;
+        background: #475363;
+    }
+
+    .modalDialog {
+        position: fixed;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #333333;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0,0,0,0.8);
+        z-index: 99999;
+        -webkit-transition: opacity 400ms ease-in;
+        -moz-transition: opacity 400ms ease-in;
+        transition: opacity 400ms ease-in;
+        display: none;
+        pointer-events: none;
+        text-align: center;
+    }
+
+    .choose {
+        border: 1px solid #333;
+        display: inline-block;
+        padding: 5px 15px;
+        text-decoration: none;
+        color: #ffffff;
+    }
+
+    .choose:hover {
+        box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        background: linear-gradient(to bottom, #fcfff4, #e9e9ce);
+        color: #a00;
+    }
 </style>
 <html>
 <head>
@@ -261,14 +308,24 @@
             </table>
             <c:if test="${curuser.role eq 'FREELANCER'}">
                 <div class="buttons__group">
-                    <a href="subscribe.html?userid=${curuser.id}&orderid=${order.id}"><fmt:message key="subscribe"/></a>
-                    <a href="unsubscribe.html?userid=${curuser.id}&orderid=${order.id}"><fmt:message key="unsubscribe"/></a>
+                    <c:if test="${subscribe eq false}">
+                        <a href="subscribe.html?orderid=${order.id}" class="choose"><fmt:message key="subscribe"/></a>
+                    </c:if>
+                    <c:if test="${subscribe eq true}">
+                        <a href="unsubscribe.html?orderid=${order.id}" class="choose"><fmt:message key="unsubscribe"/></a>
+                    </c:if>
                 </div>
             </c:if>
             <c:if test="${curuser.id eq order.client.id}">
-                <div class="buttons__group">
-                    <a href="toeditorder.html?orderid=${order.id}"><fmt:message key="edit"/></a>
-                    <a href="deleteorder.html?orderid=${order.id}"><fmt:message key="delete"/></a>
+                <a href="toeditorder.html?orderid=${order.id}" class="choose"><fmt:message key="edit"/></a>
+                <a href="#modalDelete" class="choose"><fmt:message key="delete"/></a>
+                <div id="modalDelete" class="modalDialog">
+                    <div>
+                        <h1><fmt:message key="delete"/>?</h1>
+                        <p>
+                            <a href="deleteorder.html?orderid=${order.id}" class="choose"><fmt:message key="yes"/></a> <a href="#close" class="choose"><fmt:message key="no"/></a>
+                        </p>
+                    </div>
                 </div>
             </c:if>
         </div>

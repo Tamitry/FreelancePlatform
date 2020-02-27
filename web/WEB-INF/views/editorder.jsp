@@ -7,6 +7,8 @@
 <fmt:requestEncoding value="UTF-8"/>
 <fmt:setBundle basename="Localization"/>
 
+
+<!DOCTYPE html>
 <style>
     * {
         margin: 0;
@@ -296,7 +298,6 @@
         border-radius: 10px;
     }
 </style>
-<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -306,15 +307,15 @@
 <body>
 <div class="wrapper">
     <jsp:include page="header.jsp"/>
-    </div>
-    <jsp:include page="leftnavbar.jsp"/>
+    <div class="content">
+        <jsp:include page="leftnavbar.jsp"/>
         <div class="main">
             <form action="saveorder.html" method="post">
                 <div class="ordname">
                     <p><label><fmt:message key="ordername"/></label></p>
                     <p><input type="text" placeholder=<fmt:message key="ordername"/> name="ordername" value="${order.orderName}"/></p>
                     <p><label><fmt:message key="deadlinedate"/></label></p>
-                    <p><input type="date" placeholder="Date" name="deadline" value="${date}"/></p>
+                    <p><input type="date" name="deadline" value="${date}"/></p>
                 </div>
                 <div class="desc">
                     <p><label><fmt:message key="orderdescription"/></label></p>
@@ -332,7 +333,7 @@
                 </div>
                 <p>
                     <input type="submit" value="submit">
-                    <input type="reset" value="reset" name="<fmt:message key="reset"/>">
+                    <input type="reset" value="reset">
                 </p>
             </form>
         </div>

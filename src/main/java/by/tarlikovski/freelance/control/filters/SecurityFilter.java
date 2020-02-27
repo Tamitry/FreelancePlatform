@@ -7,7 +7,6 @@ import by.tarlikovski.freelance.control.command.Command;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Set;
 
@@ -20,10 +19,8 @@ public class SecurityFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         Command command = (Command) request.getAttribute("command");
-        HttpSession session = request.getSession();
         Set<Role> allowedRoles = command.getRoles();
-        User user = null;
-        user = (User) request.getSession().getAttribute("user");
+        User user = (User) request.getSession().getAttribute("user");
         boolean canExecute = allowedRoles.isEmpty();
         if (user != null) {
             canExecute = canExecute || allowedRoles.contains(user.getRole());
@@ -31,7 +28,7 @@ public class SecurityFilter implements Filter {
         if (canExecute) {
             filterChain.doFilter(request, response);
         } else {
-            request.setAttribute("error", "Some error"); //TODO
+            request.setAttribute("error", "noaccess");
             request.getServletContext()
                     .getRequestDispatcher("/WEB-INF/views/error.jsp")
                     .forward(request, response);

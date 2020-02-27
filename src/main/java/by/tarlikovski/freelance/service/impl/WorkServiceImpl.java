@@ -8,7 +8,9 @@ import by.tarlikovski.freelance.dao.DAOException;
 import by.tarlikovski.freelance.dao.OrderDao;
 import by.tarlikovski.freelance.dao.UserDao;
 import by.tarlikovski.freelance.dao.WorkDao;
+import by.tarlikovski.freelance.service.OrderService;
 import by.tarlikovski.freelance.service.ServiceException;
+import by.tarlikovski.freelance.service.UserService;
 import by.tarlikovski.freelance.service.WorkService;
 
 import java.util.ArrayList;
@@ -104,11 +106,20 @@ public class WorkServiceImpl extends ServiceImpl implements WorkService {
     public Optional<Work> read(final int id)
             throws ServiceException {
         try {
-            int i;
             WorkDao workDao = (WorkDao) transaction.createDao(Type.WORK_DAO);
-            Optional<Work> work = workDao.read(id);
+            UserDao userDao = (UserDao) transaction.createDao(Type.USER_DAO);
+            OrderDao orderDao = (OrderDao) transaction.createDao(Type.ORDER_DAO);
+            Optional<Work> workOptional = workDao.read(id);
+            Work work;
+            if (workOptional.isPresent()) {
+                work = workOptional.get();
+                work.setUser(userDao.read(work.getUser().getId()).get());
+                work.setOrder(orderDao.read(work.getOrder().getId()).get());
+                work.getOrder().setClient(
+                        userDao.read(work.getOrder().getClient().getId()).get());
+            }
             transaction.commit();
-            return work;
+            return workOptional;
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

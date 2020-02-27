@@ -16,7 +16,7 @@ import java.util.Optional;
 
 public class OrderPropertyDaoImpl extends BaseDaoImpl implements OrderPropertyDao {
     private static final String FIND_BY_ORDER = "select OrderPropertyId, OrderId, CategoryId from orderproperties where OrderId = ?";
-    private static final String FIND_BY_CATEGORY = "select OrderPropertyId, OrderId, CategoryId from orderproperties where CategoryId = ? and datediff(now(), OrderDeadLine) < 0";
+    private static final String FIND_BY_CATEGORY = "select OrderPropertyId, OrderProperties.OrderId, CategoryId from orderproperties join orders on OrderProperties.OrderId = Orders.OrderId where CategoryId = ? and datediff(now(), OrderDeadLine) < 0";
     private static final String CREATE = "insert into orderproperties (OrderId, CategoryId) value (?,?)";
     private static final String FIND_BY_ID = "select OrderPropertyId, OrderId, CategoryId from orderproperties where OrderPropertyId = ?";
     private static final String UPDATE = "update orderproperties set OrderId = ?, CategoryId = ? where OrderPropertyId = ?";

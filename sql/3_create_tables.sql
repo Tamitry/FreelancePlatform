@@ -134,3 +134,5 @@ create unique index unq_works
 
 create unique index unq_skills
     on skills (UserId, CategoryId);
+
+alter table users add Status tinyint default 1;

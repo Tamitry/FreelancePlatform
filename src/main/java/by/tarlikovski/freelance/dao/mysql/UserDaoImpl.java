@@ -21,7 +21,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     private static final String FIND_ALL_FREELANCER = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole, Status from users where UserRole = 2 and not Status = 2";
     private static final String FIND_BY_ID = "select UserId, FirstName, LastName, RegDate, UserLogin, UserEmail, UserPassword, UserRole, Status from users where UserId = ?";
     private static final String CREATE = "insert into users (FirstName, LastName, UserLogin, UserEmail, UserPassword, UserRole) values (?,?,?,?,?,?)";
-    private static final String UPDATE = "update users set FirstName = ?, LastName = ?, RegDate = ?, UserLogin = ?, UserEmail = ?, UserPassword = ?, UserRole = ?, Status = ? where UserId = ?";
+    private static final String UPDATE = "update users set FirstName = ?, LastName = ?, UserLogin = ?, UserEmail = ?, UserPassword = ?, UserRole = ?, Status = ? where UserId = ?";
     private static final String DELETE = "delete from users where UserId = ?";
 
     @Override
@@ -268,7 +268,6 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             prepStat = connection.prepareStatement(UPDATE);
             prepStat.setString(i++, entity.getFirstName());
             prepStat.setString(i++, entity.getLastName());
-            prepStat.setTimestamp(i++, entity.getRegDate());
             prepStat.setString(i++, entity.getLogin());
             prepStat.setString(i++, entity.getEmail());
             prepStat.setString(i++, entity.getPassword());

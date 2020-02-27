@@ -202,7 +202,7 @@
         <li><a href="${orders}"><fmt:message key="orders"/></a></li>
         <c:if test="${user ne null}">
           <c:url value="/toprofile.html" var="toprofile"/>
-          <li><a href="${toprofile}?userid=${user.id}"><fmt:message key="profile"/></a></li>
+          <li><a href="${toprofile}?userid=${curuser.id}"><fmt:message key="profile"/></a></li>
           <c:url value="/exit.html" var="exit"/>
           <li><a href="${exit}"><fmt:message key="exit"/></a></li>
         </c:if>
