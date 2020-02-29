@@ -10,11 +10,16 @@ import by.tarlikovski.freelance.service.OrderService;
 import by.tarlikovski.freelance.service.ServiceException;
 import by.tarlikovski.freelance.service.UserService;
 import com.sun.org.apache.xpath.internal.operations.Or;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.Optional;
 
 public class OrderServiceImpl extends ServiceImpl implements OrderService {
+
+    private static final Logger LOGGER = LogManager.getLogger(OrderServiceImpl.class);
+
     @Override
     public List<Order> findByName(final String name)
             throws ServiceException {
@@ -28,6 +33,13 @@ public class OrderServiceImpl extends ServiceImpl implements OrderService {
             transaction.commit();
             return orders;
         } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.debug("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.debug(e);
             throw new ServiceException(e);
         }
     }
@@ -41,9 +53,15 @@ public class OrderServiceImpl extends ServiceImpl implements OrderService {
             transaction.commit();
             return orders;
         } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.debug("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.debug(e);
             throw new ServiceException(e);
         }
-
     }
 
     @Override
@@ -58,6 +76,13 @@ public class OrderServiceImpl extends ServiceImpl implements OrderService {
             transaction.commit();
             return orders;
         } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.debug("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.debug(e);
             throw new ServiceException(e);
         }
     }
@@ -75,6 +100,13 @@ public class OrderServiceImpl extends ServiceImpl implements OrderService {
             transaction.commit();
             return orders;
         } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.debug("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.debug(e);
             throw new ServiceException(e);
         }
     }
@@ -90,8 +122,16 @@ public class OrderServiceImpl extends ServiceImpl implements OrderService {
             transaction.commit();
             return Optional.ofNullable(order);
         } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.debug("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.debug(e);
             throw new ServiceException(e);
-        }    }
+        }
+    }
 
     @Override
     public int create(final Order order)
@@ -102,6 +142,13 @@ public class OrderServiceImpl extends ServiceImpl implements OrderService {
             transaction.commit();
             return i;
         } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.debug("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.debug(e);
             throw new ServiceException(e);
         }
     }
@@ -115,6 +162,13 @@ public class OrderServiceImpl extends ServiceImpl implements OrderService {
             transaction.commit();
             return i;
         } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.debug("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.debug(e);
             throw new ServiceException(e);
         }
     }
@@ -128,6 +182,13 @@ public class OrderServiceImpl extends ServiceImpl implements OrderService {
             transaction.commit();
             return i;
         } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.debug("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.debug(e);
             throw new ServiceException(e);
         }
     }

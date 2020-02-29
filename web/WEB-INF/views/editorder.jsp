@@ -313,7 +313,7 @@
             <form action="saveorder.html" method="post">
                 <div class="ordname">
                     <p><label><fmt:message key="ordername"/></label></p>
-                    <p><input type="text" placeholder=<fmt:message key="ordername"/> name="ordername" value="${order.orderName}"/></p>
+                    <p><input type="text"  name="ordername" value="${order.orderName}" placeholder=<fmt:message key="ordername"/>/></p>
                     <p><label><fmt:message key="deadlinedate"/></label></p>
                     <p><input type="date" name="deadline" value="${date}"/></p>
                 </div>

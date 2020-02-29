@@ -128,4 +128,19 @@ public class User extends Entity implements Serializable {
                 getLastName(), getRegDate(), getEmail(),
                 getLogin(), getPassword());
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("User{");
+        sb.append("role=").append(role);
+        sb.append(", firstName='").append(firstName).append('\'');
+        sb.append(", lastName='").append(lastName).append('\'');
+        sb.append(", regDate=").append(regDate);
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", login='").append(login).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", userStatus=").append(userStatus);
+        sb.append('}');
+        return sb.toString();
+    }
 }

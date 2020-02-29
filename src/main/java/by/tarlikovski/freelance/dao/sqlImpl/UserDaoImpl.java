@@ -1,10 +1,12 @@
-package by.tarlikovski.freelance.dao.mysql;
+package by.tarlikovski.freelance.dao.sqlImpl;
 
 import by.tarlikovski.freelance.bean.Role;
 import by.tarlikovski.freelance.bean.User;
 import by.tarlikovski.freelance.bean.UserStatus;
 import by.tarlikovski.freelance.dao.UserDao;
 import by.tarlikovski.freelance.dao.DAOException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,6 +25,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     private static final String CREATE = "insert into users (FirstName, LastName, UserLogin, UserEmail, UserPassword, UserRole) values (?,?,?,?,?,?)";
     private static final String UPDATE = "update users set FirstName = ?, LastName = ?, UserLogin = ?, UserEmail = ?, UserPassword = ?, UserRole = ?, Status = ? where UserId = ?";
     private static final String DELETE = "delete from users where UserId = ?";
+    private static final Logger LOGGER = LogManager.getLogger(UserDaoImpl.class);
 
     @Override
     public List<User> findByFullName(final String name) throws DAOException {
@@ -50,15 +53,18 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             }
             return users;
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepState.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
@@ -91,15 +97,18 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
                 return Optional.empty();
             }
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepState.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
@@ -128,15 +137,18 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             }
             return users;
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepState.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
@@ -170,15 +182,18 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
                 return Optional.ofNullable(user);
             }
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepState.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
@@ -206,18 +221,22 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
                 entity.setId(resSet.getInt(i));
                 return v;
             } else {
+                LOGGER.debug(new DAOException("An error occurred while adding to the table Users."));
                 throw new DAOException("An error occurred while adding to the table Users.");
             }
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepStat.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
@@ -247,15 +266,18 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
                 return Optional.ofNullable(user);
             }
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepState.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
@@ -276,11 +298,13 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             prepStat.setInt(i, entity.getId());
             return prepStat.executeUpdate();
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 prepStat.close();
             } catch (SQLException | NullPointerException ex) {
+                LOGGER.debug(ex);
             }
         }
     }
@@ -294,11 +318,13 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             prepStat.setInt(i, identity);
             return prepStat.executeUpdate();
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 prepStat.close();
             } catch (SQLException | NullPointerException ex) {
+                LOGGER.debug(ex);
             }
         }
     }

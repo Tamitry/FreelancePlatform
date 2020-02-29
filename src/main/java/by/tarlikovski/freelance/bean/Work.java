@@ -62,4 +62,15 @@ public class Work extends Entity {
     public int hashCode() {
         return Objects.hash(super.hashCode(), getGrade(), getOrder(), getUser(), getStatus());
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Work{");
+        sb.append("grade=").append(grade);
+        sb.append(", order=").append(order);
+        sb.append(", user=").append(user);
+        sb.append(", status=").append(status);
+        sb.append('}');
+        return sb.toString();
+    }
 }

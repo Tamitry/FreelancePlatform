@@ -1,2 +1,4 @@
 
-Ÿsquid:S1186'"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(‚“¶î8Ö¼¦õ‚.
+_squid:S3457#"AFormat specifiers should be used instead of string concatenation.(š‚’Í8—ÓøÜˆ.
+Usquid:S2629#"7Use the built-in formatting to construct this argument.(š‚’Í8—ÓøÜˆ.
+Ÿsquid:S1186,"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(‚“¶î8Ö¼¦õ‚.

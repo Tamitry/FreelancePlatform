@@ -1,4 +1,4 @@
-package by.tarlikovski.freelance.control.command.registered;
+package by.tarlikovski.freelance.control.command.guest;
 
 import by.tarlikovski.freelance.bean.*;
 import by.tarlikovski.freelance.control.command.Command;

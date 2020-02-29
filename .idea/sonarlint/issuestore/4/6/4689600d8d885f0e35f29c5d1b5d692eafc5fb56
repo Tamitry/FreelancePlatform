@@ -1,9 +1,18 @@
 
-Usquid:S3655"7Call "Optional#isPresent()" before accessing the value.(‹”Ë8âä¡Éƒ.
-Usquid:S36558"7Call "Optional#isPresent()" before accessing the value.(‹”Ë8³„Œè‡.
+Usquid:S3655y"7Call "Optional#isPresent()" before accessing the value.(‹”Ë8ü¨îƒ.
+`squid:S3457¼"AFormat specifiers should be used instead of string concatenation.(ŠåºÓ8†Äìˆ.
+`squid:S3457€"AFormat specifiers should be used instead of string concatenation.(ŠåºÓ8ûéÆìˆ.
+`squid:S3457”"AFormat specifiers should be used instead of string concatenation.(ŠåºÓ8õ®Çìˆ.
+Usquid:S3655x"7Call "Optional#isPresent()" before accessing the value.(Êª›¹8…à¨îƒ.
+_squid:S3457R"AFormat specifiers should be used instead of string concatenation.(ŠåºÓ8ˆØÅìˆ.
 Xsquid:S1191"5Use classes from the Java API instead of Sun classes.(µõ³‚øÿÿÿÿ8‘–‰¶ƒ.
-ysquid:UselessImportCheck"IRemove this unused import 'by.tarlikovski.freelance.service.UserService'.(¤Ùöºûÿÿÿÿ8Çè…¶ƒ.
-Usquid:S3655Y"7Call "Optional#isPresent()" before accessing the value.(‹”Ë8ü¨îƒ.
-Usquid:S3655X"7Call "Optional#isPresent()" before accessing the value.(Êª›¹8…à¨îƒ.
-Usquid:S3655I"7Call "Optional#isPresent()" before accessing the value.(‹”Ë8âä¡Éƒ.
 |squid:UselessImportCheck"LRemove this unused import 'com.sun.org.apache.xpath.internal.operations.Or'.(µõ³‚øÿÿÿÿ8‘–‰¶ƒ.
+Usquid:S3655"7Call "Optional#isPresent()" before accessing the value.(‹”Ë8âä¡Éƒ.
+ysquid:UselessImportCheck"IRemove this unused import 'by.tarlikovski.freelance.service.UserService'.(¤Ùöºûÿÿÿÿ8Çè…¶ƒ.
+_squid:S3457;"AFormat specifiers should be used instead of string concatenation.(ŠåºÓ8ŒìÄìˆ.
+_squid:S3457'"AFormat specifiers should be used instead of string concatenation.(ŠåºÓ8¼»Äìˆ.
+Usquid:S3655b"7Call "Optional#isPresent()" before accessing the value.(‹”Ë8âä¡Éƒ.
+_squid:S3457j"AFormat specifiers should be used instead of string concatenation.(ŠåºÓ8ÛˆÆìˆ.
+zsquid:S1192'"\Define a constant instead of duplicating this literal "Rollback has not been done." 8 times.(ŠåºÓ8ŒìÄìˆ.
+`squid:S3457¨"AFormat specifiers should be used instead of string concatenation.(ŠåºÓ8ŸÜÇìˆ.
+Usquid:S3655J"7Call "Optional#isPresent()" before accessing the value.(‹”Ë8³„Œè‡.

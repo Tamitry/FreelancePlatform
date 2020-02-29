@@ -1,4 +1,4 @@
-package by.tarlikovski.freelance.dao.mysql;
+package by.tarlikovski.freelance.dao.sqlImpl;
 
 import by.tarlikovski.freelance.bean.Order;
 import by.tarlikovski.freelance.bean.Status;
@@ -6,6 +6,8 @@ import by.tarlikovski.freelance.bean.User;
 import by.tarlikovski.freelance.bean.Work;
 import by.tarlikovski.freelance.dao.DAOException;
 import by.tarlikovski.freelance.dao.WorkDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +24,8 @@ public class WorkDaoImpl extends BaseDaoImpl implements WorkDao {
     private static final String CREATE = "insert into works (OrderId, UserId, Grade) values (?,?,?)";
     private static final String UPDATE = "update works set OrderId = ?, UserId = ?, Grade = ?, Status = ? where WorkId = ?";
     private static final String DELETE = "delete from works where WorkId = ?";
+    private static final Logger LOGGER = LogManager.getLogger(WorkDaoImpl.class);
+
     @Override
     public List<Work> findByUser(final User user)
             throws DAOException {
@@ -49,15 +53,18 @@ public class WorkDaoImpl extends BaseDaoImpl implements WorkDao {
             }
             return works;
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepState.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
@@ -89,15 +96,18 @@ public class WorkDaoImpl extends BaseDaoImpl implements WorkDao {
             }
             return works;
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepState.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
@@ -121,18 +131,22 @@ public class WorkDaoImpl extends BaseDaoImpl implements WorkDao {
                 entity.setId(resSet.getInt(i));
                 return v;
             } else {
+                LOGGER.debug(new DAOException("An error occurred while adding to the table Users."));
                 throw new DAOException("An error occurred while adding to the table Users.");
             }
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepStat.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
@@ -163,15 +177,18 @@ public class WorkDaoImpl extends BaseDaoImpl implements WorkDao {
                 return Optional.ofNullable(work);
             }
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepState.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
@@ -189,11 +206,13 @@ public class WorkDaoImpl extends BaseDaoImpl implements WorkDao {
             prepStat.setInt(i, entity.getId());
             return prepStat.executeUpdate();
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 prepStat.close();
             } catch (SQLException | NullPointerException ex) {
+                LOGGER.debug(ex);
             }
         }
     }
@@ -208,11 +227,13 @@ public class WorkDaoImpl extends BaseDaoImpl implements WorkDao {
             prepStat.setInt(i, identity);
             return prepStat.executeUpdate();
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 prepStat.close();
             } catch (SQLException | NullPointerException ex) {
+                LOGGER.debug(ex);
             }
         }
     }

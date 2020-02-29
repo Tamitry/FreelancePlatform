@@ -12,12 +12,17 @@ import by.tarlikovski.freelance.service.OrderService;
 import by.tarlikovski.freelance.service.ServiceException;
 import by.tarlikovski.freelance.service.UserService;
 import by.tarlikovski.freelance.service.WorkService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class WorkServiceImpl extends ServiceImpl implements WorkService {
+
+    private static final Logger LOGGER = LogManager.getLogger(WorkServiceImpl.class);
+
     @Override
     public List<Work> findByUser(final User user)
             throws ServiceException {
@@ -37,6 +42,13 @@ public class WorkServiceImpl extends ServiceImpl implements WorkService {
             transaction.commit();
             return works;
         } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.error("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.error(e);
             throw new ServiceException(e);
         }
     }
@@ -58,6 +70,13 @@ public class WorkServiceImpl extends ServiceImpl implements WorkService {
             transaction.commit();
             return works;
         } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.error("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.error(e);
             throw new ServiceException(e);
         }
     }
@@ -70,6 +89,13 @@ public class WorkServiceImpl extends ServiceImpl implements WorkService {
             transaction.commit();
             return v;
         } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.error("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.error(e);
             throw new ServiceException(e);
         }
     }
@@ -84,6 +110,13 @@ public class WorkServiceImpl extends ServiceImpl implements WorkService {
             transaction.commit();
             return i;
         } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.error("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.error(e);
             throw new ServiceException(e);
         }
     }
@@ -98,6 +131,13 @@ public class WorkServiceImpl extends ServiceImpl implements WorkService {
             transaction.commit();
             return i;
         } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.error("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.error(e);
             throw new ServiceException(e);
         }
     }
@@ -121,6 +161,13 @@ public class WorkServiceImpl extends ServiceImpl implements WorkService {
             transaction.commit();
             return workOptional;
         } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.error("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.error(e);
             throw new ServiceException(e);
         }
     }

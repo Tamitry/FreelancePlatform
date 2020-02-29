@@ -1,9 +1,16 @@
 
-Xsquid:S3655"7Call "Optional#isPresent()" before accessing the value.(º¶Àéıÿÿÿÿ8û°¬ˆˆ.
-Rsquid:S3655"7Call "Optional#isPresent()" before accessing the value.(Ë¦ÿ8û°¬ˆˆ.
-Xsquid:S3655"7Call "Optional#isPresent()" before accessing the value.(âÃäğúÿÿÿÿ8šÍ¬ˆˆ.
-Ssquid:S3655"7Call "Optional#isPresent()" before accessing the value.(Ô‡—ã8¯Á¶òƒ.
-Ssquid:S3655"7Call "Optional#isPresent()" before accessing the value.(‹”Ë8í¢Çóƒ.
-xsquid:UselessImportCheck"JRemove this unused import 'by.tarlikovski.freelance.service.OrderService'.(­çÛşÿÿÿÿ8ÿ½Ş‡ˆ.
-wsquid:UselessImportCheck"IRemove this unused import 'by.tarlikovski.freelance.service.UserService'.(¤Ùöºûÿÿÿÿ8Ÿãİ‡ˆ.
-Xsquid:S3655"7Call "Optional#isPresent()" before accessing the value.(­ÃµŒúÿÿÿÿ8Ã¡Äóƒ.
+Usquid:S3655B"7Call "Optional#isPresent()" before accessing the value.(Ô‡—ã8¯Á¶òƒ.
+dsquid:S3457L"AFormat specifiers should be used instead of string concatenation.(åû¢õşÿÿÿÿ8ÜÛìˆ.
+[squid:S3655Ÿ"7Call "Optional#isPresent()" before accessing the value.(âÃäğúÿÿÿÿ8šÍ¬ˆˆ.
+dsquid:S3457_"AFormat specifiers should be used instead of string concatenation.(åû¢õşÿÿÿÿ8„…Üìˆ.
+squid:S11920"\Define a constant instead of duplicating this literal "Rollback has not been done." 6 times.(åû¢õşÿÿÿÿ8„…Üìˆ.
+esquid:S3457‰"AFormat specifiers should be used instead of string concatenation.(åû¢õşÿÿÿÿ8ŠÁİìˆ.
+Zsquid:S3655%"7Call "Optional#isPresent()" before accessing the value.(­ÃµŒúÿÿÿÿ8Ã¡Äóƒ.
+[squid:S3655"7Call "Optional#isPresent()" before accessing the value.(º¶Àéıÿÿÿÿ8û°¬ˆˆ.
+Usquid:S3655œ"7Call "Optional#isPresent()" before accessing the value.(Ë¦ÿ8û°¬ˆˆ.
+zsquid:UselessImportCheck"JRemove this unused import 'by.tarlikovski.freelance.service.OrderService'.(­çÛşÿÿÿÿ8ÿ½Ş‡ˆ.
+ysquid:UselessImportCheck"IRemove this unused import 'by.tarlikovski.freelance.service.UserService'.(¤Ùöºûÿÿÿÿ8Ÿãİ‡ˆ.
+esquid:S3457§"AFormat specifiers should be used instead of string concatenation.(åû¢õşÿÿÿÿ8øİìˆ.
+Usquid:S3655&"7Call "Optional#isPresent()" before accessing the value.(‹”Ë8í¢Çóƒ.
+dsquid:S3457t"AFormat specifiers should be used instead of string concatenation.(åû¢õşÿÿÿÿ8† İìˆ.
+dsquid:S34570"AFormat specifiers should be used instead of string concatenation.(åû¢õşÿÿÿÿ8Ş¹Ûìˆ.

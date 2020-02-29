@@ -1,10 +1,12 @@
-package by.tarlikovski.freelance.dao.mysql;
+package by.tarlikovski.freelance.dao.sqlImpl;
 
 import by.tarlikovski.freelance.bean.Category;
 import by.tarlikovski.freelance.bean.Order;
 import by.tarlikovski.freelance.bean.OrderProperty;
 import by.tarlikovski.freelance.dao.DAOException;
 import by.tarlikovski.freelance.dao.OrderPropertyDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,6 +23,8 @@ public class OrderPropertyDaoImpl extends BaseDaoImpl implements OrderPropertyDa
     private static final String FIND_BY_ID = "select OrderPropertyId, OrderId, CategoryId from orderproperties where OrderPropertyId = ?";
     private static final String UPDATE = "update orderproperties set OrderId = ?, CategoryId = ? where OrderPropertyId = ?";
     private static final String DELETE = "delete from orderproperties where OrderPropertyId = ?";
+    private static final Logger LOGGER = LogManager.getLogger(OrderPropertyDaoImpl.class);
+
     @Override
     public List<OrderProperty> findByOrder(final Order order) throws DAOException {
         PreparedStatement prepState = null;
@@ -41,15 +45,18 @@ public class OrderPropertyDaoImpl extends BaseDaoImpl implements OrderPropertyDa
             }
             return orderProperties;
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepState.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
@@ -75,15 +82,18 @@ public class OrderPropertyDaoImpl extends BaseDaoImpl implements OrderPropertyDa
             }
             return orderProperties;
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepState.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
@@ -106,18 +116,22 @@ public class OrderPropertyDaoImpl extends BaseDaoImpl implements OrderPropertyDa
                 entity.setId(resSet.getInt(i));
                 return v;
             } else {
+                LOGGER.debug(new DAOException("An error occurred while adding to the table Users."));
                 throw new DAOException("An error occurred while adding to the table Users.");
             }
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepStat.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
@@ -142,15 +156,18 @@ public class OrderPropertyDaoImpl extends BaseDaoImpl implements OrderPropertyDa
                 return Optional.ofNullable(orderProperty);
             }
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepState.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
@@ -167,11 +184,13 @@ public class OrderPropertyDaoImpl extends BaseDaoImpl implements OrderPropertyDa
             prepStat.setInt(i, entity.getId());
             return prepStat.executeUpdate();
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 prepStat.close();
             } catch (SQLException | NullPointerException ex) {
+                LOGGER.debug(ex);
             }
         }
     }
@@ -186,11 +205,13 @@ public class OrderPropertyDaoImpl extends BaseDaoImpl implements OrderPropertyDa
             prepStat.setInt(i, identity);
             return prepStat.executeUpdate();
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 prepStat.close();
             } catch (SQLException | NullPointerException ex) {
+                LOGGER.debug(ex);
             }
         }
     }

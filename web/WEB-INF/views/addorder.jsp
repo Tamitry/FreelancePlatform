@@ -229,7 +229,7 @@
             <form action="addorder.html" method="post">
                 <div class="ordname">
                     <p><label><fmt:message key="ordername"/></label></p>
-                    <p><input type="text" placeholder=<fmt:message key="ordername"/> name="ordername"/></p>
+                    <p><input type="text" name="ordername" placeholder=<fmt:message key="ordername"/>/></p>
                     <p><label><fmt:message key="deadlinedate"/></label></p>
                     <p><input type="date" name="deadline"/></p>
                 </div>

@@ -6,11 +6,15 @@ import by.tarlikovski.freelance.dao.UserDao;
 import by.tarlikovski.freelance.dao.DAOException;
 import by.tarlikovski.freelance.service.ServiceException;
 import by.tarlikovski.freelance.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl extends ServiceImpl implements UserService {
+
+    private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
 
     @Override
     public int userRegistration(final User user) throws ServiceException {
@@ -19,8 +23,15 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
             int id = userDao.create(user);
             transaction.commit();
             return id;
-        } catch (DAOException ex) {
-            throw new ServiceException(ex);
+        } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.error("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.error(e);
+            throw new ServiceException(e);
         }
     }
 
@@ -33,6 +44,13 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
             transaction.commit();
             return i;
         } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.error("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.error(e);
             throw new ServiceException(e);
         }
     }
@@ -45,8 +63,15 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
             i = userDao.update(user);
             transaction.commit();
             return i;
-        } catch (DAOException ex) {
-            throw new ServiceException(ex);
+        } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.error("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.error(e);
+            throw new ServiceException(e);
         }
     }
 
@@ -57,8 +82,15 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
             List<User> users = userDao.findAllFreelancers();
             transaction.commit();
             return users;
-        } catch (DAOException ex) {
-            throw new ServiceException(ex);
+        } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.error("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.error(e);
+            throw new ServiceException(e);
         }
     }
 
@@ -69,8 +101,15 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
             List<User> users = userDao.findByFullName(name);
             transaction.commit();
             return users;
-        } catch (DAOException ex) {
-            throw new ServiceException(ex);
+        } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.error("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.error(e);
+            throw new ServiceException(e);
         }
     }
 
@@ -81,8 +120,15 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
             Optional<User> user = userDao.findByLogin(login);
             transaction.commit();
             return user;
-        } catch (DAOException ex) {
-            throw new ServiceException(ex);
+        } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.error("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.error(e);
+            throw new ServiceException(e);
         }
     }
 
@@ -93,8 +139,15 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
             Optional<User> user = userDao.findByEmail(email);
             transaction.commit();
             return user;
-        } catch (DAOException ex) {
-            throw new ServiceException(ex);
+        } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.error("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.error(e);
+            throw new ServiceException(e);
         }
     }
 
@@ -105,8 +158,15 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
             Optional<User> user = userDao.read(id);
             transaction.commit();
             return user;
-        } catch (DAOException ex) {
-            throw new ServiceException(ex);
+        } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.error("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.error(e);
+            throw new ServiceException(e);
         }
     }
 }

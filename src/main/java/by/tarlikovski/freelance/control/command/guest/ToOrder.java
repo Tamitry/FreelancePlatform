@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ToOrder extends Command {
+public class ToOrder extends Command {//TODO RegDate < Deadline
     public ToOrder() {
         setAddress("/order");
     }
@@ -42,10 +42,13 @@ public class ToOrder extends Command {
                     subscribe = true;
                 }
             }
+            boolean ended = order.getOrderDeadLine()
+                    .compareTo(order.getOrderRegDate()) > 0;
             request.setAttribute("confworks", confWorks);
             request.setAttribute("subscribe", subscribe);
             request.setAttribute("unconfworks", unconfWorks);
             request.setAttribute("properties", categories);
+            request.setAttribute("ended", ended);
             return "To order";
         } else {
             request.setAttribute("error", "wrongid");

@@ -1,8 +1,10 @@
-package by.tarlikovski.freelance.dao.mysql;
+package by.tarlikovski.freelance.dao.sqlImpl;
 
 import by.tarlikovski.freelance.bean.Category;
 import by.tarlikovski.freelance.dao.CategoryDao;
 import by.tarlikovski.freelance.dao.DAOException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +16,7 @@ import java.util.Optional;
 public class CategoryDaoImpl extends BaseDaoImpl implements CategoryDao {
     private static final String FIND_ALL = "select CategoryId, CategoryName from Categories";
     private static final String READ = "select CategoryId, CategoryName from Categories where CategoryId = ?";
-
+    private static final Logger LOGGER = LogManager.getLogger(CategoryDaoImpl.class);
     @Override
     public List<Category> findAll() throws DAOException {
         PreparedStatement prepStat = null;
@@ -32,21 +34,25 @@ public class CategoryDaoImpl extends BaseDaoImpl implements CategoryDao {
             }
             return categories;
         } catch (SQLException e) {
+            LOGGER.debug(e);
             throw new DAOException(e);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepStat.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
 
     @Override
     public int create(final Category entity) throws DAOException {
+        LOGGER.debug(new UnsupportedOperationException());
         throw new DAOException(new UnsupportedOperationException("Сategory creation should be done in the database console."));
     }
 
@@ -68,15 +74,18 @@ public class CategoryDaoImpl extends BaseDaoImpl implements CategoryDao {
                 return Optional.empty();
             }
         } catch (SQLException e) {
+            LOGGER.debug(e);
             throw new DAOException(e);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepStat.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }

@@ -2,10 +2,7 @@ package by.tarlikovski.freelance.control.command.registered;
 
 import by.tarlikovski.freelance.bean.*;
 import by.tarlikovski.freelance.control.command.Command;
-import by.tarlikovski.freelance.service.CategoryService;
-import by.tarlikovski.freelance.service.OrderPropertyService;
-import by.tarlikovski.freelance.service.OrderService;
-import by.tarlikovski.freelance.service.ServiceException;
+import by.tarlikovski.freelance.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +27,8 @@ public class AddOrder extends Command {
                 .getService(ServiceName.ORDER_PROPERTY_SERVICE);
         CategoryService categoryService = (CategoryService) factory
                 .getService(ServiceName.CATEGORY_SERVICE);
+        Validator<Order> validator
+                = (Validator<Order>) factory.getService(ServiceName.ORDER_VALIDATOR);
         String name = request.getParameter("ordername");
         String date = request.getParameter("deadline");
         String desc = request.getParameter("desc");
@@ -39,13 +38,20 @@ public class AddOrder extends Command {
         order.setDescription(desc);
         order.setOrderDeadLine(Timestamp.valueOf(date + " 00:00:00"));
         order.setOrderName(name);
-        orderService.create(order);
-        for (Category category : categories) {
-            if(request.getParameter("" + category.getId()) != null) {
-                propertyService.create(order, category);
+        try {
+            validator.validate(order);
+            orderService.create(order);
+            for (Category category : categories) {
+                if (request.getParameter("" + category.getId()) != null) {
+                    propertyService.create(order, category);
+                }
             }
+            request.setAttribute("url", request.getContextPath() + "/orderlist.html");
+            return "Redirect";
+        } catch (ServiceException ex) {
+            request.setAttribute("error", ex.getMessage());
+            setAddress("/error");
+            return "error";
         }
-        request.setAttribute("url", request.getContextPath() + "/orderlist.html");
-        return "Redirect";
     }
 }

@@ -2,9 +2,7 @@ package by.tarlikovski.freelance.dao.transaction.Impl;
 
 import by.tarlikovski.freelance.bean.Type;
 import by.tarlikovski.freelance.dao.Dao;
-import by.tarlikovski.freelance.dao.OrderPropertyDao;
-import by.tarlikovski.freelance.dao.WorkDao;
-import by.tarlikovski.freelance.dao.mysql.*;
+import by.tarlikovski.freelance.dao.sqlImpl.*;
 import by.tarlikovski.freelance.dao.transaction.Transaction;
 import by.tarlikovski.freelance.dao.DAOException;
 

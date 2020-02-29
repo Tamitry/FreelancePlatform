@@ -1,10 +1,12 @@
-package by.tarlikovski.freelance.dao.mysql;
+package by.tarlikovski.freelance.dao.sqlImpl;
 
 import by.tarlikovski.freelance.bean.Category;
 import by.tarlikovski.freelance.bean.Skill;
 import by.tarlikovski.freelance.bean.User;
 import by.tarlikovski.freelance.dao.SkillDao;
 import by.tarlikovski.freelance.dao.DAOException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +22,7 @@ public class SkillDaoImpl extends BaseDaoImpl implements SkillDao {
     private static final String CREATE = "insert into skills (UserId, CategoryId) value (?,?)";
     private static final String READ = "select SkillId, UserId, CategoryId from Skills where SkillId = ?";
     private static final String DELETE = "delete from Skills where SkillId = ?";
+    private static final Logger LOGGER = LogManager.getLogger(SkillDaoImpl.class);
 
     @Override
     public List<Skill> findByUser(final User user) throws DAOException {
@@ -41,15 +44,18 @@ public class SkillDaoImpl extends BaseDaoImpl implements SkillDao {
             }
             return skills;
         } catch (SQLException e) {
+            LOGGER.debug(e);
             throw new DAOException(e);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepStat.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
@@ -75,15 +81,18 @@ public class SkillDaoImpl extends BaseDaoImpl implements SkillDao {
             }
             return skills;
         } catch (SQLException e) {
+            LOGGER.debug(e);
             throw new DAOException(e);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepStat.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
@@ -105,6 +114,7 @@ public class SkillDaoImpl extends BaseDaoImpl implements SkillDao {
                 entity.setId(resSet.getInt(i));
                 return v;
             } else {
+                LOGGER.debug(new DAOException("An error occurred while adding to the table Skills."));
                 throw new DAOException("An error occurred while adding to the table Skills.");
             }
         } catch (SQLException e) {
@@ -113,10 +123,12 @@ public class SkillDaoImpl extends BaseDaoImpl implements SkillDao {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepStat.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
@@ -140,21 +152,25 @@ public class SkillDaoImpl extends BaseDaoImpl implements SkillDao {
                 return Optional.empty();
             }
         } catch (SQLException e) {
+            LOGGER.debug(e);
             throw new DAOException(e);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepStat.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
 
     @Override
     public int update(final Skill entity) throws DAOException {
+        LOGGER.debug(new UnsupportedOperationException("This table can not be updated."));
         throw new DAOException(new UnsupportedOperationException("This table can not be updated."));
     }
 
@@ -167,11 +183,13 @@ public class SkillDaoImpl extends BaseDaoImpl implements SkillDao {
             prepStat.setInt(i, identity);
             return prepStat.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.debug(e);
             throw new DAOException(e);
         } finally {
             try {
                 prepStat.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }

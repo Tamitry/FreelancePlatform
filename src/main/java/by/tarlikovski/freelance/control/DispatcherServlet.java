@@ -6,6 +6,8 @@ import by.tarlikovski.freelance.control.command.CommandManager;
 import by.tarlikovski.freelance.control.command.CommandManagerFactory;
 import by.tarlikovski.freelance.service.ServiceException;
 import by.tarlikovski.freelance.service.impl.ServiceFactoryImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class DispatcherServlet extends HttpServlet {
+
+    private static final Logger LOGGER = LogManager.getLogger(DispatcherServlet.class);
+
     @Override
     protected void doGet(final HttpServletRequest req,
                          final HttpServletResponse resp)
@@ -34,6 +39,7 @@ public class DispatcherServlet extends HttpServlet {
         try {
             ServiceFactoryImpl.init();
         } catch (ServiceException e) {
+            LOGGER.error(e);
             throw new ServletException(e);
         }
     }
@@ -47,12 +53,14 @@ public class DispatcherServlet extends HttpServlet {
             CommandManager cm = CommandManagerFactory.getManager();
             res = cm.execute(command, req, resp);
         } catch (ControlException e) {
-            throw new ServletException(e);
+            LOGGER.error(e);
+            res = "error";
+            command.setAddress("/error");
         }
         if (req.getSession().getAttribute("user") != null) {
             User user = (User) req.getSession().getAttribute("user");
             user.setPassword(null);
-            req.setAttribute("curuser", user); //TODO Change this part.
+            req.setAttribute("curuser", user);
         }
         String jspPage;
         if (!res.equals("Redirect")) {

@@ -7,6 +7,7 @@
 <fmt:requestEncoding value="UTF-8"/>
 <fmt:setBundle basename="Localization"/>
 
+<!DOCTYPE html>
 <style>
     * {
         margin: 0;

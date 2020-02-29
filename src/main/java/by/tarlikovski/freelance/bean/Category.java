@@ -32,4 +32,12 @@ public class Category extends Entity {
     public int hashCode() {
         return Objects.hash(super.hashCode(), getName());
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Category{");
+        sb.append("name='").append(name).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

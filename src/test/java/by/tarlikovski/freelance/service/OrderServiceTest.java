@@ -16,14 +16,14 @@ public class OrderServiceTest {
     private ServiceFactory factory;
     private OrderService orderService;
 
-    @BeforeTest
+    @BeforeTest(description = "Factory initiated.")
     public void beforeTest() throws Exception {
         ServiceFactoryImpl.init();
         factory = new ServiceFactoryImpl();
         orderService = (OrderService) factory.getService(ServiceName.ORDER_SERVICE);
     }
 
-    @Test
+    @Test(description = "Entity has been created.")
     public void createTest_Equal() throws Exception {
         UserService userService = (UserService) factory.getService(ServiceName.USER_SERVICE);
         User user = userService.findByLogin("client").get();
@@ -37,7 +37,8 @@ public class OrderServiceTest {
         Assert.assertEquals(i, 1);
     }
 
-    @Test(dependsOnMethods = "createTest_Equal")
+    @Test(dependsOnMethods = "createTest_Equal",
+            description = "Find the order by name.")
     public void findByNameTest_True() throws Exception {
         UserService userService = (UserService) factory.getService(ServiceName.USER_SERVICE);
         User user = userService.findByLogin("client").get();
@@ -56,7 +57,8 @@ public class OrderServiceTest {
                 expected.getId() == actual.getId());
     }
 
-    @Test(dependsOnMethods = "findByNameTest_True")
+    @Test(dependsOnMethods = "findByNameTest_True",
+            description = "Find the order by client.")
     public void findByUserTest_True() throws Exception {
         UserService userService = (UserService) factory.getService(ServiceName.USER_SERVICE);
         User user = userService.findByLogin("client").get();
@@ -74,7 +76,8 @@ public class OrderServiceTest {
                 order.getId() == actual.getId());
     }
 
-    @Test(dependsOnMethods = "findByUserTest_True")
+    @Test(dependsOnMethods = "findByUserTest_True",
+            description = "Find all not outdated orders.")
     public void findAllTest_True() throws Exception {
         UserService userService = (UserService) factory.getService(ServiceName.USER_SERVICE);
         User user = userService.findByLogin("client").get();
@@ -110,7 +113,8 @@ public class OrderServiceTest {
                 order.getId() == actual.getId());
     }
 
-    @Test(dependsOnMethods = "readTest_True")
+    @Test(dependsOnMethods = "readTest_True",
+            description = "Update orders.")
     public void updateTest_Equal() throws Exception {
         UserService userService = (UserService) factory.getService(ServiceName.USER_SERVICE);
         User user = userService.findByLogin("client").get();
@@ -124,7 +128,8 @@ public class OrderServiceTest {
         Assert.assertEquals(v, 1);
     }
 
-    @Test(dependsOnMethods = "updateTest_Equal")
+    @Test(dependsOnMethods = "updateTest_Equal",
+            description = "Delete order.")
     public void deleteTest_Equal() throws Exception {
         int i = orderService.delete(id);
         Assert.assertEquals(i, 1);

@@ -10,11 +10,16 @@ import by.tarlikovski.freelance.dao.DAOException;
 import by.tarlikovski.freelance.dao.UserDao;
 import by.tarlikovski.freelance.service.ServiceException;
 import by.tarlikovski.freelance.service.SkillService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SkillServiceImpl extends ServiceImpl implements SkillService {
+
+    private static final Logger LOGGER = LogManager.getLogger(SkillServiceImpl.class);
+
     @Override
     public List<Category> findUserSkills(final User user) throws ServiceException {
         try {
@@ -27,8 +32,15 @@ public class SkillServiceImpl extends ServiceImpl implements SkillService {
             }
             transaction.commit();
             return categories;
-        } catch (DAOException ex) {
-            throw new ServiceException(ex);
+        } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.error("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.error(e);
+            throw new ServiceException(e);
         }
     }
 
@@ -45,8 +57,15 @@ public class SkillServiceImpl extends ServiceImpl implements SkillService {
             }
             transaction.commit();
             return users;
-        } catch (DAOException ex) {
-            throw new ServiceException(ex);
+        } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.error("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.error(e);
+            throw new ServiceException(e);
         }
     }
 
@@ -64,6 +83,13 @@ public class SkillServiceImpl extends ServiceImpl implements SkillService {
             transaction.commit();
             return i;
         } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.error("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.error(e);
             throw new ServiceException(e);
         }
     }
@@ -84,6 +110,13 @@ public class SkillServiceImpl extends ServiceImpl implements SkillService {
             transaction.commit();
             return i;
         } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.error("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.error(e);
             throw new ServiceException(e);
         }
     }

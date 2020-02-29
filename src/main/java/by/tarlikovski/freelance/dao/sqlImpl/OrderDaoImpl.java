@@ -1,9 +1,11 @@
-package by.tarlikovski.freelance.dao.mysql;
+package by.tarlikovski.freelance.dao.sqlImpl;
 
 import by.tarlikovski.freelance.bean.Order;
 import by.tarlikovski.freelance.bean.User;
 import by.tarlikovski.freelance.dao.DAOException;
 import by.tarlikovski.freelance.dao.OrderDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +24,8 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
     private static final String READ = "select OrderId, OrderName, OrderRegDate, OrderDeadLine, OrderDesc, ClientId from orders where OrderId = ?";
     private static final String UPDATE = "update orders set OrderName = ?, OrderRegDate = ?, OrderDeadLine = ?, OrderDesc = ? where OrderId = ?";
     private static final String DELETE = "delete from orders where OrderId = ?";
+    private static final Logger LOGGER = LogManager.getLogger(OrderDaoImpl.class);
+
     @Override
     public List<Order> findAll() throws DAOException {
         PreparedStatement prepState = null;
@@ -44,15 +48,18 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
             }
             return orders;
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepState.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
@@ -80,15 +87,18 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
             }
             return orders;
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepState.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
               }
         }
     }
@@ -119,15 +129,18 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
             }
             return orders;
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepState.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
@@ -158,15 +171,18 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
             }
             return orders;
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepState.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
@@ -191,18 +207,22 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
                 entity.setId(resSet.getInt(i));
                 return v;
             } else {
+                LOGGER.debug(new DAOException("An error occurred while adding to the table Users."));
                 throw new DAOException("An error occurred while adding to the table Users.");
             }
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepStat.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
@@ -232,15 +252,18 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
                 return Optional.ofNullable(order);
             }
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 resSet.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
             try {
                 prepState.close();
             } catch (SQLException | NullPointerException e) {
+                LOGGER.debug(e);
             }
         }
     }
@@ -259,11 +282,13 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
             i = prepStat.executeUpdate();
             return i;
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 prepStat.close();
             } catch (SQLException | NullPointerException ex) {
+                LOGGER.debug(ex);
             }
         }
     }
@@ -277,11 +302,13 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
             prepStat.setInt(i, identity);
             return prepStat.executeUpdate();
         } catch (SQLException ex) {
+            LOGGER.debug(ex);
             throw new DAOException(ex);
         } finally {
             try {
                 prepStat.close();
             } catch (SQLException | NullPointerException ex) {
+                LOGGER.debug(ex);
             }
         }
     }

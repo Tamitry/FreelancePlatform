@@ -1,4 +1,4 @@
-package by.tarlikovski.freelance.dao.mysql;
+package by.tarlikovski.freelance.dao.sqlImpl;
 
 import java.sql.Connection;
 

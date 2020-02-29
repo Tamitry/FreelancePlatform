@@ -25,4 +25,12 @@ public enum Role {
     public int getRoleNum() {
         return roleNum;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Role{");
+        sb.append("roleNum=").append(roleNum);
+        sb.append('}');
+        return sb.toString();
+    }
 }

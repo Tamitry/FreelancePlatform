@@ -5,11 +5,16 @@ import by.tarlikovski.freelance.dao.*;
 import by.tarlikovski.freelance.service.OrderPropertyService;
 import by.tarlikovski.freelance.service.ServiceException;
 import com.sun.org.apache.xpath.internal.operations.Or;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderPropertyServiceImpl extends ServiceImpl implements OrderPropertyService {
+
+    private static final Logger LOGGER = LogManager.getLogger(OrderPropertyServiceImpl.class);
+
     @Override
     public List<Category> findByOrder(final Order order)
             throws ServiceException {
@@ -26,6 +31,13 @@ public class OrderPropertyServiceImpl extends ServiceImpl implements OrderProper
             transaction.commit();
             return categories;
         } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.debug("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.debug(e);
             throw new ServiceException(e);
         }
     }
@@ -52,6 +64,13 @@ public class OrderPropertyServiceImpl extends ServiceImpl implements OrderProper
             transaction.commit();
             return orders;
         } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.debug("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.debug(e);
             throw new ServiceException(e);
         }
     }
@@ -69,6 +88,13 @@ public class OrderPropertyServiceImpl extends ServiceImpl implements OrderProper
             transaction.commit();
             return i;
         } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.debug("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.debug(e);
             throw new ServiceException(e);
         }
 
@@ -91,6 +117,13 @@ public class OrderPropertyServiceImpl extends ServiceImpl implements OrderProper
             transaction.commit();
             return i;
         } catch (DAOException e) {
+            try {
+                transaction.rollback();
+            } catch (DAOException ex) {
+                LOGGER.debug("Rollback has not been done." + ex);
+                throw new ServiceException(ex);
+            }
+            LOGGER.debug(e);
             throw new ServiceException(e);
         }
 

@@ -1,9 +1,9 @@
 package by.tarlikovski.freelance.control.filters;
 
-import by.tarlikovski.freelance.control.command.*;
-import by.tarlikovski.freelance.control.command.guest.*;
 import by.tarlikovski.freelance.control.ControlException;
+import by.tarlikovski.freelance.control.command.Command;
 import by.tarlikovski.freelance.control.command.guest.Registration;
+import by.tarlikovski.freelance.control.command.guest.*;
 import by.tarlikovski.freelance.control.command.registered.*;
 
 import javax.servlet.*;
@@ -20,7 +20,7 @@ public class CommandFilter implements Filter {
     private Command findCommand(final String name) throws ControlException {
         switch (name) {
             case "/userlist":
-                    return new UserList();
+                return new UserList();
             case "/toregistration":
                 return new ToRegistration();
             case "/registration":
@@ -78,7 +78,7 @@ public class CommandFilter implements Filter {
             case "/deleteorder":
                 return new DeleteOrder();
             default:
-                throw new ControlException("command_not_found");
+                throw new ControlException("commandnotfound");
         }
     }
 

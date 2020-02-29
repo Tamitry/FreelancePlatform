@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class Home extends Command {
+
+    private static final int DEFAULT_DAYS = 7;
+
     public Home() {
         setAddress("/index");
     }
@@ -23,7 +26,7 @@ public class Home extends Command {
         int days = request.getParameter("days") != null
         && request.getParameter("days").matches("\\d\\d?") ?
                 Integer.parseInt(request.getParameter("days")) :
-                7;
+                DEFAULT_DAYS;
         List<Order> orders = orderService.findNewest(days);
         request.setAttribute("listoforders", orders);
         return "To homepage.";

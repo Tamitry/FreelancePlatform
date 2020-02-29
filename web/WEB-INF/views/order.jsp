@@ -267,7 +267,7 @@
                 <thead>
                 <tr>
                     <th><fmt:message key="freelancer"/></th>
-                    <c:if test="${order.client.id eq curuser.id}">
+                    <c:if test="${order.client.id eq curuser.id and ended eq true}">
                         <th><fmt:message key="cancel"/></th>
                     </c:if>
                 </tr>
@@ -288,7 +288,7 @@
                 <thead>
                 <tr>
                     <th><fmt:message key="freelancer"/></th>
-                    <c:if test="${order.client.id eq curuser.id}">
+                    <c:if test="${order.client.id eq curuser.id and ended eq true}">
                         <th><fmt:message key="confirm"/></th>
                         <th><fmt:message key="cancel"/></th>
                     </c:if>
@@ -298,7 +298,7 @@
                 <c:forEach var="elem" items="${unconfworks}">
                     <tr>
                         <td><a href="toprofile.html?userid=${elem.user.id}"><c:out value="${elem.user.firstName} ${elem.user.lastName}"/></a></td>
-                        <c:if test="${order.client.id eq curuser.id}">
+                        <c:if test="${order.client.id eq curuser.id and ended eq true}">
                             <td><a href="confirmwork.html?workid=${elem.id}"><fmt:message key="confirm"/></a></td>
                             <td><a href="cancelwork.html?workid=${elem.id}"><fmt:message key="cancel"/></a></td>
                         </c:if>
@@ -306,7 +306,7 @@
                 </c:forEach>
                 </tbody>
             </table>
-            <c:if test="${curuser.role eq 'FREELANCER'}">
+            <c:if test="${curuser.role eq 'FREELANCER' and ended eq true}">
                 <div class="buttons__group">
                     <c:if test="${subscribe eq false}">
                         <a href="subscribe.html?orderid=${order.id}" class="choose"><fmt:message key="subscribe"/></a>

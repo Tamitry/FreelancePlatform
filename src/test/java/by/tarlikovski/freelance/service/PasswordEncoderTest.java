@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class PasswordEncoderTest {
-    @Test
+    @Test(description = "It encode password and then checked equality of encoded and initial password.")
     public void checkTest_True() throws ServiceException {
         String pass = "1234";
         PasswordEncoder passwordEncoder = new PasswordEncoderImpl();

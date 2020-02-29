@@ -3,13 +3,15 @@ package by.tarlikovski.freelance.control.command;
 import by.tarlikovski.freelance.control.ControlException;
 import by.tarlikovski.freelance.service.ServiceException;
 import by.tarlikovski.freelance.service.ServiceFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class CommandManagerImpl implements CommandManager {
     private ServiceFactory factory;
-
+    private static final Logger LOGGER = LogManager.getLogger(CommandManagerImpl.class);
     public CommandManagerImpl(final ServiceFactory fact) {
         factory = fact;
     }
@@ -23,6 +25,7 @@ public class CommandManagerImpl implements CommandManager {
         try {
             return command.exec(request, response);
         } catch (ServiceException ex) {
+            LOGGER.error(ex);
             throw new ControlException(ex);
         }
     }
