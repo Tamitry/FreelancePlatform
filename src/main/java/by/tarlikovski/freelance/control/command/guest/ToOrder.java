@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ToOrder extends Command {//TODO RegDate < Deadline
+public class ToOrder extends Command {
     public ToOrder() {
         setAddress("/order");
     }
